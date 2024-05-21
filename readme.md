@@ -27,8 +27,18 @@ npx expo start
 
 ### Executing program
 
-- Android: Open Expo Go and tap 'Scan QR code', then scan the QR code in the terminal.
-- iOS: Scan the QR code in the terminal via your phone's camera app.
+- Make sure both your mobile device and computer are on the same network.
+
+- Android:
+
+  - Open Expo Go app and tap 'Scan QR code', then scan the QR code in your computer's terminal. You may have to scroll up to see it.
+
+- iOS:
+
+  - Go to 'Expo Go' in the Settings app turn on 'Local Network'
+  - Turn VPN status off (Not Connected)
+    Scan the QR code in the terminal via your phone's camera app (you may have to scroll up to see it).
+
 - The app should launch. You're done. :)
 
 ## Authors
