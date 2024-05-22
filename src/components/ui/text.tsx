@@ -7,22 +7,22 @@ import { cn } from "~/lib/utils"
 const TextClassContext = React.createContext<string | undefined>(undefined)
 
 const Text = React.forwardRef<TextRef, SlottableTextProps>(
-	({ className, asChild = false, ...props }, ref) => {
-		const textClass = React.useContext(TextClassContext)
-		const Component = asChild ? Slot.Text : RNText
-		return (
-			<Component
-				className={cn(
-					"font-interregular text-base text-foreground web:select-text",
-					textClass,
-					className,
-				)}
-				// style={{ fontFamily: "Inter-Medium" }}
-				ref={ref}
-				{...props}
-			/>
-		)
-	},
+  ({ className, asChild = false, ...props }, ref) => {
+    const textClass = React.useContext(TextClassContext)
+    const Component = asChild ? Slot.Text : RNText
+    return (
+      <Component
+        className={cn(
+          "font-interregular text-base text-foreground web:select-text",
+          textClass,
+          className,
+        )}
+        // style={{ fontFamily: "Inter-Medium" }}
+        ref={ref}
+        {...props}
+      />
+    )
+  },
 )
 Text.displayName = "Text"
 
