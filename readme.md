@@ -41,6 +41,8 @@ The npx expo start -c runs and clears the cache, which is good to know, but in t
 npm start
 ```
 
+\*To quickly reload the app during development, press r in the terminal
+
 - Download Expo Go on GooglePlay/App Store
 
 ### Executing program

@@ -9,6 +9,7 @@ import * as React from "react"
 import { Platform } from "react-native"
 import { NAV_THEME } from "~/lib/constants"
 import { useColorScheme } from "~/lib/useColorScheme"
+import { PortalHost } from "~/components/primitives/portal"
 
 const LIGHT_THEME: Theme = {
 	dark: false,
@@ -85,6 +86,7 @@ export default function RootLayout() {
 		<ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
 			<StatusBar style={isDarkColorScheme ? "light" : "dark"} />
 			<Stack />
+			<PortalHost />
 		</ThemeProvider>
 	)
 }
