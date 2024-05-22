@@ -2,6 +2,7 @@ import "~/app/global.css"
 
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { Theme, ThemeProvider } from "@react-navigation/native"
+import { useFonts } from "expo-font"
 import { SplashScreen, Stack } from "expo-router"
 import { StatusBar } from "expo-status-bar"
 import * as React from "react"
@@ -30,6 +31,27 @@ export default function RootLayout() {
 	const { colorScheme, setColorScheme, isDarkColorScheme } = useColorScheme()
 	const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false)
 
+	const [fontsLoaded] = useFonts({
+		"Inter-BoldItalic": require("@/assets/fonts/Inter-BoldItalic.ttf"),
+		"Inter-Black": require("@/assets/fonts/Inter-Black.ttf"),
+		"Inter-BlackItalic": require("@/assets/fonts/Inter-BlackItalic.ttf"),
+		"Inter-ExtraBold": require("@/assets/fonts/Inter-ExtraBold.ttf"),
+		"Inter-ExtraBoldItalic": require("@/assets/fonts/Inter-ExtraBoldItalic.ttf"),
+		"Inter-ExtraLight": require("@/assets/fonts/Inter-ExtraLight.ttf"),
+		"Inter-Italic": require("@/assets/fonts/Inter-Italic.ttf"),
+		"Inter-LightItalic": require("@/assets/fonts/Inter-LightItalic.ttf"),
+		"Inter-MediumItalic": require("@/assets/fonts/Inter-MediumItalic.ttf"),
+		"Inter-Regular": require("@/assets/fonts/Inter-Regular.ttf"),
+		"Inter-SemiBold": require("@/assets/fonts/Inter-SemiBold.ttf"),
+		"Inter-ThinItalic": require("@/assets/fonts/Inter-ThinItalic.ttf"),
+		"Inter-Bold": require("@/assets/fonts/Inter-Bold.ttf"),
+		"Inter-ExtraLightItalic": require("@/assets/fonts/Inter-ExtraLightItalic.ttf"),
+		"Inter-Light": require("@/assets/fonts/Inter-Light.ttf"),
+		"Inter-Medium": require("@/assets/fonts/Inter-Medium.ttf"),
+		"Inter-SemiBoldItalic": require("@/assets/fonts/Inter-SemiBoldItalic.ttf"),
+		"Inter-Thin": require("@/assets/fonts/Inter-Thin.ttf"),
+	})
+
 	React.useEffect(() => {
 		;(async () => {
 			const theme = await AsyncStorage.getItem("theme")
@@ -55,7 +77,7 @@ export default function RootLayout() {
 		})
 	}, [])
 
-	if (!isColorSchemeLoaded) {
+	if (!isColorSchemeLoaded || !fontsLoaded) {
 		return null
 	}
 

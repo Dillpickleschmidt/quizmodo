@@ -13,7 +13,7 @@ export default function App() {
 				{/* Put a color here to change all children text colors */}
 				<TextClassContext.Provider value="">
 					<Text className="p-2 text-2xl">Hello World</Text>
-					{/* fyi Button blocks text color inheritance */}
+					{/* fyi Button seems to block text color inheritance */}
 					<Button size="lg" onPress={toggleColorScheme} className="dark:bg-emerald-400">
 						<Text>Toggle Theme</Text>
 					</Button>
