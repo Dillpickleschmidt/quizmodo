@@ -1,13 +1,24 @@
-import { Link } from "expo-router"
-import { StatusBar } from "expo-status-bar"
-import { Text, View } from "react-native"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { Text, TextClassContext } from "@/components/ui/text"
+import { useColorScheme } from "nativewind"
+import { View } from "react-native"
 
 export default function App() {
+	const { toggleColorScheme } = useColorScheme()
+
 	return (
-		<View className="items-center justify-center flex-1 text-red-500">
-			<Text className="text-3xl">It works!</Text>
-			<StatusBar style="auto" />
-			<Link href="/profile">Go to Profile</Link>
+		<View className="items-center justify-center flex-1 w-full h-full">
+			<Card className="items-center justify-center h-96 w-96">
+				{/* Put a color here to change all children text colors */}
+				<TextClassContext.Provider value="">
+					<Text className="p-2 text-2xl">Hello World</Text>
+					{/* fyi Button blocks text color inheritance */}
+					<Button size="lg" onPress={toggleColorScheme} className="dark:bg-emerald-400">
+						<Text>Toggle Theme</Text>
+					</Button>
+				</TextClassContext.Provider>
+			</Card>
 		</View>
 	)
 }
