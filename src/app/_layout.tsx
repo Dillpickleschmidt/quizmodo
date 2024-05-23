@@ -10,6 +10,7 @@ import { Platform, View } from "react-native"
 import { NAV_THEME } from "~/lib/constants"
 import { useColorScheme } from "~/lib/useColorScheme"
 import { PortalHost } from "~/components/primitives/portal"
+import { GlobalContextProvider } from "@/context/GlobalContext"
 
 const LIGHT_THEME: Theme = {
   dark: false,
@@ -84,13 +85,15 @@ export default function RootLayout() {
   const backgroundColor = colorScheme ? NAV_THEME[colorScheme].background : undefined
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      <View className="w-full h-full" style={{ backgroundColor: backgroundColor }}>
-        <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="index" />
-        </Stack>
-        <PortalHost />
-      </View>
+      <GlobalContextProvider>
+        <View className="w-full h-full" style={{ backgroundColor: backgroundColor }}>
+          <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="index" />
+          </Stack>
+          <PortalHost />
+        </View>
+      </GlobalContextProvider>
     </ThemeProvider>
   )
 }

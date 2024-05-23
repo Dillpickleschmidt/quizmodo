@@ -8,13 +8,27 @@ type TabIconProps = {
   icon: React.ReactNode
   color: string // Requires a tailwind color class
   size: number
+  tabIcon?: boolean
   focused?: boolean
   text?: string
   className?: string
 }
 // Uses above type definition
-export function CustomIcon({ icon, size, color, text, focused, className }: TabIconProps) {
-  const _className = focused ? `${color} font-intersemibold` : "text-neutral-200 font-interregular" // Conditional colors
+export function CustomIcon({
+  icon,
+  size,
+  color,
+  tabIcon = false,
+  text,
+  focused,
+  className,
+}: TabIconProps) {
+  let _className: string
+  if (tabIcon) {
+    _className = focused ? `${color} font-intersemibold` : "text-primary/50 font-interregular" // Conditional colors
+  } else {
+    _className = color
+  }
 
   // Clones the icon component (passed as a prop) so we can add the color class to it
   const coloredIcon = React.cloneElement(icon as React.ReactElement, {
@@ -39,6 +53,7 @@ export function TabIcon(title: string, iconComponent: React.ReactNode) {
         color="text-emerald-500"
         icon={iconComponent}
         size={26}
+        tabIcon
         text={title}
         focused={focused}
         className="text-xs"

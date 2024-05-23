@@ -10,7 +10,7 @@ import { Eye } from "@/lib/icons/Eye"
 import { EyeOff } from "@/lib/icons/EyeOff"
 import { CustomIcon } from "@/components/homeRoute/CustomIcon"
 import { Button } from "@/components/ui/button"
-import { Link } from "expo-router"
+import { Link, router } from "expo-router"
 
 export default function SignUp() {
   const [form, setForm] = useState({
@@ -21,7 +21,15 @@ export default function SignUp() {
   const { loading, signUpWithEmail } = useAuthForm()
 
   const handleSubmit = () => {
-    signUpWithEmail(form.email, form.password)
+    if (!form.email || !form.password) {
+      // Add custom alert dialog here
+    }
+    try {
+      signUpWithEmail(form.email, form.password)
+      router.replace("/library")
+    } catch (error) {
+      // Add custom alert dialog here
+    }
   }
 
   return (

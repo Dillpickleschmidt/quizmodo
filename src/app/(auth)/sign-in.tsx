@@ -9,7 +9,8 @@ import { Eye } from "@/lib/icons/Eye"
 import { EyeOff } from "@/lib/icons/EyeOff"
 import { CustomIcon } from "@/components/homeRoute/CustomIcon"
 import { Button } from "@/components/ui/button"
-import { Link } from "expo-router"
+import { Link, router } from "expo-router"
+import { useAuthForm } from "@/components/auth/auth"
 
 export default function SignIn() {
   const [form, setForm] = useState({
@@ -18,9 +19,19 @@ export default function SignIn() {
   })
   const [showPassword, setshowPassword] = useState(false)
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const { loading, signInWithEmail } = useAuthForm()
 
-  function submitForm() {}
+  const handleSubmit = async () => {
+    if (!form.email || !form.password) {
+      // Add custom alert dialog here for missing email or password]
+      return
+    }
+    const success = await signInWithEmail(form.email, form.password)
+    if (success) {
+      // Assuming the user is logged in successfully if no error is thrown
+      router.replace("/library")
+    }
+  }
 
   return (
     <SafeAreaView className="h-full bg-background">
@@ -75,8 +86,8 @@ export default function SignIn() {
               </TouchableOpacity>
             </View>
             <Button
-              onPress={submitForm}
-              isLoading={isSubmitting}
+              onPress={handleSubmit}
+              isLoading={loading}
               className="mt-2 bg-orange-500 rounded-lg min-h-14"
             >
               <Text className="-mt-[0.125rem] font-intersemibold !text-lg">Log in</Text>

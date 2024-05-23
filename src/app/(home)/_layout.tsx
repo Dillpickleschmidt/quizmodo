@@ -42,7 +42,7 @@ export default function TabsLayout() {
                     <CustomIcon
                       icon={<Ionicons name="add-circle" />}
                       size={44}
-                      color="text-emerald-500"
+                      color="text-primary"
                     />
                   </Pressable>
                 </AddDialog>

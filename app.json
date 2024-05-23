@@ -2,7 +2,7 @@
   "expo": {
     "name": "Learn Stack",
     "slug": "learn-stack",
-    "scheme": "learn-stack",
+    "scheme": ["learn-stack", "com.supabase"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,7 +24,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-router"],
+    "plugins": ["expo-router", "expo-secure-store"],
     "experiments": {
       "typedRoutes": true,
       "tsconfigPaths": true

@@ -1,10 +1,17 @@
 import { Button } from "@/components/ui/button"
 import { Text } from "@/components/ui/text"
+import { useGlobalContext } from "@/context/GlobalContext"
 import { Redirect, router } from "expo-router"
 import { Platform, ScrollView, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 
 export default function App() {
+  const { isLoading, isLoggedIn } = useGlobalContext()
+
+  if (!isLoading && isLoggedIn) {
+    return <Redirect href="/library" />
+  }
+
   return (
     <SafeAreaView className="h-full bg-background">
       <ScrollView
