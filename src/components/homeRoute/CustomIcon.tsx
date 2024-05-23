@@ -7,13 +7,13 @@ import React from "react"
 type TabIconProps = {
   icon: React.ReactNode
   color: string // Requires a tailwind color class
+  size: number
   focused?: boolean
   text?: string
   className?: string
 }
 // Uses above type definition
-function TabIcon({ icon, color, text, focused, className }: TabIconProps) {
-  const size = 26
+export function CustomIcon({ icon, size, color, text, focused, className }: TabIconProps) {
   const _className = focused ? `${color} font-intersemibold` : "text-gray-500 font-interregular" // Conditional colors
 
   // Clones the icon component (passed as a prop) so we can add the color class to it
@@ -22,7 +22,7 @@ function TabIcon({ icon, color, text, focused, className }: TabIconProps) {
     size: size,
   })
   return (
-    <View className="items-center justify-center gap-[0.375rem]">
+    <View className="items-center justify-center gap-1">
       {coloredIcon}
       {/* The cn function conditionally combines multiple class names into a single string, with the second argument taking precedence */}
       <Text className={cn(_className, className)}>{text}</Text>
@@ -30,14 +30,15 @@ function TabIcon({ icon, color, text, focused, className }: TabIconProps) {
   )
 }
 
-export default function TabButton(title: string, iconComponent: React.ReactNode) {
+export function TabIcon(title: string, iconComponent: React.ReactNode) {
   const options = {
     title: title,
     headerShown: false,
     tabBarIcon: ({ focused }: { focused: boolean }) => (
-      <TabIcon
+      <CustomIcon
         color="text-emerald-500"
         icon={iconComponent}
+        size={26}
         text={title}
         focused={focused}
         className="text-xs"
