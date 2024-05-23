@@ -81,12 +81,14 @@ export default function RootLayout() {
   if (!isColorSchemeLoaded || !fontsLoaded) {
     return null
   }
-
+  const backgroundColor = colorScheme ? NAV_THEME[colorScheme].background : undefined
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      {/* <StatusBar style={isDarkColorScheme ? "light" : "dark"} /> */}
-      <Stack screenOptions={{ headerShown: false }} />
-      <PortalHost />
+      <View className="w-full h-full" style={{ backgroundColor: backgroundColor }}>
+        <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
+        <Stack screenOptions={{ headerShown: false }} />
+        <PortalHost />
+      </View>
     </ThemeProvider>
   )
 }
