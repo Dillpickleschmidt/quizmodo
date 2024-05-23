@@ -4,6 +4,7 @@ import { Input } from "~/components/ui/input"
 import { ScrollView, TouchableOpacity, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { useState } from "react"
+import { useAuthForm } from "@/components/auth/auth"
 
 import { Eye } from "@/lib/icons/Eye"
 import { EyeOff } from "@/lib/icons/EyeOff"
@@ -11,23 +12,24 @@ import { CustomIcon } from "@/components/homeRoute/CustomIcon"
 import { Button } from "@/components/ui/button"
 import { Link } from "expo-router"
 
-export default function SignIn() {
+export default function SignUp() {
   const [form, setForm] = useState({
     email: "",
     password: "",
   })
   const [showPassword, setshowPassword] = useState(false)
+  const { loading, signUpWithEmail } = useAuthForm()
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-
-  function submitForm() {}
+  const handleSubmit = () => {
+    signUpWithEmail(form.email, form.password)
+  }
 
   return (
     <SafeAreaView className="h-full bg-background">
       <ScrollView>
         <View className="justify-center w-full min-h-[95vh] px-4 my-6">
           <View className="items-center w-full my-20">
-            <Text className="text-2xl font-intersemibold">Log in to Learn Stack</Text>
+            <Text className="text-2xl font-intersemibold">Sign up for Learn Stack!</Text>
           </View>
           <View className="px-4 gap-y-2">
             {/* <Label nativeID="email" className="!text-sm">
@@ -75,16 +77,16 @@ export default function SignIn() {
               </TouchableOpacity>
             </View>
             <Button
-              onPress={submitForm}
-              isLoading={isSubmitting}
-              className="mt-2 bg-orange-500 rounded-lg min-h-14"
+              onPress={handleSubmit}
+              isLoading={loading}
+              className="mt-2 rounded-lg bg-emerald-500 min-h-14"
             >
-              <Text className="-mt-[0.125rem] font-intersemibold !text-lg">Log in</Text>
+              <Text className="-mt-[0.125rem] font-intersemibold !text-lg">Sign up</Text>
             </Button>
             <View className="flex-row items-center justify-center gap-2 mt-5">
-              <Text>Don't have an account?</Text>
-              <Link href="/sign-up">
-                <Text className="text-lg font-interbolditalic">Sign up</Text>
+              <Text>Already have an account?</Text>
+              <Link href="/sign-in">
+                <Text className="text-lg font-interbolditalic">Sign in</Text>
               </Link>
             </View>
           </View>

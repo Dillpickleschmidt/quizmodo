@@ -58,10 +58,12 @@ const buttonTextVariants = cva(
 )
 
 type ButtonProps = React.ComponentPropsWithoutRef<typeof Pressable> &
-  VariantProps<typeof buttonVariants>
+  VariantProps<typeof buttonVariants> & {
+    isLoading?: boolean // Added for future use
+  }
 
 const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>(
-  ({ className, variant, size, ...props }, ref) => {
+  ({ className, variant, size, isLoading, ...props }, ref) => {
     return (
       <TextClassContext.Provider
         value={cn(

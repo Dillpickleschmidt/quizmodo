@@ -1,13 +1,16 @@
 import { Button } from "@/components/ui/button"
 import { Text } from "@/components/ui/text"
 import { Redirect, router } from "expo-router"
-import { ScrollView, View } from "react-native"
+import { Platform, ScrollView, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 
 export default function App() {
   return (
     <SafeAreaView className="h-full bg-background">
-      <ScrollView contentContainerStyle={{ height: "100%" }}>
+      <ScrollView
+        contentContainerStyle={{ height: "100%" }}
+        overScrollMode={Platform.OS === "android" ? "always" : "auto"}
+      >
         <View className="items-center justify-center w-full h-full px-4 -mt-12">
           <View className="flex-row flex-wrap justify-center mx-3">
             <View className="flex-row flex-wrap items-center">
@@ -27,7 +30,7 @@ export default function App() {
           <Button
             size="lg"
             onPress={() => {
-              router.push("/library")
+              router.push("/sign-up")
             }}
             className="w-full my-3 rounded-xl"
           >
@@ -36,7 +39,7 @@ export default function App() {
           <Button
             size="lg"
             onPress={() => {
-              router.push("/library")
+              router.push("/sign-in")
             }}
             className="w-full max-w-[600px] rounded-xl"
           >
