@@ -6,7 +6,7 @@ import { useFonts } from "expo-font"
 import { SplashScreen, Stack } from "expo-router"
 import { StatusBar } from "expo-status-bar"
 import * as React from "react"
-import { Platform } from "react-native"
+import { Platform, View } from "react-native"
 import { NAV_THEME } from "~/lib/constants"
 import { useColorScheme } from "~/lib/useColorScheme"
 import { PortalHost } from "~/components/primitives/portal"
@@ -84,8 +84,8 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-      <Stack />
+      {/* <StatusBar style={isDarkColorScheme ? "light" : "dark"} /> */}
+      <Stack screenOptions={{ headerShown: false }} />
       <PortalHost />
     </ThemeProvider>
   )

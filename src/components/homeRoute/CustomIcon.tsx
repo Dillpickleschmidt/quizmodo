@@ -14,7 +14,7 @@ type TabIconProps = {
 }
 // Uses above type definition
 export function CustomIcon({ icon, size, color, text, focused, className }: TabIconProps) {
-  const _className = focused ? `${color} font-intersemibold` : "text-gray-500 font-interregular" // Conditional colors
+  const _className = focused ? `${color} font-intersemibold` : "text-neutral-200 font-interregular" // Conditional colors
 
   // Clones the icon component (passed as a prop) so we can add the color class to it
   const coloredIcon = React.cloneElement(icon as React.ReactElement, {
