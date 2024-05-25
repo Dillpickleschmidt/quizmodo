@@ -89,7 +89,7 @@ export default function RootLayout() {
         <View className="w-full h-full" style={{ backgroundColor: backgroundColor }}>
           <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
           <Stack screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="index" />
+            {/* <Stack.Screen name="index" /> */}
           </Stack>
           <PortalHost />
         </View>

@@ -29,7 +29,7 @@ export default function Settings() {
     await signOut()
     setUser(null)
     setIsLoggedIn(false)
-    router.replace("/sign-in")
+    router.replace("/auth/sign-in")
   }
 
   return (

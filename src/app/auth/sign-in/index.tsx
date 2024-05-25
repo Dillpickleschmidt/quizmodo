@@ -4,31 +4,32 @@ import { Input } from "~/components/ui/input"
 import { ScrollView, TouchableOpacity, View } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { useState } from "react"
-import { useAuthForm } from "@/components/auth/auth"
 
 import { Eye } from "@/lib/icons/Eye"
 import { EyeOff } from "@/lib/icons/EyeOff"
 import { CustomIcon } from "@/components/homeRoute/CustomIcon"
 import { Button } from "@/components/ui/button"
 import { Link, router } from "expo-router"
+import { useAuthForm } from "@/components/auth/auth"
 
-export default function SignUp() {
+export default function SignIn() {
   const [form, setForm] = useState({
     email: "",
     password: "",
   })
   const [showPassword, setshowPassword] = useState(false)
-  const { loading, signUpWithEmail } = useAuthForm()
 
-  const handleSubmit = () => {
+  const { loading, signInWithEmail } = useAuthForm()
+
+  const handleSubmit = async () => {
     if (!form.email || !form.password) {
-      // Add custom alert dialog here
+      // Add custom alert dialog here for missing email or password]
+      return
     }
-    try {
-      signUpWithEmail(form.email, form.password)
+    const success = await signInWithEmail(form.email, form.password)
+    if (success) {
+      // Assuming the user is logged in successfully if no error is thrown
       router.replace("/library")
-    } catch (error) {
-      // Add custom alert dialog here
     }
   }
 
@@ -37,7 +38,7 @@ export default function SignUp() {
       <ScrollView>
         <View className="justify-center w-full min-h-[95vh] px-4 my-6">
           <View className="items-center w-full my-20">
-            <Text className="text-2xl font-intersemibold">Sign up for Learn Stack!</Text>
+            <Text className="text-2xl font-intersemibold">Log in to Learn Stack</Text>
           </View>
           <View className="px-4 gap-y-2">
             {/* <Label nativeID="email" className="!text-sm">
@@ -87,15 +88,15 @@ export default function SignUp() {
             <Button
               onPress={handleSubmit}
               isLoading={loading}
-              className="mt-2 rounded-lg bg-emerald-500 min-h-14"
+              className="mt-2 bg-orange-500 rounded-lg min-h-14"
             >
-              <Text className="-mt-[0.125rem] font-intersemibold !text-lg">Sign up</Text>
+              <Text className="-mt-[0.125rem] font-intersemibold !text-lg">Log in</Text>
             </Button>
             <View className="flex-row items-center justify-center gap-2 mt-5">
-              <Text>Already have an account?</Text>
-              <Link href="/sign-in">
-                <Text className="text-lg font-interbolditalic">Sign in</Text>
-              </Link>
+              <Text>Don't have an account?</Text>
+              <TouchableOpacity onPress={() => router.replace("/auth/sign-up")}>
+                <Text className="text-lg font-interbolditalic">Sign up</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>

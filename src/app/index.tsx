@@ -37,7 +37,7 @@ export default function App() {
           <Button
             size="lg"
             onPress={() => {
-              router.push("/sign-up")
+              router.navigate("/auth/sign-up")
             }}
             className="w-full my-3 rounded-xl"
           >
@@ -46,7 +46,7 @@ export default function App() {
           <Button
             size="lg"
             onPress={() => {
-              router.push("/sign-in")
+              router.navigate("/auth/sign-in")
             }}
             className="w-full max-w-[600px] rounded-xl"
           >

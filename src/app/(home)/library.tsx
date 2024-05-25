@@ -1,18 +1,25 @@
-import { Text } from "@/components/ui/text"
-import React from "react"
 import { View } from "react-native"
+import { Text } from "@/components/ui/text"
 
-import { MoonStar } from "@/lib/icons/MoonStar"
 import { Button } from "@/components/ui/button"
 import { router } from "expo-router"
 
-export default function Library() {
+export default function index() {
   return (
-    <View className="items-center justify-center w-full h-full">
-      <Text className="text-3xl font-interblack">Library</Text>
-      <MoonStar className="text-5xl" color="gray" size={48} />
-      <Button onPress={() => router.navigate("/test-deck")} className="mt-4">
+    <View className="justify-center w-full h-full px-4">
+      {/* Eventually, fetch the list of decks from the user and use a */}
+      {/* map function to create a button for each deck */}
+      <View className="items-center">
+        <Text className="text-3xl font-interblack">Library</Text>
+      </View>
+      <Button onPress={() => router.navigate("/1")} className="mt-6">
         <Text>Go to Deck 1</Text>
+      </Button>
+      <Button onPress={() => router.navigate("/2")} className="mt-4">
+        <Text>Go to Deck 2</Text>
+      </Button>
+      <Button onPress={() => router.navigate("/3")} className="mt-4">
+        <Text>Go to Deck 3</Text>
       </Button>
     </View>
   )
