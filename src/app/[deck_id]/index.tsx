@@ -12,7 +12,7 @@ export default function DeckPage() {
     <View className="items-center justify-center w-full h-full">
       <Text className="text-3xl font-interblack">Deck {deck_id} Info</Text>
       <View className="justify-center my-6 border-t-2 border-b-2 min-h-96 border-primary">
-        {/* Get all the decks the user has and list them here */}
+        {/* Get all the questions+answers the deck has and list them here */}
         <Text>List your deck's terms and answers here!</Text>
       </View>
       <Button onPress={() => router.navigate("./learn")}>
