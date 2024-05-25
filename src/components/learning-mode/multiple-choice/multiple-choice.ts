@@ -1,31 +1,58 @@
+/*
+This file contains the logic for generating multiple choice options and handling the user's selection.
+*/
+
 import { VocabData } from "@/types"
 
 type VocabDataRaw = VocabData["data"]
 
-export function presentMultipleChoiceOptions(data: VocabDataRaw) {
-  const entries = Object.entries(data)
+/*
+This function takes in a raw vocab data object and returns an object with multiple choice options.
+@param data: The raw vocab data object.
+@param shuffleInput: A boolean to determine if the input should be shuffled. Default is false.
+@return An object with multiple choice options and the correct key.
+
+- By default, the function will shuffle the input data and select the first 4 entries as options.
+The correct key is randomly selected from the input data.
+- Alternatively, the function can be called with shuffleInput set to false. In that case, the
+first entry will be the correct key and the remaining entries will be shuffled to select 3 options.
+This is useful for cycling through the data in order.
+*/
+export function presentMultipleChoiceOptions(data: VocabDataRaw, shuffleInput = true) {
+  let entries = Object.entries(data)
 
   if (entries.length < 4) {
     throw new Error("Not enough entries to select 4 options")
   }
 
-  // Shuffle the entries array
-  const shuffledEntries = entries.sort(() => 0.5 - Math.random())
+  if (shuffleInput) {
+    // Shuffle the entries array
+    entries = entries.sort(() => 0.5 - Math.random())
+  }
+  // Destructuring the 'entries' array to assign the first element to 'correctKeyArr' and the remaining elements to 'remainingEntries'
+  const [correctKeyArr, ...remainingEntries] = entries // ex: [1], [2, 3, 4, 5...]
 
-  // Select the first 4 entries after shuffling
-  const selectedEntries = shuffledEntries.slice(0, 4)
+  // Shuffle the remaining entries array
+  const remainingShuffledEntries = remainingEntries.sort(() => 0.5 - Math.random()) // [1], [3, 5, 7, 2...]
 
-  // Pick a random entry from the selected entries as the correct answer
-  const correctIndex = Math.floor(Math.random() * 4)
-  const correctKey = selectedEntries[correctIndex][0]
+  // Select the first 3 remaining entries after shuffling
+  const select3Entries = remainingShuffledEntries.slice(0, 3) // [1], [3, 5, 7]
+
+  // Combine the correct key with the selected entries
+  const selectedEntries = [correctKeyArr, ...select3Entries] // [1, 3, 5, 7]
+
+  // Shuffle the selected entries
+  const shuffledSelectedEntries = selectedEntries.sort(() => 0.5 - Math.random()) // [3, 1, 7, 5]
 
   // Map the selected entries to a more usable format
-  const options = selectedEntries.map(([key, entry]) => ({
+  const options = shuffledSelectedEntries.map(([key, entry]) => ({
     key,
     answers: entry.answers,
     mnemonics: entry.mnemonics,
     notes: entry.notes,
   }))
+  // Get the correct key from the correctKeyArr
+  const correctKey = correctKeyArr[0] // 1
 
   return {
     options,
