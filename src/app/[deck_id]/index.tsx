@@ -1,12 +1,12 @@
-import { View } from "react-native";
-import React from "react";
-import { Text } from "@/components/ui/text";
-import { router, useLocalSearchParams } from "expo-router";
-import { Button } from "@/components/ui/button";
-import QuizList from "../(home)/(test-study-set)/test-study-set"; 
+import { View } from "react-native"
+import React from "react"
+import { Text } from "@/components/ui/text"
+import { router } from "expo-router"
+import { Button } from "@/components/ui/button"
+import { useLocalSearchParams } from "expo-router"
 
 export default function DeckPage() {
-  const { deck_id } = useLocalSearchParams<{ deck_id: string }>();
+  const { deck_id } = useLocalSearchParams<{ deck_id: string }>()
 
   return (
     <View className="items-center justify-center w-full h-full">
@@ -15,10 +15,9 @@ export default function DeckPage() {
         {/* Get all the decks the user has and list them here */}
         <Text>List your deck's terms and answers here!</Text>
       </View>
-      <QuizList /> {/* Added QuizList component */}
       <Button onPress={() => router.navigate("./learn")}>
         <Text>Start Learning!</Text>
       </Button>
     </View>
-  );
+  )
 }
