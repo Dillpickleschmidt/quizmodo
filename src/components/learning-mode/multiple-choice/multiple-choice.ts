@@ -1,7 +1,9 @@
 import { VocabData } from "@/types"
 
-export function presentMultipleChoiceOptions(data: VocabData) {
-  const entries = Object.entries(data.data)
+type VocabDataRaw = VocabData["data"]
+
+export function presentMultipleChoiceOptions(data: VocabDataRaw) {
+  const entries = Object.entries(data)
 
   if (entries.length < 4) {
     throw new Error("Not enough entries to select 4 options")
@@ -31,7 +33,7 @@ export function presentMultipleChoiceOptions(data: VocabData) {
   }
 }
 
-type MultipleChoiceOutput = {
+export type MultipleChoices = {
   options: {
     key: string
     answers?: string[]
@@ -42,10 +44,10 @@ type MultipleChoiceOutput = {
 }
 
 export function handleMultipleChoiceSelection(
-  multipleChoiceOutput: MultipleChoiceOutput,
+  multipleChoices: MultipleChoices,
   userAnswer: string,
 ): boolean {
-  const { options, correctKey } = multipleChoiceOutput
+  const { options, correctKey } = multipleChoices
 
   // Find the correct option based on the correctKey
   const correctOption = options.find((option) => option.key === correctKey)
