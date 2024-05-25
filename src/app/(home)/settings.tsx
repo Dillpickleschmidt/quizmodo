@@ -6,15 +6,16 @@ import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
 import { NAV_THEME } from "~/lib/constants"
-
-import { CustomIcon } from "@/components/homeRoute/CustomIcon"
-import { MoonStar } from "@/lib/icons/MoonStar"
-import { Sun } from "@/lib/icons/Sun"
-import { LogOut } from "@/lib/icons/LogOut"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { useAuthForm } from "@/components/auth/auth"
 import { useGlobalContext } from "@/context/GlobalContext"
 import { router } from "expo-router"
+
+// Icons
+import { CustomIcon } from "@/components/homeRoute/CustomIcon"
+import { MoonStar } from "@/lib/icons/MoonStar"
+import { Sun } from "@/lib/icons/Sun"
+import { LogOut } from "@/lib/icons/LogOut"
 
 export default function Settings() {
   const { colorScheme, toggleColorScheme } = useColorScheme()

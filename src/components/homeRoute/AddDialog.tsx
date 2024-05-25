@@ -1,3 +1,4 @@
+import { Link, router } from "expo-router"
 import * as React from "react"
 import { Button } from "~/components/ui/button"
 import {
@@ -22,11 +23,17 @@ export default function AddDialog({ children }: AddDialogProps) {
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add</DialogTitle>
+          <DialogTitle>Create</DialogTitle>
           <DialogDescription>
             This is where you'll add buttons to add new items to your library.
           </DialogDescription>
         </DialogHeader>
+        <Button className="bg-card min-h-32" onPress={() => router.push("")}>
+          <Text className="text-primary">Create Folder</Text>
+        </Button>
+        <Button className="bg-card min-h-32" onPress={() => router.push("")}>
+          <Text className="text-primary">Create New Set</Text>
+        </Button>
         <DialogFooter>
           <DialogClose asChild>
             <Button>
