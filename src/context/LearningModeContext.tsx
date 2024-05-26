@@ -1,3 +1,4 @@
+import { VocabEntry } from "@/types"
 import { createContext, useContext, useState } from "react"
 
 type LearningModeContextProps = {
@@ -7,28 +8,33 @@ type LearningModeContextProps = {
 type LearningModeContext = {
   correctKey: string
   setCorrectKey: React.Dispatch<React.SetStateAction<string>>
-  isSelectionCorrect: boolean
-  setIsSelectionCorrect: React.Dispatch<React.SetStateAction<boolean>>
+  isAnswerCorrect: boolean
+  setIsAnswerCorrect: React.Dispatch<React.SetStateAction<boolean>>
   hasUserAnswered: boolean
   setHasUserAnswered: React.Dispatch<React.SetStateAction<boolean>>
+  correctEntry?: VocabEntry & { key: string }
+  setCorrectEntry: React.Dispatch<React.SetStateAction<(VocabEntry & { key: string }) | undefined>>
 }
 
 const LearningModeContext = createContext<LearningModeContext | null>(null)
 
 export function LearningModeContextProvider({ children }: LearningModeContextProps) {
   const [correctKey, setCorrectKey] = useState("")
-  const [isSelectionCorrect, setIsSelectionCorrect] = useState(false)
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(false)
   const [hasUserAnswered, setHasUserAnswered] = useState(false)
+  const [correctEntry, setCorrectEntry] = useState<VocabEntry & { key: string }>()
 
   return (
     <LearningModeContext.Provider
       value={{
         correctKey,
         setCorrectKey,
-        isSelectionCorrect,
-        setIsSelectionCorrect,
+        isAnswerCorrect,
+        setIsAnswerCorrect,
         hasUserAnswered,
         setHasUserAnswered,
+        correctEntry,
+        setCorrectEntry,
       }}
     >
       {children}
