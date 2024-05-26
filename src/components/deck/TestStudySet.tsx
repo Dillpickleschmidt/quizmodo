@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    color: "#fff",
+    color: "#d3ad7f",
     marginBottom: 20,
     textAlign: "center",
   },
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   detailText: {
     fontSize: 16,
-    color: "#fff",
+    color: "#d4d4d4",
   },
 })
 
