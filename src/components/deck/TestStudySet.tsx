@@ -1,44 +1,44 @@
-import React from 'react';
-import { SafeAreaView, ScrollView, View, Text, StyleSheet } from 'react-native';
+import React from "react"
+import { SafeAreaView, ScrollView, View, Text, StyleSheet } from "react-native"
 
 type QuestionData = {
-  answers: string[];
-  mnemonics?: string[];
-  notes?: string[];
-};
+  answers: string[]
+  mnemonics?: string[]
+  notes?: string[]
+}
 
 type DataList = {
-  [key: string]: QuestionData;
-};
+  [key: string]: QuestionData
+}
 
 const data: DataList = {
   "What is the capital of France?": {
-    "answers": ["Paris"],
-    "mnemonics": [
-      "Paris rhymes with 'pair of keys', which can unlock the gates to the city of lights."
+    answers: ["Paris"],
+    mnemonics: [
+      "Paris rhymes with 'pair of keys', which can unlock the gates to the city of lights.",
     ],
-    "notes": ["Paris is also known for its significant contributions to art, fashion, and cuisine."]
+    notes: ["Paris is also known for its significant contributions to art, fashion, and cuisine."],
   },
   "What is the boiling point of water?": {
-    "answers": ["100 degrees Celsius"],
-    "mnemonics": [
-      "'Boiling point' sounds like 'boiling joint', imagine water boiling at a joint family dinner at 100 degrees."
+    answers: ["100 degrees Celsius"],
+    mnemonics: [
+      "'Boiling point' sounds like 'boiling joint', imagine water boiling at a joint family dinner at 100 degrees.",
     ],
-    "notes": ["This is at standard atmospheric pressure."]
+    notes: ["This is at standard atmospheric pressure."],
   },
   "What is the chemical symbol for gold?": {
-    "answers": ["Au"],
-    "mnemonics": [
-      "'Au' sounds like 'ow', something you might exclaim when finding gold because it's so valuable."
+    answers: ["Au"],
+    mnemonics: [
+      "'Au' sounds like 'ow', something you might exclaim when finding gold because it's so valuable.",
     ],
-    "notes": ["Gold has been a valuable resource for jewelry and economics for centuries."]
+    notes: ["Gold has been a valuable resource for jewelry and economics for centuries."],
   },
   "Who wrote 'To Kill a Mockingbird'?": {
-    "answers": ["Harper Lee"],
-    "mnemonics": ["'Harper' sounds like 'harp', and a musician could sing about the mockingbird."],
-    "notes": ["This novel was published in 1960 and is famous for its themes of racial injustice."]
-  }
-};
+    answers: ["Harper Lee"],
+    mnemonics: ["'Harper' sounds like 'harp', and a musician could sing about the mockingbird."],
+    notes: ["This novel was published in 1960 and is famous for its themes of racial injustice."],
+  },
+}
 
 const QuizList = () => {
   return (
@@ -52,7 +52,9 @@ const QuizList = () => {
               <View style={styles.detailSection}>
                 <Text style={styles.detailTitle}>Answers:</Text>
                 {details.answers.map((answer, i) => (
-                  <Text key={i} style={styles.detailText}>{answer}</Text>
+                  <Text key={i} style={styles.detailText}>
+                    {answer}
+                  </Text>
                 ))}
               </View>
             )}
@@ -60,7 +62,9 @@ const QuizList = () => {
               <View style={styles.detailSection}>
                 <Text style={styles.detailTitle}>Mnemonics:</Text>
                 {details.mnemonics.map((mnemonic, i) => (
-                  <Text key={i} style={styles.detailText}>{mnemonic}</Text>
+                  <Text key={i} style={styles.detailText}>
+                    {mnemonic}
+                  </Text>
                 ))}
               </View>
             )}
@@ -68,7 +72,9 @@ const QuizList = () => {
               <View style={styles.detailSection}>
                 <Text style={styles.detailTitle}>Notes:</Text>
                 {details.notes.map((note, i) => (
-                  <Text key={i} style={styles.detailText}>{note}</Text>
+                  <Text key={i} style={styles.detailText}>
+                    {note}
+                  </Text>
                 ))}
               </View>
             )}
@@ -76,32 +82,32 @@ const QuizList = () => {
         ))}
       </ScrollView>
     </SafeAreaView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: "#000",
   },
   scrollView: {
     padding: 20,
   },
   title: {
     fontSize: 24,
-    color: '#fff',
+    color: "#fff",
     marginBottom: 20,
-    textAlign: 'center',
+    textAlign: "center",
   },
   entryContainer: {
     marginBottom: 20,
     padding: 10,
-    backgroundColor: '#1e1e1e',
+    backgroundColor: "#1e1e1e",
     borderRadius: 10,
   },
   question: {
     fontSize: 18,
-    color: '#d3ad7f',
+    color: "#d3ad7f",
     marginBottom: 10,
   },
   detailSection: {
@@ -109,13 +115,13 @@ const styles = StyleSheet.create({
   },
   detailTitle: {
     fontSize: 16,
-    color: '#e5c07b',
+    color: "#e5c07b",
     marginBottom: 5,
   },
   detailText: {
     fontSize: 16,
-    color: '#fff',
+    color: "#fff",
   },
-});
+})
 
-export default QuizList;
+export default QuizList
