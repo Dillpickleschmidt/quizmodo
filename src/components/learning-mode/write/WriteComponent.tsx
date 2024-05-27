@@ -20,16 +20,14 @@ export default function WriteComponent({ data, shuffleInput = true }: WriteCompo
 
   useEffect(() => {
     setCorrectEntry(correctEntry)
+    setUserAnswer("")
   }, [correctEntry])
 
   const handleInput = (userAnswer: string) => {
     setIsAnswerCorrect(handleWrittenAnswer(userAnswer, correctEntry))
     setHasUserAnswered(true)
     console.log("User answer: ", userAnswer)
-    console.log(
-      "Correct answer: ",
-      correctEntry.answers.map((answer: string) => answer.toLowerCase()),
-    )
+    console.log("Correct answer: ", correctEntry.answers.join(", "))
   }
 
   return (

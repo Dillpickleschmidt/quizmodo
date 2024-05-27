@@ -33,8 +33,8 @@ export function presentWriteOptions(data: UniversalJSONData, shuffleInput = true
 export function handleWrittenAnswer(userAnswer: string, correctOption: any) {
   if (
     correctOption.answers
-      .map((answer: string) => answer.toLowerCase())
-      .includes(userAnswer.toLowerCase())
+      .map((answer: string) => answer.trim().toLowerCase())
+      .includes(userAnswer.trim().toLowerCase())
   ) {
     return true
   } else {

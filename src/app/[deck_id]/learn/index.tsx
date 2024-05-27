@@ -17,40 +17,104 @@ export default function LearningPage() {
   const { slicedData, remainingData } = useMemo(() => useDeckSplit(data), [data])
 
   const [activeCards, setActiveCards] = useState(slicedData) // This is the subset of data that the user is currently practicing
-  const [remainingCards, setRemainingCards] = useState(remainingData)
+  const [inactiveCards, setInactiveCards] = useState(remainingData)
 
+  // Log the length of the slicedData and remainingData
   useEffect(() => {
     console.log("slicedData length: ", Object.keys(slicedData).length)
     console.log("remainingData length: ", Object.keys(remainingData).length)
   }, [slicedData, remainingData])
 
+  // Log the deck_id whenever it changes
   useEffect(() => {
     console.log("Now practicing deck " + deck_id)
   }, [deck_id])
 
-  const setBackgroundColor = (isCorrect: boolean) => {
-    return hasUserAnswered ? (isCorrect ? "bg-green-500" : "bg-red-500") : ""
-  }
-
-  function handleNextQuestion() {
+  function handleNextQuestion(isAnswerCorrect: boolean) {
     console.log("Next question!")
     setHasUserAnswered(false)
     setIsAnswerCorrect(false)
 
-    // Cycle the first card to the end of the active cards
-    const [firstKey, ...remainingKeys] = Object.keys(activeCards)
-    const firstCard = { ...activeCards[firstKey], cardStyle: "write" }
-    console.log("First card: ", firstCard)
+    // If there are no more cards to practice, log a message and return
+    if (Object.keys(activeCards).length === 0) {
+      console.log("No more cards to practice!")
+      return
+    }
 
-    const updatedCards: UniversalJSONData = remainingKeys.reduce((acc, key) => {
-      acc[key] = activeCards[key]
+    // If there are no more inactive cards, handle based on correctness
+    if (Object.keys(inactiveCards).length === 0) {
+      if (isAnswerCorrect) {
+        removeCard()
+      } else {
+        cycleCards("multiple-choice")
+      }
+      return
+    }
+
+    // Get the cardStyle of the first card in the active cards
+    const firstKeyStyle = activeCards[Object.keys(activeCards)[0]].cardStyle
+
+    // Handle based on correctness and card type
+    if (isAnswerCorrect) {
+      if (firstKeyStyle === "write") {
+        removeAndAddNewCard()
+      } else {
+        cycleCards("write")
+      }
+    } else {
+      cycleCards("multiple-choice")
+    }
+  }
+
+  function cycleCards(cardType: "write" | "multiple-choice") {
+    const [firstKey, ...remainingKeys] = Object.keys(activeCards)
+    const firstCard = { ...activeCards[firstKey], cardStyle: cardType }
+
+    const updatedActiveCards = updateCards(remainingKeys, activeCards)
+    updatedActiveCards[firstKey] = firstCard
+
+    setActiveCards(updatedActiveCards)
+    logCardCounts(updatedActiveCards, inactiveCards)
+  }
+
+  function removeCard() {
+    const [, ...remainingKeys] = Object.keys(activeCards)
+    const updatedActiveCards = updateCards(remainingKeys, activeCards)
+
+    setActiveCards(updatedActiveCards)
+    logCardCounts(updatedActiveCards, inactiveCards)
+  }
+
+  function removeAndAddNewCard() {
+    const [firstKey, ...remainingKeys] = Object.keys(activeCards)
+    const [inactiveFirstKey, ...remainingInactiveKeys] = Object.keys(inactiveCards)
+
+    const firstInactiveCard = { ...inactiveCards[inactiveFirstKey] }
+    const updatedActiveCards = updateCards(remainingKeys, activeCards)
+    updatedActiveCards[inactiveFirstKey] = firstInactiveCard
+    const updatedInactiveCards = updateCards(remainingInactiveKeys, inactiveCards)
+
+    setActiveCards(updatedActiveCards)
+    setInactiveCards(updatedInactiveCards)
+    logCardCounts(updatedActiveCards, updatedInactiveCards)
+  }
+
+  // Helper function to update cards
+  function updateCards(keys: string[], source: UniversalJSONData): UniversalJSONData {
+    return keys.reduce((acc, key) => {
+      acc[key] = source[key]
       return acc
     }, {} as UniversalJSONData)
+  }
 
-    updatedCards[firstKey] = firstCard
+  // Helper function to log the number of active and inactive cards
+  function logCardCounts(activeCards: UniversalJSONData, inactiveCards: UniversalJSONData) {
+    console.log("Active cards count: ", Object.keys(activeCards).length)
+    console.log("Inactive cards count: ", Object.keys(inactiveCards).length)
+  }
 
-    setActiveCards(updatedCards)
-    // console.log("Active cards: ", updatedCards)
+  function setBackgroundColor(isCorrect: boolean) {
+    return hasUserAnswered ? (isCorrect ? "bg-green-500" : "bg-red-500") : ""
   }
 
   return (
@@ -62,10 +126,13 @@ export default function LearningPage() {
         <Text className="text-xl">This is where you'll practice</Text>
         <Text className="mt-12 text-2xl font-intersemibold">{correctEntry?.key}</Text>
         <CardHandler data={activeCards} />
-        {/* <MultipleChoice data={data} /> */}
       </View>
       {hasUserAnswered && (
-        <Button size="lg" onPress={handleNextQuestion} className="absolute bottom-12">
+        <Button
+          size="lg"
+          onPress={() => handleNextQuestion(isAnswerCorrect)}
+          className="absolute bottom-12"
+        >
           <Text>Next Question {"->"}</Text>
         </Button>
       )}
