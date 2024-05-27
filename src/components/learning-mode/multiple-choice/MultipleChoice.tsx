@@ -4,10 +4,10 @@ import { handleMultipleChoiceSelection, presentMultipleChoiceOptions } from "./m
 import { Button } from "@/components/ui/button"
 import { Text } from "@/components/ui/text"
 import { useLearningModeContext } from "@/context/LearningModeContext"
-import { UniversalJSONData } from "@/types"
+import { JSONWithAnswers } from "@/types"
 
 type MultipleChoiceProps = {
-  data: UniversalJSONData
+  data: JSONWithAnswers
   shuffleInput?: boolean
 }
 

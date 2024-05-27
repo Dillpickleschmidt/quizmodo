@@ -2,7 +2,7 @@
 This file contains the logic for generating multiple choice options and handling the user's selection.
 */
 
-import { UniversalJSONData } from "@/types"
+import { JSONWithAnswers } from "@/types"
 
 /*
 This function takes in a raw vocab data object and returns an object with multiple choice options.
@@ -16,7 +16,7 @@ The correct key is randomly selected from the input data.
 first entry will be the correct key and the remaining entries will be shuffled to select 3 options.
 This is useful for cycling through the data in order.
 */
-export function presentMultipleChoiceOptions(data: UniversalJSONData, shuffleInput = true) {
+export function presentMultipleChoiceOptions(data: JSONWithAnswers, shuffleInput = true) {
   let entries = Object.entries(data)
 
   if (entries.length < 4) {
@@ -57,8 +57,8 @@ export function presentMultipleChoiceOptions(data: UniversalJSONData, shuffleInp
 }
 
 export type MultipleChoices = {
-  options: any[]
-  correctOption: any
+  options: JSONWithAnswers[0][]
+  correctOption: JSONWithAnswers[0]
 }
 
 export function handleMultipleChoiceSelection(

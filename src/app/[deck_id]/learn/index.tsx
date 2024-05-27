@@ -7,7 +7,7 @@ import { useLearningModeContext } from "@/context/LearningModeContext"
 import data from "@/test-data/test-data.json"
 import CardHandler from "@/components/learning-mode/CardHandler"
 import useDeckSplit from "@/components/learning-mode/useDeckSplit"
-import { UniversalJSONData } from "@/types"
+import { JSONWithAnswers } from "@/types"
 
 export default function LearningPage() {
   const { deck_id } = useLocalSearchParams<{ deck_id: string }>()
@@ -100,15 +100,15 @@ export default function LearningPage() {
   }
 
   // Helper function to update cards
-  function updateCards(keys: string[], source: UniversalJSONData): UniversalJSONData {
+  function updateCards(keys: string[], source: JSONWithAnswers): JSONWithAnswers {
     return keys.reduce((acc, key) => {
       acc[key] = source[key]
       return acc
-    }, {} as UniversalJSONData)
+    }, {} as JSONWithAnswers)
   }
 
   // Helper function to log the number of active and inactive cards
-  function logCardCounts(activeCards: UniversalJSONData, inactiveCards: UniversalJSONData) {
+  function logCardCounts(activeCards: JSONWithAnswers, inactiveCards: JSONWithAnswers) {
     console.log("Active cards count: ", Object.keys(activeCards).length)
     console.log("Inactive cards count: ", Object.keys(inactiveCards).length)
   }
