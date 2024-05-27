@@ -7,13 +7,13 @@ import { Text } from "@/components/ui/text"
 import { useLearningModeContext } from "@/context/LearningModeContext"
 
 export default function MultipleChoice() {
-  const { setCorrectKey, setIsAnswerCorrect, setHasUserAnswered } = useLearningModeContext()
+  const { setCorrectEntry, setIsAnswerCorrect, setHasUserAnswered } = useLearningModeContext()
 
   const choices = useMemo(() => presentMultipleChoiceOptions(data), [data])
 
   useEffect(() => {
-    setCorrectKey(choices.correctKey)
-  }, [choices.correctKey, setCorrectKey])
+    setCorrectEntry(choices.correctOption)
+  }, [choices.correctOption, setCorrectEntry])
 
   const handleSelection = (selection: string) => {
     setIsAnswerCorrect(handleMultipleChoiceSelection(choices, selection))
@@ -24,6 +24,7 @@ export default function MultipleChoice() {
     <View className="mt-4">
       <Text>Multiple Choice</Text>
       {choices.options.map((option, index) => (
+        // Pick the first answer from the answers array (each answer in the array is equally valid)
         <Button key={index} onPress={() => handleSelection(option.answers[0])} className="my-2">
           <Text>{option.answers.join(", ")}</Text>
         </Button>

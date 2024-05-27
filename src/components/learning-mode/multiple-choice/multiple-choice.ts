@@ -2,9 +2,7 @@
 This file contains the logic for generating multiple choice options and handling the user's selection.
 */
 
-import { VocabData } from "@/types"
-
-type VocabDataRaw = VocabData["data"]
+import { VocabData, VocabEntry } from "@/types"
 
 /*
 This function takes in a raw vocab data object and returns an object with multiple choice options.
@@ -18,7 +16,7 @@ The correct key is randomly selected from the input data.
 first entry will be the correct key and the remaining entries will be shuffled to select 3 options.
 This is useful for cycling through the data in order.
 */
-export function presentMultipleChoiceOptions(data: VocabDataRaw, shuffleInput = true) {
+export function presentMultipleChoiceOptions(data: VocabData, shuffleInput = true) {
   let entries = Object.entries(data)
 
   if (entries.length < 4) {
@@ -47,37 +45,27 @@ export function presentMultipleChoiceOptions(data: VocabDataRaw, shuffleInput = 
   // Map the selected entries to a more usable format
   const options = shuffledSelectedEntries.map(([key, entry]) => ({
     key,
-    answers: entry.answers,
-    mnemonics: entry.mnemonics,
-    notes: entry.notes,
+    ...entry,
   }))
   // Get the correct key from the correctKeyArr
-  const correctKey = correctKeyArr[0] // 1
+  const correctOption = options.find((option) => option.key === correctKeyArr[0])!
 
   return {
     options,
-    correctKey,
+    correctOption,
   }
 }
 
 export type MultipleChoices = {
-  options: {
-    key: string
-    answers?: string[]
-    mnemonics?: string[]
-    notes?: string[]
-  }[]
-  correctKey: string
+  options: (VocabEntry & { key: string })[]
+  correctOption: VocabEntry & { key: string }
 }
 
 export function handleMultipleChoiceSelection(
   multipleChoices: MultipleChoices,
   userAnswer: string,
 ): boolean {
-  const { options, correctKey } = multipleChoices
-
-  // Find the correct option based on the correctKey
-  const correctOption = options.find((option) => option.key === correctKey)
+  const { correctOption } = multipleChoices
 
   if (!correctOption || !correctOption.answers) {
     throw new Error("Correct option or answer not found")

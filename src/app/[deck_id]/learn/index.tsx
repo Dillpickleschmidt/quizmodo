@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import { View } from "react-native"
 import { Text } from "@/components/ui/text"
 import { Button } from "@/components/ui/button"
@@ -9,14 +9,8 @@ import WriteComponent from "@/components/learning-mode/write/WriteComponent"
 
 export default function LearningPage() {
   const { deck_id } = useLocalSearchParams<{ deck_id: string }>()
-  const {
-    correctKey,
-    correctEntry,
-    isAnswerCorrect,
-    hasUserAnswered,
-    setHasUserAnswered,
-    setIsAnswerCorrect,
-  } = useLearningModeContext()
+  const { correctEntry, isAnswerCorrect, setIsAnswerCorrect, hasUserAnswered, setHasUserAnswered } =
+    useLearningModeContext()
 
   useEffect(() => {
     console.log("Now practicing deck " + deck_id)
@@ -39,7 +33,7 @@ export default function LearningPage() {
       <View className="w-full px-6 translate-y-12">
         <Text className="text-3xl font-interblack">Deck {deck_id} Learning Page</Text>
         <Text className="text-xl">This is where you'll practice</Text>
-        <Text className="mt-12 text-2xl font-intersemibold">{correctKey}</Text>
+        <Text className="mt-12 text-2xl font-intersemibold">{correctEntry?.key}</Text>
         <MultipleChoice />
         <Text className="mt-12 text-2xl font-intersemibold">{correctEntry?.key}</Text>
         <WriteComponent />

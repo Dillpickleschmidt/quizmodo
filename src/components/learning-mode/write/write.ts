@@ -4,9 +4,7 @@ This file contains the logic for handling the user's input for the write mode.
 
 import { VocabData, VocabEntry } from "@/types"
 
-type VocabDataRaw = VocabData["data"]
-
-export function presentWriteOptions(data: VocabDataRaw, shuffleInput = true) {
+export function presentWriteOptions(data: VocabData, shuffleInput = true) {
   let entries = Object.entries(data)
 
   if (entries.length < 1) {
@@ -26,15 +24,16 @@ export function presentWriteOptions(data: VocabDataRaw, shuffleInput = true) {
 
   const correctOption = {
     key: correctKey,
-    answers: selectedEntry.answers,
-    mnemonics: selectedEntry.mnemonics,
-    notes: selectedEntry.notes,
+    ...selectedEntry,
   }
 
   return correctOption
 }
 
-export function handleWrittenAnswer(userAnswer: string, correctOption: VocabEntry) {
+export function handleWrittenAnswer(
+  userAnswer: string,
+  correctOption: VocabEntry & { key: string },
+) {
   if (
     correctOption.answers.map((answer) => answer.toLowerCase()).includes(userAnswer.toLowerCase())
   ) {

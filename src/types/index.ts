@@ -3,6 +3,4 @@ export type VocabEntry = {
   mnemonics?: string[]
   notes?: string[]
 }
-export type VocabData = {
-  data: Record<string, VocabEntry>
-}
+export type VocabData = Record<string, VocabEntry>
