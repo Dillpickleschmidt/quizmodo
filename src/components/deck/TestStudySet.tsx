@@ -1,51 +1,32 @@
-import React from "react"
-import { SafeAreaView, ScrollView, View, Text, StyleSheet } from "react-native"
+import React, { useEffect, useState } from "react";
+import { SafeAreaView, ScrollView, View, Text, StyleSheet } from "react-native";
+import rawData from '../../test-data/test-data.json';
 
 type QuestionData = {
-  answers: string[]
-  mnemonics?: string[]
-  notes?: string[]
-}
+  answers: string[];
+  mnemonics?: string[];
+  notes?: string[];
+};
 
 type DataList = {
-  [key: string]: QuestionData
-}
+  [key: string]: QuestionData;
+};
 
-const data: DataList = {
-  "What is the capital of France?": {
-    answers: ["Paris"],
-    mnemonics: [
-      "Paris rhymes with 'pair of keys', which can unlock the gates to the city of lights.",
-    ],
-    notes: ["Paris is also known for its significant contributions to art, fashion, and cuisine."],
-  },
-  "What is the boiling point of water?": {
-    answers: ["100 degrees Celsius"],
-    mnemonics: [
-      "'Boiling point' sounds like 'boiling joint', imagine water boiling at a joint family dinner at 100 degrees.",
-    ],
-    notes: ["This is at standard atmospheric pressure."],
-  },
-  "What is the chemical symbol for gold?": {
-    answers: ["Au"],
-    mnemonics: [
-      "'Au' sounds like 'ow', something you might exclaim when finding gold because it's so valuable.",
-    ],
-    notes: ["Gold has been a valuable resource for jewelry and economics for centuries."],
-  },
-  "Who wrote 'To Kill a Mockingbird'?": {
-    answers: ["Harper Lee"],
-    mnemonics: ["'Harper' sounds like 'harp', and a musician could sing about the mockingbird."],
-    notes: ["This novel was published in 1960 and is famous for its themes of racial injustice."],
-  },
-}
+// Ensure rawData conforms to the DataList type
+const data: DataList = rawData as unknown as DataList;
 
 const QuizList = () => {
+  const [quizData, setQuizData] = useState<DataList>({});
+
+  useEffect(() => {
+    setQuizData(data); // Directly set the data from JSON
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollView}>
         <Text style={styles.title}>Quiz Questions</Text>
-        {Object.entries(data).map(([question, details], index) => (
+        {Object.entries(quizData).map(([question, details], index) => (
           <View key={index} style={styles.entryContainer}>
             <Text style={styles.question}>{question}</Text>
             {details.answers && (
@@ -82,13 +63,13 @@ const QuizList = () => {
         ))}
       </ScrollView>
     </SafeAreaView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "--background--",
+    backgroundColor: "--background--", // Replace with your desired background color
   },
   scrollView: {
     padding: 20,
@@ -122,6 +103,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#d4d4d4",
   },
-})
+});
 
-export default QuizList
+export default QuizList;
