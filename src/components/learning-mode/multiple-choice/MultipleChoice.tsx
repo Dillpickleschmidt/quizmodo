@@ -4,15 +4,17 @@ import { handleMultipleChoiceSelection, presentMultipleChoiceOptions } from "./m
 import { Button } from "@/components/ui/button"
 import { Text } from "@/components/ui/text"
 import { useLearningModeContext } from "@/context/LearningModeContext"
+import { UniversalJSONData } from "@/types"
 
 type MultipleChoiceProps = {
-  data: Record<string, any>
+  data: UniversalJSONData
+  shuffleInput?: boolean
 }
 
-export default function MultipleChoice({ data }: MultipleChoiceProps) {
+export default function MultipleChoice({ data, shuffleInput = true }: MultipleChoiceProps) {
   const { setCorrectEntry, setIsAnswerCorrect, setHasUserAnswered } = useLearningModeContext()
 
-  const choices = useMemo(() => presentMultipleChoiceOptions(data), [data])
+  const choices = useMemo(() => presentMultipleChoiceOptions(data, shuffleInput), [data])
 
   useEffect(() => {
     setCorrectEntry(choices.correctOption)

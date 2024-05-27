@@ -5,15 +5,17 @@ import { useLearningModeContext } from "@/context/LearningModeContext"
 import { handleWrittenAnswer, presentWriteOptions } from "./write"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { UniversalJSONData } from "@/types"
 
 type WriteComponentProps = {
-  data: Record<string, any>
+  data: UniversalJSONData
+  shuffleInput?: boolean
 }
 
-export default function WriteComponent({ data }: WriteComponentProps) {
+export default function WriteComponent({ data, shuffleInput = true }: WriteComponentProps) {
   const { setCorrectEntry, setIsAnswerCorrect, setHasUserAnswered } = useLearningModeContext()
 
-  const correctEntry = useMemo(() => presentWriteOptions(data), [data])
+  const correctEntry = useMemo(() => presentWriteOptions(data, shuffleInput), [data])
   const [userAnswer, setUserAnswer] = useState<string>("")
 
   useEffect(() => {

@@ -7,6 +7,7 @@ import MultipleChoice from "@/components/learning-mode/multiple-choice/MultipleC
 import { useLearningModeContext } from "@/context/LearningModeContext"
 import WriteComponent from "@/components/learning-mode/write/WriteComponent"
 import data from "@/test-data/test-data.json"
+import CardHandler from "@/components/learning-mode/CardHandler"
 
 export default function LearningPage() {
   const { deck_id } = useLocalSearchParams<{ deck_id: string }>()
@@ -35,9 +36,8 @@ export default function LearningPage() {
         <Text className="text-3xl font-interblack">Deck {deck_id} Learning Page</Text>
         <Text className="text-xl">This is where you'll practice</Text>
         <Text className="mt-12 text-2xl font-intersemibold">{correctEntry?.key}</Text>
-        <MultipleChoice data={data} />
-        <Text className="mt-12 text-2xl font-intersemibold">{correctEntry?.key}</Text>
-        {/* <WriteComponent data={data} /> */}
+        <CardHandler data={data} />
+        {/* <MultipleChoice data={data} /> */}
       </View>
       {hasUserAnswered && (
         <Button size="lg" onPress={handleNextQuestion} className="absolute bottom-12">
