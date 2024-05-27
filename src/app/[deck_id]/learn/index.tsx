@@ -14,16 +14,15 @@ export default function LearningPage() {
 
   const { correctEntry, isAnswerCorrect, setIsAnswerCorrect, hasUserAnswered, setHasUserAnswered } =
     useLearningModeContext()
-  const { slicedData, remainingData, firstKey } = useMemo(() => useDeckSplit(data), [data])
+  const { slicedData, remainingData } = useMemo(() => useDeckSplit(data), [data])
 
   const [activeCards, setActiveCards] = useState(slicedData) // This is the subset of data that the user is currently practicing
   const [remainingCards, setRemainingCards] = useState(remainingData)
 
   useEffect(() => {
-    console.log("firstKey: ", firstKey)
     console.log("slicedData length: ", Object.keys(slicedData).length)
     console.log("remainingData length: ", Object.keys(remainingData).length)
-  }, [slicedData, remainingData, firstKey])
+  }, [slicedData, remainingData])
 
   useEffect(() => {
     console.log("Now practicing deck " + deck_id)
@@ -39,18 +38,19 @@ export default function LearningPage() {
     setIsAnswerCorrect(false)
 
     // Cycle the first card to the end of the active cards
-    const newActiveCards: UniversalJSONData = { ...activeCards }
     const [firstKey, ...remainingKeys] = Object.keys(activeCards)
-    const firstCard = newActiveCards[firstKey]
+    const firstCard = { ...activeCards[firstKey], cardStyle: "write" }
+    console.log("First card: ", firstCard)
+
     const updatedCards: UniversalJSONData = remainingKeys.reduce((acc, key) => {
-      acc[key] = newActiveCards[key]
+      acc[key] = activeCards[key]
       return acc
     }, {} as UniversalJSONData)
 
     updatedCards[firstKey] = firstCard
 
     setActiveCards(updatedCards)
-    console.log("Active cards: ", updatedCards)
+    // console.log("Active cards: ", updatedCards)
   }
 
   return (
@@ -61,7 +61,7 @@ export default function LearningPage() {
         <Text className="text-3xl font-interblack">Deck {deck_id} Learning Page</Text>
         <Text className="text-xl">This is where you'll practice</Text>
         <Text className="mt-12 text-2xl font-intersemibold">{correctEntry?.key}</Text>
-        <CardHandler data={activeCards} firstKey={firstKey} />
+        <CardHandler data={activeCards} />
         {/* <MultipleChoice data={data} /> */}
       </View>
       {hasUserAnswered && (

@@ -7,10 +7,12 @@ import { useMemo } from "react"
 
 type CardHandlerProps = {
   data: UniversalJSONData
-  firstKey: string
 }
 
-export default function CardHandler({ data, firstKey }: CardHandlerProps) {
+export default function CardHandler({ data }: CardHandlerProps) {
+  // get data from first entry
+  const firstKey = useMemo(() => Object.keys(data)[0], [data])
+
   return (
     <>
       {firstKey ? (
