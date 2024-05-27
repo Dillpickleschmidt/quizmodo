@@ -1,12 +1,15 @@
 import { useEffect, useMemo } from "react"
 import { View } from "react-native"
-import data from "@/test-data/test-data.json"
 import { handleMultipleChoiceSelection, presentMultipleChoiceOptions } from "./multiple-choice"
 import { Button } from "@/components/ui/button"
 import { Text } from "@/components/ui/text"
 import { useLearningModeContext } from "@/context/LearningModeContext"
 
-export default function MultipleChoice() {
+type MultipleChoiceProps = {
+  data: Record<string, any>
+}
+
+export default function MultipleChoice({ data }: MultipleChoiceProps) {
   const { setCorrectEntry, setIsAnswerCorrect, setHasUserAnswered } = useLearningModeContext()
 
   const choices = useMemo(() => presentMultipleChoiceOptions(data), [data])

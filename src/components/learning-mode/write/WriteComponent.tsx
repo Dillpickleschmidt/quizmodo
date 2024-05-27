@@ -1,13 +1,16 @@
 import { useEffect, useMemo, useState } from "react"
 import { View } from "react-native"
 import { Text } from "@/components/ui/text"
-import data from "@/test-data/test-data.json"
 import { useLearningModeContext } from "@/context/LearningModeContext"
 import { handleWrittenAnswer, presentWriteOptions } from "./write"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
-export default function WriteComponent() {
+type WriteComponentProps = {
+  data: Record<string, any>
+}
+
+export default function WriteComponent({ data }: WriteComponentProps) {
   const { setCorrectEntry, setIsAnswerCorrect, setHasUserAnswered } = useLearningModeContext()
 
   const correctEntry = useMemo(() => presentWriteOptions(data), [data])
@@ -23,7 +26,7 @@ export default function WriteComponent() {
     console.log("User answer: ", userAnswer)
     console.log(
       "Correct answer: ",
-      correctEntry.answers.map((answer) => answer.toLowerCase()),
+      correctEntry.answers.map((answer: string) => answer.toLowerCase()),
     )
   }
 

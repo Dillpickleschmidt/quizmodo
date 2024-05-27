@@ -2,9 +2,9 @@
 This file contains the logic for handling the user's input for the write mode.
 */
 
-import { VocabData, VocabEntry } from "@/types"
+import { UniversalJSONData } from "@/types"
 
-export function presentWriteOptions(data: VocabData, shuffleInput = true) {
+export function presentWriteOptions(data: UniversalJSONData, shuffleInput = true) {
   let entries = Object.entries(data)
 
   if (entries.length < 1) {
@@ -30,12 +30,11 @@ export function presentWriteOptions(data: VocabData, shuffleInput = true) {
   return correctOption
 }
 
-export function handleWrittenAnswer(
-  userAnswer: string,
-  correctOption: VocabEntry & { key: string },
-) {
+export function handleWrittenAnswer(userAnswer: string, correctOption: any) {
   if (
-    correctOption.answers.map((answer) => answer.toLowerCase()).includes(userAnswer.toLowerCase())
+    correctOption.answers
+      .map((answer: string) => answer.toLowerCase())
+      .includes(userAnswer.toLowerCase())
   ) {
     return true
   } else {
