@@ -66,10 +66,11 @@ const QuizList = () => {
   );
 };
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "--background--", // Replace with your desired background color
+    backgroundColor: "--background--",
   },
   scrollView: {
     padding: 20,
@@ -104,5 +105,6 @@ const styles = StyleSheet.create({
     color: "#d4d4d4",
   },
 });
+
 
 export default QuizList;
