@@ -5,11 +5,18 @@ import { Button } from "@/components/ui/button"
 import { useLocalSearchParams } from "expo-router"
 import MultipleChoice from "@/components/learning-mode/multiple-choice/MultipleChoice"
 import { useLearningModeContext } from "@/context/LearningModeContext"
+import WriteComponent from "@/components/learning-mode/write/WriteComponent"
 
 export default function LearningPage() {
   const { deck_id } = useLocalSearchParams<{ deck_id: string }>()
-  const { correctKey, isSelectionCorrect, hasUserAnswered, setHasUserAnswered } =
-    useLearningModeContext()
+  const {
+    correctKey,
+    correctEntry,
+    isAnswerCorrect,
+    hasUserAnswered,
+    setHasUserAnswered,
+    setIsAnswerCorrect,
+  } = useLearningModeContext()
 
   useEffect(() => {
     console.log("Now practicing deck " + deck_id)
@@ -22,20 +29,23 @@ export default function LearningPage() {
   function handleNextQuestion() {
     console.log("Next question!")
     setHasUserAnswered(false)
+    setIsAnswerCorrect(false)
   }
 
   return (
     <View
-      className={`${setResponseClassName(isSelectionCorrect)} items-center justify-center w-full h-full`}
+      className={`${setResponseClassName(isAnswerCorrect)} items-center justify-center w-full h-full`}
     >
       <View className="w-full px-6 translate-y-12">
         <Text className="text-3xl font-interblack">Deck {deck_id} Learning Page</Text>
         <Text className="text-xl">This is where you'll practice</Text>
         <Text className="mt-12 text-2xl font-intersemibold">{correctKey}</Text>
         <MultipleChoice />
+        <Text className="mt-12 text-2xl font-intersemibold">{correctEntry?.key}</Text>
+        <WriteComponent />
       </View>
       {hasUserAnswered && (
-        <Button size="lg" onPress={handleNextQuestion} className="absolute bottom-24">
+        <Button size="lg" onPress={handleNextQuestion} className="absolute bottom-12">
           <Text>Next Question {"->"}</Text>
         </Button>
       )}
