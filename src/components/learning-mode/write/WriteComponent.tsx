@@ -13,10 +13,18 @@ type WriteComponentProps = {
 }
 
 export default function WriteComponent({ data, shuffleInput = true }: WriteComponentProps) {
-  const { setCorrectEntry, setIsAnswerCorrect, setHasUserAnswered, enabledAnswerCategories } =
-    useLearningModeContext()
+  const {
+    setCorrectEntry,
+    setIsAnswerCorrect,
+    setHasUserAnswered,
+    enabledAnswerCategories,
+    currentCardIndex,
+  } = useLearningModeContext()
 
-  const correctEntry = useMemo(() => presentWriteOptions(data, shuffleInput), [data])
+  const correctEntry = useMemo(
+    () => presentWriteOptions(data, shuffleInput, currentCardIndex),
+    [data, currentCardIndex],
+  )
   const [userAnswer, setUserAnswer] = useState<string>("")
 
   useEffect(() => {

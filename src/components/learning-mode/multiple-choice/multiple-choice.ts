@@ -16,8 +16,12 @@ The correct key is randomly selected from the input data.
 first entry will be the correct key and the remaining entries will be shuffled to select 3 options.
 This is useful for cycling through the data in order.
 */
-export function presentMultipleChoiceOptions(data: JSONWithAnswerCategories, shuffleInput = true) {
-  let entries = Object.entries(data)
+export function presentMultipleChoiceOptions(
+  data: JSONWithAnswerCategories,
+  shuffleInput = true,
+  currentCardIndex: number,
+) {
+  let entries = Object.entries(data) // [1, 2, 3, 4, 5...]
 
   if (entries.length < 4) {
     throw new Error("Not enough entries to select 4 options")
@@ -27,20 +31,22 @@ export function presentMultipleChoiceOptions(data: JSONWithAnswerCategories, shu
     // Shuffle the entries array
     entries = entries.sort(() => 0.5 - Math.random())
   }
-  // Destructuring the 'entries' array to assign the first element to 'correctKeyArr' and the remaining elements to 'remainingEntries'
-  const [correctKeyArr, ...remainingEntries] = entries // ex: [1], [2, 3, 4, 5...]
+  // Extract the entry at the current card index
+  const correctKeyArr = entries.splice(currentCardIndex, 1)[0]
+  // ex: say currentCardIndex = 1 (0-based index), entries = [1, 2, 3, 4, 5...]
+  // --> [2], [1, 3, 4, 5...]
 
   // Shuffle the remaining entries array
-  const remainingShuffledEntries = remainingEntries.sort(() => 0.5 - Math.random()) // [1], [3, 5, 7, 2...]
+  const remainingShuffledEntries = entries.sort(() => 0.5 - Math.random()) // [2], [3, 5, 7, 1...]
 
   // Select the first 3 remaining entries after shuffling
-  const select3Entries = remainingShuffledEntries.slice(0, 3) // [1], [3, 5, 7]
+  const select3Entries = remainingShuffledEntries.slice(0, 3) // [2], [3, 5, 7]
 
   // Combine the correct key with the selected entries
-  const selectedEntries = [correctKeyArr, ...select3Entries] // [1, 3, 5, 7]
+  const selectedEntries = [correctKeyArr, ...select3Entries] // [2, 3, 5, 7]
 
   // Shuffle the selected entries
-  const shuffledSelectedEntries = selectedEntries.sort(() => 0.5 - Math.random()) // [3, 1, 7, 5]
+  const shuffledSelectedEntries = selectedEntries.sort(() => 0.5 - Math.random()) // [3, 2, 7, 5]
 
   // Map the selected entries to a more usable format
   const options = shuffledSelectedEntries.map(([key, entry]) => ({

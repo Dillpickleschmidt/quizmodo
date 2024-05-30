@@ -23,17 +23,13 @@ export default function LearningPage() {
     hasUserAnswered,
     setHasUserAnswered,
     setEnabledAnswerCategories,
+    currentCardIndex,
+    setCurrentCardIndex,
   } = useLearningModeContext()
   const { slicedData, remainingData } = useMemo(() => useDeckSplit(data), [data])
 
   const [activeCards, setActiveCards] = useState(slicedData) // This is the subset of data that the user is currently practicing
   const [inactiveCards, setInactiveCards] = useState(remainingData)
-
-  // Log the length of the slicedData and remainingData
-  useEffect(() => {
-    console.log("slicedData length: ", Object.keys(slicedData).length)
-    console.log("remainingData length: ", Object.keys(remainingData).length)
-  }, [slicedData, remainingData])
 
   // Log the deck_id whenever it changes
   useEffect(() => {
@@ -48,12 +44,19 @@ export default function LearningPage() {
         categories.add(category.category)
       })
     })
-    const categoriesArray = Array.from(categories)
-    // Set enabledAnswerCategories to all categories at the start
-    setEnabledAnswerCategories(categoriesArray)
     // Return the unique categories
-    return Array.from(categoriesArray)
+    return Array.from(categories)
   }, [data])
+
+  // Set enabledAnswerCategories to all categories at the start
+  useEffect(() => {
+    setEnabledAnswerCategories(uniqueCategories)
+  }, [uniqueCategories])
+
+  useEffect(() => {
+    logCardCounts(activeCards, inactiveCards)
+    console.log("Current card index: ", currentCardIndex)
+  }, [activeCards, inactiveCards, currentCardIndex])
 
   function handleNextQuestion(isAnswerCorrect: boolean) {
     console.log("Next question!")
@@ -66,22 +69,30 @@ export default function LearningPage() {
       return
     }
 
-    // If there are no more inactive cards, handle active cards only
-    if (Object.keys(inactiveCards).length === 0) {
+    // Get the cardStyle of the current active card
+    const currentCardStyle = activeCards[Object.keys(activeCards)[currentCardIndex]].cardStyle
+
+    // At the beginning, increment the current card index from 0 to 4
+    if (currentCardIndex <= 3) {
       if (isAnswerCorrect) {
-        removeCard()
+        if (currentCardStyle === "multiple-choice") {
+          updateCardType("write")
+        }
       } else {
-        cycleCards("multiple-choice")
+        // if the user got it wrong, make it a multiple choice card
+        updateCardType("multiple-choice")
       }
+      incrementIndex()
       return
     }
-
-    // Get the cardStyle of the first card in the active cards
-    const firstKeyStyle = activeCards[Object.keys(activeCards)[0]].cardStyle
-
-    // Handle based on correctness and card type
+    // Once the current card index reaches 4...
     if (isAnswerCorrect) {
-      if (firstKeyStyle === "write") {
+      if (currentCardStyle === "write") {
+        // if there are no inactive cards, increment the current card index
+        if (Object.keys(inactiveCards).length === 0) {
+          incrementIndex()
+          return
+        }
         removeAndAddNewCard()
       } else {
         cycleCards("write")
@@ -91,37 +102,56 @@ export default function LearningPage() {
     }
   }
 
-  function cycleCards(cardType: "write" | "multiple-choice") {
-    const [firstKey, ...remainingKeys] = Object.keys(activeCards)
-    const firstCard = { ...activeCards[firstKey], cardStyle: cardType }
+  function cycleCards(cardType: "write" | "multiple-choice", localActiveCards = activeCards) {
+    // use optional localActiveCards to avoid bad state updates where applicable
+    updateCardType(cardType)
 
-    const updatedActiveCards = updateCards(remainingKeys, activeCards)
+    // split into two arrays: one with the first card and one with the rest
+    const [firstKey, ...remainingKeys] = Object.keys(localActiveCards)
+    const firstCard = { ...localActiveCards[firstKey] }
+
+    // remove the first card from the activeCards
+    const updatedActiveCards = updateCards(remainingKeys, localActiveCards)
+    // add the first card back to the updatedActiveCards
     updatedActiveCards[firstKey] = firstCard
 
     setActiveCards(updatedActiveCards)
-    logCardCounts(updatedActiveCards, inactiveCards)
   }
 
-  function removeCard() {
-    const [, ...remainingKeys] = Object.keys(activeCards)
-    const updatedActiveCards = updateCards(remainingKeys, activeCards)
+  function updateCardType(cardType: "write" | "multiple-choice") {
+    // get the active card at currentCardIndex
+    const currentCard = activeCards[Object.keys(activeCards)[currentCardIndex]]
+    // update the cardStyle of the current card
+    currentCard.cardStyle = cardType
+  }
 
-    setActiveCards(updatedActiveCards)
-    logCardCounts(updatedActiveCards, inactiveCards)
+  function incrementIndex() {
+    const newCardIndex = currentCardIndex + 1
+    setCurrentCardIndex(newCardIndex)
   }
 
   function removeAndAddNewCard() {
-    const [firstKey, ...remainingKeys] = Object.keys(activeCards)
-    const [inactiveFirstKey, ...remainingInactiveKeys] = Object.keys(inactiveCards)
+    const [firstInactiveKey, ...remainingInactiveKeys] = Object.keys(inactiveCards)
+    const updatedActiveCards: JSONWithCardStyle = { ...activeCards }
 
-    const firstInactiveCard = { ...inactiveCards[inactiveFirstKey] }
-    const updatedActiveCards = updateCards(remainingKeys, activeCards)
-    updatedActiveCards[inactiveFirstKey] = firstInactiveCard
+    // Define the type for newActiveCards
+    const newActiveCards: JSONWithCardStyle = {}
+    let index = 0
+
+    // Add cards to the new object, replacing the current card with the new card
+    for (const key in updatedActiveCards) {
+      if (index === currentCardIndex) {
+        newActiveCards[firstInactiveKey] = { ...inactiveCards[firstInactiveKey] }
+      } else {
+        newActiveCards[key] = updatedActiveCards[key]
+      }
+      index++
+    }
+
     const updatedInactiveCards = updateCards(remainingInactiveKeys, inactiveCards)
-
-    setActiveCards(updatedActiveCards)
     setInactiveCards(updatedInactiveCards)
-    logCardCounts(updatedActiveCards, updatedInactiveCards)
+    setActiveCards(newActiveCards)
+    cycleCards("multiple-choice", newActiveCards)
   }
 
   // Helper function to update cards

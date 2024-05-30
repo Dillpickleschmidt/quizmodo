@@ -23,8 +23,5 @@ export default function useDeckSplit(data: JSONWithAnswerCategories) {
 
   const remainingData = Object.fromEntries(remainingEntries) as JSONWithCardStyle
 
-  // Get the first key from the sliced data
-  const firstKey = Object.keys(slicedData)[0]
-
-  return { slicedData, remainingData, firstKey }
+  return { slicedData, remainingData }
 }

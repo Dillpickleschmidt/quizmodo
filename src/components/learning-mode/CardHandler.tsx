@@ -4,19 +4,22 @@ import { JSONWithCardStyle } from "@/types"
 import MultipleChoice from "./multiple-choice/MultipleChoice"
 import WriteComponent from "./write/WriteComponent"
 import { useMemo } from "react"
+import { useLearningModeContext } from "@/context/LearningModeContext"
 
 type CardHandlerProps = {
   data: JSONWithCardStyle
 }
 
 export default function CardHandler({ data }: CardHandlerProps) {
-  // get data from first entry in active set
-  const firstKey = useMemo(() => Object.keys(data)[0], [data])
+  const { currentCardIndex } = useLearningModeContext()
+
+  // get data from the curentCardIndex'th index entry from the active set
+  const currentKey = useMemo(() => Object.keys(data)[currentCardIndex], [data, currentCardIndex])
 
   return (
     <>
-      {firstKey ? (
-        data[firstKey].cardStyle === "multiple-choice" ? (
+      {currentKey ? (
+        data[currentKey].cardStyle === "multiple-choice" ? (
           <MultipleChoice data={data} shuffleInput={false} />
         ) : (
           <WriteComponent data={data} shuffleInput={false} />

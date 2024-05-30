@@ -58,7 +58,7 @@ export default function CategoryDropdown({ uniqueCategories }: CategoryDropdownP
         <DropdownMenuSeparator /> */}
         {uniqueCategories.map((category) => (
           <DropdownMenuItem key={category}>
-            <View className="flex flex-row gap-2 my-2">
+            <View className="flex flex-row gap-2 mx-1 my-2">
               <View className="w-6 h-6">
                 <Checkbox
                   key={category}

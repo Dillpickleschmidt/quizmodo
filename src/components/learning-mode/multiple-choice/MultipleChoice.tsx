@@ -12,14 +12,23 @@ type MultipleChoiceProps = {
 }
 
 export default function MultipleChoice({ data, shuffleInput = true }: MultipleChoiceProps) {
-  const { setCorrectEntry, setIsAnswerCorrect, setHasUserAnswered, enabledAnswerCategories } =
-    useLearningModeContext()
+  const {
+    setCorrectEntry,
+    setIsAnswerCorrect,
+    setHasUserAnswered,
+    enabledAnswerCategories,
+    currentCardIndex,
+    correctEntry,
+  } = useLearningModeContext()
 
-  const choices = useMemo(() => presentMultipleChoiceOptions(data, shuffleInput), [data])
+  const choices = useMemo(
+    () => presentMultipleChoiceOptions(data, shuffleInput, currentCardIndex),
+    [data, currentCardIndex],
+  )
 
   useEffect(() => {
     setCorrectEntry(choices.correctOption)
-  }, [choices.correctOption, setCorrectEntry])
+  }, [choices, setCorrectEntry])
 
   const handleSelection = (selection: string) => {
     setIsAnswerCorrect(handleMultipleChoiceSelection(choices, selection))
