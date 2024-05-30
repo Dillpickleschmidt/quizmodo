@@ -1,20 +1,43 @@
-import { View } from "react-native"
+import { View, StyleSheet, ScrollView } from "react-native"
 import React from "react"
 import { Text } from "@/components/ui/text"
 import { router, useLocalSearchParams } from "expo-router"
 import { Button } from "@/components/ui/button"
-import QuizList from "@/components/deck/TestStudySet"
+import StudyList from "@/components/deck/StudyList"
+import { SafeAreaView } from "react-native-safe-area-context"
 
 export default function DeckPage() {
   const { deck_id } = useLocalSearchParams<{ deck_id: string }>()
 
   return (
-    <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
-      {/* <Text style={{ fontSize: 24, fontWeight: "bold" }}>Deck {deck_id} Info</Text> */}
-      <QuizList />
-      <Button onPress={() => router.navigate("./learn")}>
-        <Text>Start Learning!</Text>
-      </Button>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        {/* Use ! for overriding "undefined type" warning */}
+        <StudyList deck_id={deck_id!} />
+      </ScrollView>
+      <View className="fixed bottom-0 px-4 py-4">
+        <Button onPress={() => router.navigate("./learn")} className="min-w-full">
+          <Text>Start Learning!</Text>
+        </Button>
+      </View>
+    </SafeAreaView>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "--background--",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  scrollView: {
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    color: "#d3ad7f",
+    marginBottom: 20,
+    textAlign: "center",
+  },
+})
