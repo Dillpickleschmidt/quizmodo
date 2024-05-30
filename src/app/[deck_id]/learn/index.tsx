@@ -8,12 +8,22 @@ import data from "@/test-data/test-data-2.json"
 import CardHandler from "@/components/learning-mode/CardHandler"
 import useDeckSplit from "@/components/learning-mode/useDeckSplit"
 import { JSONWithCardStyle } from "@/types"
+import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label"
+import CategoryDropdown from "@/components/learning-mode/CategoryDropdown"
+import { Checkbox } from "@/components/ui/checkbox"
 
 export default function LearningPage() {
   const { deck_id } = useLocalSearchParams<{ deck_id: string }>()
 
-  const { correctEntry, isAnswerCorrect, setIsAnswerCorrect, hasUserAnswered, setHasUserAnswered } =
-    useLearningModeContext()
+  const {
+    correctEntry,
+    isAnswerCorrect,
+    setIsAnswerCorrect,
+    hasUserAnswered,
+    setHasUserAnswered,
+    setEnabledAnswerCategories,
+  } = useLearningModeContext()
   const { slicedData, remainingData } = useMemo(() => useDeckSplit(data), [data])
 
   const [activeCards, setActiveCards] = useState(slicedData) // This is the subset of data that the user is currently practicing
@@ -29,6 +39,21 @@ export default function LearningPage() {
   useEffect(() => {
     console.log("Now practicing deck " + deck_id)
   }, [deck_id])
+
+  // Extract unique categories from data
+  const uniqueCategories = useMemo(() => {
+    const categories = new Set<string>()
+    Object.values(data).forEach((value) => {
+      value.answerCategories.forEach((category: { category: string }) => {
+        categories.add(category.category)
+      })
+    })
+    const categoriesArray = Array.from(categories)
+    // Set enabledAnswerCategories to all categories at the start
+    setEnabledAnswerCategories(categoriesArray)
+    // Return the unique categories
+    return Array.from(categoriesArray)
+  }, [data])
 
   function handleNextQuestion(isAnswerCorrect: boolean) {
     console.log("Next question!")
@@ -124,6 +149,10 @@ export default function LearningPage() {
       <View className="w-full px-6 translate-y-12">
         <Text className="text-3xl font-interblack">Deck {deck_id} Learning Page</Text>
         <Text className="text-xl">This is where you'll practice</Text>
+        {/* Add category buttons here */}
+        <View className="w-56 mt-4">
+          <CategoryDropdown uniqueCategories={uniqueCategories} />
+        </View>
         <Text className="mt-12 text-2xl font-intersemibold">{correctEntry?.key}</Text>
         <CardHandler data={activeCards} />
       </View>

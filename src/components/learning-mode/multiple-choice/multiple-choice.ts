@@ -78,12 +78,10 @@ export function handleMultipleChoiceSelection(
   }
 
   // Flatten the enabled answers from all categories
-  const enabledAnswers = correctOption.answerCategories
-    .filter((category) => category.enabled)
-    .flatMap((category) => category.answers)
+  const answers = correctOption.answerCategories.flatMap((category) => category.answers)
 
-  console.log("enabledAnswers: ", enabledAnswers)
+  console.log("enabledAnswers: ", answers)
 
   // Check if the user's answer matches any of the enabled answers
-  return enabledAnswers.includes(userAnswer)
+  return answers.includes(userAnswer)
 }

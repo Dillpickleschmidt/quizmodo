@@ -12,6 +12,8 @@ type LearningModeContext = {
   setHasUserAnswered: React.Dispatch<React.SetStateAction<boolean>>
   correctEntry?: Entry & { key: string }
   setCorrectEntry: React.Dispatch<React.SetStateAction<(Entry & { key: string }) | undefined>>
+  enabledAnswerCategories: string[]
+  setEnabledAnswerCategories: React.Dispatch<React.SetStateAction<string[]>>
 }
 
 const LearningModeContext = createContext<LearningModeContext | null>(null)
@@ -20,6 +22,7 @@ export function LearningModeContextProvider({ children }: LearningModeContextPro
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false)
   const [hasUserAnswered, setHasUserAnswered] = useState(false)
   const [correctEntry, setCorrectEntry] = useState<(Entry & { key: string }) | undefined>()
+  const [enabledAnswerCategories, setEnabledAnswerCategories] = useState<string[]>([])
 
   return (
     <LearningModeContext.Provider
@@ -30,6 +33,8 @@ export function LearningModeContextProvider({ children }: LearningModeContextPro
         setHasUserAnswered,
         correctEntry,
         setCorrectEntry,
+        enabledAnswerCategories,
+        setEnabledAnswerCategories,
       }}
     >
       {children}

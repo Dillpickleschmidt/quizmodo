@@ -12,7 +12,6 @@ export type UniversalJSONData = Record<string, any>
 export type AnswerCategory = {
   category: string
   answers: string[]
-  enabled: boolean
 }
 export type Entry = {
   answerCategories: AnswerCategory[]

@@ -30,10 +30,14 @@ export function presentWriteOptions(data: JSONWithAnswerCategories, shuffleInput
   return correctOption
 }
 
-export function handleWrittenAnswer(userAnswer: string, correctOption: Entry & { key: string }) {
+export function handleWrittenAnswer(
+  userAnswer: string,
+  correctOption: Entry & { key: string },
+  correctAnswers: string[],
+) {
   // Flatten the enabled answers from all categories
   const enabledAnswers = correctOption.answerCategories
-    .filter((category) => category.enabled)
+    .filter((category) => correctAnswers.includes(category.category))
     .flatMap((category) => category.answers)
 
   // Check if the user's answer matches any of the enabled answers

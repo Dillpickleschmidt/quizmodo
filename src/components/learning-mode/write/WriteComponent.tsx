@@ -13,7 +13,8 @@ type WriteComponentProps = {
 }
 
 export default function WriteComponent({ data, shuffleInput = true }: WriteComponentProps) {
-  const { setCorrectEntry, setIsAnswerCorrect, setHasUserAnswered } = useLearningModeContext()
+  const { setCorrectEntry, setIsAnswerCorrect, setHasUserAnswered, enabledAnswerCategories } =
+    useLearningModeContext()
 
   const correctEntry = useMemo(() => presentWriteOptions(data, shuffleInput), [data])
   const [userAnswer, setUserAnswer] = useState<string>("")
@@ -24,12 +25,12 @@ export default function WriteComponent({ data, shuffleInput = true }: WriteCompo
   }, [correctEntry])
 
   const handleInput = (userAnswer: string) => {
-    setIsAnswerCorrect(handleWrittenAnswer(userAnswer, correctEntry))
+    setIsAnswerCorrect(handleWrittenAnswer(userAnswer, correctEntry, enabledAnswerCategories))
     setHasUserAnswered(true)
 
     // Flatten the enabled answers from all categories for logging
     const enabledAnswers = correctEntry.answerCategories
-      .filter((category) => category.enabled)
+      .filter((category) => enabledAnswerCategories.includes(category.category))
       .flatMap((category) => category.answers)
 
     console.log("User answer: ", userAnswer)

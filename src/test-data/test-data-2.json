@@ -3,13 +3,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Loxodonta africana"],
-        "enabled": true
+        "answers": ["Loxodonta africana"]
       },
       {
         "category": "Common Name",
-        "answers": ["African Elephant"],
-        "enabled": true
+        "answers": ["African Elephant"]
       }
     ],
     "notes": [
@@ -21,13 +19,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Acinonyx jubatus"],
-        "enabled": true
+        "answers": ["Acinonyx jubatus"]
       },
       {
         "category": "Common Name",
-        "answers": ["Cheetah"],
-        "enabled": true
+        "answers": ["Cheetah"]
       }
     ],
     "notes": [
@@ -39,13 +35,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Panthera leo"],
-        "enabled": true
+        "answers": ["Panthera leo"]
       },
       {
         "category": "Common Name",
-        "answers": ["Lion"],
-        "enabled": true
+        "answers": ["Lion"]
       }
     ],
     "notes": [
@@ -57,13 +51,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Giraffa camelopardalis"],
-        "enabled": true
+        "answers": ["Giraffa camelopardalis"]
       },
       {
         "category": "Common Name",
-        "answers": ["Giraffe"],
-        "enabled": true
+        "answers": ["Giraffe"]
       }
     ],
     "notes": [
@@ -75,13 +67,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Balaenoptera musculus"],
-        "enabled": true
+        "answers": ["Balaenoptera musculus"]
       },
       {
         "category": "Common Name",
-        "answers": ["Blue Whale"],
-        "enabled": true
+        "answers": ["Blue Whale"]
       }
     ],
     "notes": [
@@ -93,13 +83,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Diomedea exulans"],
-        "enabled": true
+        "answers": ["Diomedea exulans"]
       },
       {
         "category": "Common Name",
-        "answers": ["Wandering Albatross"],
-        "enabled": true
+        "answers": ["Wandering Albatross"]
       }
     ],
     "notes": [
@@ -111,13 +99,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Chiroptera"],
-        "enabled": true
+        "answers": ["Chiroptera"]
       },
       {
         "category": "Common Name",
-        "answers": ["Bat"],
-        "enabled": true
+        "answers": ["Bat"]
       }
     ],
     "notes": [
@@ -129,13 +115,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Rhincodon typus"],
-        "enabled": true
+        "answers": ["Rhincodon typus"]
       },
       {
         "category": "Common Name",
-        "answers": ["Whale Shark"],
-        "enabled": true
+        "answers": ["Whale Shark"]
       }
     ],
     "notes": [
@@ -147,13 +131,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Mellisuga helenae"],
-        "enabled": true
+        "answers": ["Mellisuga helenae"]
       },
       {
         "category": "Common Name",
-        "answers": ["Bee Hummingbird"],
-        "enabled": true
+        "answers": ["Bee Hummingbird"]
       }
     ],
     "notes": [
@@ -165,13 +147,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Aptenodytes forsteri"],
-        "enabled": true
+        "answers": ["Aptenodytes forsteri"]
       },
       {
         "category": "Common Name",
-        "answers": ["Emperor Penguin"],
-        "enabled": true
+        "answers": ["Emperor Penguin"]
       }
     ],
     "notes": [
@@ -183,13 +163,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Crocodylus porosus"],
-        "enabled": true
+        "answers": ["Crocodylus porosus"]
       },
       {
         "category": "Common Name",
-        "answers": ["Saltwater Crocodile"],
-        "enabled": true
+        "answers": ["Saltwater Crocodile"]
       }
     ],
     "notes": [
@@ -201,13 +179,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Istiophorus platypterus"],
-        "enabled": true
+        "answers": ["Istiophorus platypterus"]
       },
       {
         "category": "Common Name",
-        "answers": ["Sailfish"],
-        "enabled": true
+        "answers": ["Sailfish"]
       }
     ],
     "notes": [
@@ -219,13 +195,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Andrias davidianus"],
-        "enabled": true
+        "answers": ["Andrias davidianus"]
       },
       {
         "category": "Common Name",
-        "answers": ["Chinese Giant Salamander"],
-        "enabled": true
+        "answers": ["Chinese Giant Salamander"]
       }
     ],
     "notes": [
@@ -237,13 +211,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Didelphis virginiana"],
-        "enabled": true
+        "answers": ["Didelphis virginiana"]
       },
       {
         "category": "Common Name",
-        "answers": ["Virginia Opossum"],
-        "enabled": true
+        "answers": ["Virginia Opossum"]
       }
     ],
     "notes": [
@@ -255,13 +227,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Phyllobates terribilis"],
-        "enabled": true
+        "answers": ["Phyllobates terribilis"]
       },
       {
         "category": "Common Name",
-        "answers": ["Golden Poison Dart Frog"],
-        "enabled": true
+        "answers": ["Golden Poison Dart Frog"]
       }
     ],
     "notes": [
@@ -273,13 +243,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Chiroptera"],
-        "enabled": true
+        "answers": ["Chiroptera"]
       },
       {
         "category": "Common Name",
-        "answers": ["Bat"],
-        "enabled": true
+        "answers": ["Bat"]
       }
     ],
     "notes": [
@@ -291,13 +259,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Deinacrida heteracantha"],
-        "enabled": true
+        "answers": ["Deinacrida heteracantha"]
       },
       {
         "category": "Common Name",
-        "answers": ["Giant Weta"],
-        "enabled": true
+        "answers": ["Giant Weta"]
       }
     ],
     "notes": [
@@ -309,13 +275,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Trochilidae"],
-        "enabled": true
+        "answers": ["Trochilidae"]
       },
       {
         "category": "Common Name",
-        "answers": ["Hummingbird"],
-        "enabled": true
+        "answers": ["Hummingbird"]
       }
     ],
     "notes": [
@@ -327,13 +291,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Craseonycteris thonglongyai"],
-        "enabled": true
+        "answers": ["Craseonycteris thonglongyai"]
       },
       {
         "category": "Common Name",
-        "answers": ["Bumblebee Bat"],
-        "enabled": true
+        "answers": ["Bumblebee Bat"]
       }
     ],
     "notes": [
@@ -345,13 +307,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Crocodylus niloticus"],
-        "enabled": true
+        "answers": ["Crocodylus niloticus"]
       },
       {
         "category": "Common Name",
-        "answers": ["Nile Crocodile"],
-        "enabled": true
+        "answers": ["Nile Crocodile"]
       }
     ],
     "notes": [
@@ -363,13 +323,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Mellisuga helenae"],
-        "enabled": true
+        "answers": ["Mellisuga helenae"]
       },
       {
         "category": "Common Name",
-        "answers": ["Bee Hummingbird"],
-        "enabled": true
+        "answers": ["Bee Hummingbird"]
       }
     ],
     "notes": [
@@ -381,13 +339,11 @@
     "answerCategories": [
       {
         "category": "Scientific Name",
-        "answers": ["Panthera tigris"],
-        "enabled": true
+        "answers": ["Panthera tigris"]
       },
       {
         "category": "Common Name",
-        "answers": ["Tiger"],
-        "enabled": true
+        "answers": ["Tiger"]
       }
     ],
     "notes": [

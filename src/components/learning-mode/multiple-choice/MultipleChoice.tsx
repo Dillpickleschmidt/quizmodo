@@ -12,7 +12,8 @@ type MultipleChoiceProps = {
 }
 
 export default function MultipleChoice({ data, shuffleInput = true }: MultipleChoiceProps) {
-  const { setCorrectEntry, setIsAnswerCorrect, setHasUserAnswered } = useLearningModeContext()
+  const { setCorrectEntry, setIsAnswerCorrect, setHasUserAnswered, enabledAnswerCategories } =
+    useLearningModeContext()
 
   const choices = useMemo(() => presentMultipleChoiceOptions(data, shuffleInput), [data])
 
@@ -31,7 +32,7 @@ export default function MultipleChoice({ data, shuffleInput = true }: MultipleCh
       {choices.options.map((option, index) => {
         // Flatten the enabled answers from all categories
         const enabledAnswers = option.answerCategories
-          .filter((category) => category.enabled)
+          .filter((category) => enabledAnswerCategories.includes(category.category))
           .flatMap((category) => category.answers)
 
         // Pick the first answer from the enabled answers array (each answer in the array is equally valid)
