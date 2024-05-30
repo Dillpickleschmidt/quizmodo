@@ -2,7 +2,7 @@
 This file contains the logic for generating multiple choice options and handling the user's selection.
 */
 
-import { JSONWithAnswers } from "@/types"
+import { JSONWithAnswerCategories, Entry } from "@/types"
 
 /*
 This function takes in a raw vocab data object and returns an object with multiple choice options.
@@ -16,7 +16,7 @@ The correct key is randomly selected from the input data.
 first entry will be the correct key and the remaining entries will be shuffled to select 3 options.
 This is useful for cycling through the data in order.
 */
-export function presentMultipleChoiceOptions(data: JSONWithAnswers, shuffleInput = true) {
+export function presentMultipleChoiceOptions(data: JSONWithAnswerCategories, shuffleInput = true) {
   let entries = Object.entries(data)
 
   if (entries.length < 4) {
@@ -56,21 +56,34 @@ export function presentMultipleChoiceOptions(data: JSONWithAnswers, shuffleInput
   }
 }
 
-export type MultipleChoices = {
-  options: JSONWithAnswers[0][]
-  correctOption: JSONWithAnswers[0]
+type MultipleChoices = {
+  options: (Entry & { key: string })[]
+  correctOption: Entry & { key: string }
 }
 
+/**
+ * Check if the user's answer is correct based on enabled categories.
+ * @param multipleChoices The multiple choice options and correct option.
+ * @param userAnswer The user's answer to check.
+ * @returns True if the answer is correct, false otherwise.
+ */
 export function handleMultipleChoiceSelection(
   multipleChoices: MultipleChoices,
   userAnswer: string,
 ): boolean {
   const { correctOption } = multipleChoices
 
-  if (!correctOption || !correctOption.answers) {
-    throw new Error("Correct option or answer not found")
+  if (!correctOption || !correctOption.answerCategories) {
+    throw new Error("Correct option or answer categories not found")
   }
 
-  // Check if the userAnswer matches any of the correct answers
-  return correctOption.answers.includes(userAnswer)
+  // Flatten the enabled answers from all categories
+  const enabledAnswers = correctOption.answerCategories
+    .filter((category) => category.enabled)
+    .flatMap((category) => category.answers)
+
+  console.log("enabledAnswers: ", enabledAnswers)
+
+  // Check if the user's answer matches any of the enabled answers
+  return enabledAnswers.includes(userAnswer)
 }

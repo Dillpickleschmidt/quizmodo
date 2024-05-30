@@ -1,6 +1,6 @@
-import { UniversalJSONData } from "@/types"
+import { JSONWithCardStyle, JSONWithAnswerCategories } from "@/types"
 
-export default function useDeckSplit(data: UniversalJSONData) {
+export default function useDeckSplit(data: JSONWithAnswerCategories) {
   // Convert the data object into an array of key-value pairs
   const dataEntries = Object.entries(data)
 
@@ -19,9 +19,9 @@ export default function useDeckSplit(data: UniversalJSONData) {
   const remainingEntries = updatedEntries.slice(10)
 
   // Convert the updated entries back to an object
-  const slicedData = Object.fromEntries(slicedEntries) as UniversalJSONData
+  const slicedData = Object.fromEntries(slicedEntries) as JSONWithCardStyle
 
-  const remainingData = Object.fromEntries(remainingEntries) as UniversalJSONData
+  const remainingData = Object.fromEntries(remainingEntries) as JSONWithCardStyle
 
   // Get the first key from the sliced data
   const firstKey = Object.keys(slicedData)[0]

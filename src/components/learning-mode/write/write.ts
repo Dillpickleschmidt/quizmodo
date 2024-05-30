@@ -2,9 +2,9 @@
 This file contains the logic for handling the user's input for the write mode.
 */
 
-import { JSONWithAnswers } from "@/types"
+import { Entry, JSONWithAnswerCategories } from "@/types"
 
-export function presentWriteOptions(data: JSONWithAnswers, shuffleInput = true) {
+export function presentWriteOptions(data: JSONWithAnswerCategories, shuffleInput = true) {
   let entries = Object.entries(data)
 
   if (entries.length < 1) {
@@ -30,14 +30,13 @@ export function presentWriteOptions(data: JSONWithAnswers, shuffleInput = true) 
   return correctOption
 }
 
-export function handleWrittenAnswer(userAnswer: string, correctOption: JSONWithAnswers[0]) {
-  if (
-    correctOption.answers
-      .map((answer: string) => answer.trim().toLowerCase())
-      .includes(userAnswer.trim().toLowerCase())
-  ) {
-    return true
-  } else {
-    return false
-  }
+export function handleWrittenAnswer(userAnswer: string, correctOption: Entry & { key: string }) {
+  // Flatten the enabled answers from all categories
+  const enabledAnswers = correctOption.answerCategories
+    .filter((category) => category.enabled)
+    .flatMap((category) => category.answers)
+
+  // Check if the user's answer matches any of the enabled answers
+  const normalizedUserAnswer = userAnswer.trim().toLowerCase()
+  return enabledAnswers.map((answer) => answer.trim().toLowerCase()).includes(normalizedUserAnswer)
 }

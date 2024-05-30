@@ -1,12 +1,12 @@
 import { View } from "react-native"
 import { Text } from "@/components/ui/text"
-import { UniversalJSONData } from "@/types"
+import { JSONWithCardStyle } from "@/types"
 import MultipleChoice from "./multiple-choice/MultipleChoice"
 import WriteComponent from "./write/WriteComponent"
 import { useMemo } from "react"
 
 type CardHandlerProps = {
-  data: UniversalJSONData
+  data: JSONWithCardStyle
 }
 
 export default function CardHandler({ data }: CardHandlerProps) {

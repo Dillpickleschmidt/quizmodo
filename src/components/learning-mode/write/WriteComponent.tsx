@@ -5,10 +5,10 @@ import { useLearningModeContext } from "@/context/LearningModeContext"
 import { handleWrittenAnswer, presentWriteOptions } from "./write"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { JSONWithAnswers } from "@/types"
+import { JSONWithAnswerCategories } from "@/types"
 
 type WriteComponentProps = {
-  data: JSONWithAnswers
+  data: JSONWithAnswerCategories
   shuffleInput?: boolean
 }
 
@@ -26,8 +26,14 @@ export default function WriteComponent({ data, shuffleInput = true }: WriteCompo
   const handleInput = (userAnswer: string) => {
     setIsAnswerCorrect(handleWrittenAnswer(userAnswer, correctEntry))
     setHasUserAnswered(true)
+
+    // Flatten the enabled answers from all categories for logging
+    const enabledAnswers = correctEntry.answerCategories
+      .filter((category) => category.enabled)
+      .flatMap((category) => category.answers)
+
     console.log("User answer: ", userAnswer)
-    console.log("Correct answer: ", correctEntry.answers.join(", "))
+    console.log("Correct answer: ", enabledAnswers.join(", "))
   }
 
   return (

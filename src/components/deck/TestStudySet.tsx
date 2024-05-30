@@ -1,26 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { SafeAreaView, ScrollView, View, Text, StyleSheet } from "react-native";
-import rawData from '../../test-data/test-data.json';
-
-type QuestionData = {
-  answers: string[];
-  mnemonics?: string[];
-  notes?: string[];
-};
-
-type DataList = {
-  [key: string]: QuestionData;
-};
-
-// Ensure rawData conforms to the DataList type
-const data: DataList = rawData as unknown as DataList;
+import React, { useEffect, useState } from "react"
+import { SafeAreaView, ScrollView, View, Text, StyleSheet } from "react-native"
+import data from "@/test-data/test-data-2.json"
+import { JSONWithAnswerCategories } from "@/types"
 
 const QuizList = () => {
-  const [quizData, setQuizData] = useState<DataList>({});
+  const [quizData, setQuizData] = useState<JSONWithAnswerCategories>({})
 
   useEffect(() => {
-    setQuizData(data); // Directly set the data from JSON
-  }, []);
+    setQuizData(data) // Directly set the data from JSON
+  }, [])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -29,26 +17,16 @@ const QuizList = () => {
         {Object.entries(quizData).map(([question, details], index) => (
           <View key={index} style={styles.entryContainer}>
             <Text style={styles.question}>{question}</Text>
-            {details.answers && (
-              <View style={styles.detailSection}>
-                <Text style={styles.detailTitle}>Answers:</Text>
-                {details.answers.map((answer, i) => (
-                  <Text key={i} style={styles.detailText}>
+            {details.answerCategories.map((category, i) => (
+              <View key={i} style={styles.detailSection}>
+                <Text style={styles.detailTitle}>{category.category}:</Text>
+                {category.answers.map((answer, j) => (
+                  <Text key={j} style={styles.detailText}>
                     {answer}
                   </Text>
                 ))}
               </View>
-            )}
-            {details.mnemonics && (
-              <View style={styles.detailSection}>
-                <Text style={styles.detailTitle}>Mnemonics:</Text>
-                {details.mnemonics.map((mnemonic, i) => (
-                  <Text key={i} style={styles.detailText}>
-                    {mnemonic}
-                  </Text>
-                ))}
-              </View>
-            )}
+            ))}
             {details.notes && (
               <View style={styles.detailSection}>
                 <Text style={styles.detailTitle}>Notes:</Text>
@@ -63,9 +41,8 @@ const QuizList = () => {
         ))}
       </ScrollView>
     </SafeAreaView>
-  );
-};
-
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -104,7 +81,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#d4d4d4",
   },
-});
+})
 
-
-export default QuizList;
+export default QuizList

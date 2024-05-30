@@ -4,10 +4,10 @@ import { Text } from "@/components/ui/text"
 import { Button } from "@/components/ui/button"
 import { useLocalSearchParams } from "expo-router"
 import { useLearningModeContext } from "@/context/LearningModeContext"
-import data from "@/test-data/test-data.json"
+import data from "@/test-data/test-data-2.json"
 import CardHandler from "@/components/learning-mode/CardHandler"
 import useDeckSplit from "@/components/learning-mode/useDeckSplit"
-import { JSONWithAnswers } from "@/types"
+import { JSONWithCardStyle } from "@/types"
 
 export default function LearningPage() {
   const { deck_id } = useLocalSearchParams<{ deck_id: string }>()
@@ -41,7 +41,7 @@ export default function LearningPage() {
       return
     }
 
-    // If there are no more inactive cards, handle based on correctness
+    // If there are no more inactive cards, handle active cards only
     if (Object.keys(inactiveCards).length === 0) {
       if (isAnswerCorrect) {
         removeCard()
@@ -100,15 +100,15 @@ export default function LearningPage() {
   }
 
   // Helper function to update cards
-  function updateCards(keys: string[], source: JSONWithAnswers): JSONWithAnswers {
+  function updateCards(keys: string[], source: JSONWithCardStyle): JSONWithCardStyle {
     return keys.reduce((acc, key) => {
       acc[key] = source[key]
       return acc
-    }, {} as JSONWithAnswers)
+    }, {} as JSONWithCardStyle)
   }
 
   // Helper function to log the number of active and inactive cards
-  function logCardCounts(activeCards: JSONWithAnswers, inactiveCards: JSONWithAnswers) {
+  function logCardCounts(activeCards: JSONWithCardStyle, inactiveCards: JSONWithCardStyle) {
     console.log("Active cards count: ", Object.keys(activeCards).length)
     console.log("Inactive cards count: ", Object.keys(inactiveCards).length)
   }

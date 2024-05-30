@@ -1,0 +1,398 @@
+{
+  "What is the largest land animal?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Loxodonta africana"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["African Elephant"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "African Elephants are the largest land animals on Earth.",
+      "They are known for their large ears, which help to regulate their body temperature."
+    ]
+  },
+  "What is the fastest land animal?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Acinonyx jubatus"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Cheetah"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "Cheetahs are known for their incredible speed, which they use to catch their prey.",
+      "They have a unique black 'tear mark' under their eyes which helps to reflect the sun's glare while hunting."
+    ]
+  },
+  "What animal is known as the king of the jungle?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Panthera leo"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Lion"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "Lions are known as the king of the jungle, although they primarily live in grasslands and savannas.",
+      "Male lions have a distinctive mane, which is a sign of maturity and health."
+    ]
+  },
+  "What is the tallest land animal?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Giraffa camelopardalis"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Giraffe"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "Giraffes are the tallest land animals, reaching heights of up to 18 feet (5.5 meters).",
+      "Their long necks allow them to browse on leaves and shoots high in the trees."
+    ]
+  },
+  "What is the largest marine mammal?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Balaenoptera musculus"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Blue Whale"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "Blue Whales are the largest animals to have ever existed, larger than any dinosaur.",
+      "They can reach lengths of up to 100 feet (30 meters) and weigh as much as 200 tons."
+    ]
+  },
+  "What bird has the largest wingspan?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Diomedea exulans"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Wandering Albatross"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "The Wandering Albatross has the largest wingspan of any living bird, reaching up to 11 feet (3.4 meters).",
+      "They are known for their long-distance flights across the Southern Ocean."
+    ]
+  },
+  "What is the only mammal capable of true flight?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Chiroptera"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Bat"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "Bats are the only mammals capable of sustained flight.",
+      "There are over 1,200 species of bats, making up about 20% of all mammal species."
+    ]
+  },
+  "What is the largest species of shark?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Rhincodon typus"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Whale Shark"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "Whale Sharks are the largest species of shark, growing up to 40 feet (12 meters) in length.",
+      "They are filter feeders and primarily eat plankton."
+    ]
+  },
+  "What is the smallest bird?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Mellisuga helenae"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Bee Hummingbird"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "The Bee Hummingbird is the smallest bird, measuring about 2.4 inches (6.1 cm) in length.",
+      "They are native to Cuba and the Isla de la Juventud."
+    ]
+  },
+  "What is the largest species of penguin?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Aptenodytes forsteri"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Emperor Penguin"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "Emperor Penguins are the largest species of penguin, standing up to 48 inches (122 cm) tall.",
+      "They are known for their long treks across the Antarctic ice to breeding colonies."
+    ]
+  },
+  "What is the largest reptile?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Crocodylus porosus"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Saltwater Crocodile"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "Saltwater Crocodiles are the largest reptiles, growing up to 23 feet (7 meters) in length.",
+      "They are found in saltwater habitats and brackish wetlands in Southeast Asia and Australia."
+    ]
+  },
+  "What is the fastest marine animal?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Istiophorus platypterus"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Sailfish"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "Sailfish are the fastest marine animals, reaching speeds of up to 68 mph (110 km/h).",
+      "They are known for their distinctive sail-like dorsal fin."
+    ]
+  },
+  "What is the largest amphibian?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Andrias davidianus"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Chinese Giant Salamander"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "The Chinese Giant Salamander is the largest amphibian, growing up to 6 feet (1.8 meters) in length.",
+      "They are critically endangered due to habitat loss and overexploitation."
+    ]
+  },
+  "What is the only marsupial found in North America?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Didelphis virginiana"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Virginia Opossum"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "The Virginia Opossum is the only marsupial found in North America.",
+      "They are known for playing dead as a defense mechanism."
+    ]
+  },
+  "What is the most poisonous animal?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Phyllobates terribilis"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Golden Poison Dart Frog"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "The Golden Poison Dart Frog is the most poisonous animal, with enough toxin to kill 10 adult humans.",
+      "They are native to the rainforests of Colombia."
+    ]
+  },
+  "What is the only flying mammal?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Chiroptera"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Bat"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "Bats are the only mammals capable of sustained flight.",
+      "There are over 1,200 species of bats, making up about 20% of all mammal species."
+    ]
+  },
+  "What is the heaviest insect?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Deinacrida heteracantha"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Giant Weta"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "The Giant Weta is the heaviest insect, weighing up to 2.5 ounces (71 grams).",
+      "They are native to New Zealand."
+    ]
+  },
+  "What is the only bird that can fly backwards?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Trochilidae"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Hummingbird"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "Hummingbirds are the only birds that can fly backwards.",
+      "They are known for their rapid wing flapping, which creates a humming sound."
+    ]
+  },
+  "What is the smallest mammal?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Craseonycteris thonglongyai"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Bumblebee Bat"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "The Bumblebee Bat is the smallest mammal, weighing about 2 grams and measuring about 1.1 inches (2.8 cm) in length.",
+      "They are found in Thailand and Myanmar."
+    ]
+  },
+  "What animal has the most powerful bite?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Crocodylus niloticus"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Nile Crocodile"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "Nile Crocodiles have the most powerful bite, with a force of up to 5,000 psi (pounds per square inch).",
+      "They are found in freshwater habitats in Africa."
+    ]
+  },
+  "What is the smallest bird in the world?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Mellisuga helenae"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Bee Hummingbird"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "The Bee Hummingbird is the smallest bird in the world, measuring about 2.4 inches (6.1 cm) in length.",
+      "They are native to Cuba and the Isla de la Juventud."
+    ]
+  },
+  "What is the largest species of cat?": {
+    "answerCategories": [
+      {
+        "category": "Scientific Name",
+        "answers": ["Panthera tigris"],
+        "enabled": true
+      },
+      {
+        "category": "Common Name",
+        "answers": ["Tiger"],
+        "enabled": true
+      }
+    ],
+    "notes": [
+      "The tiger is the largest species of cat, with some males weighing over 600 pounds.",
+      "Tigers are known for their powerful build and distinctive orange and black stripes."
+    ]
+  }
+}
