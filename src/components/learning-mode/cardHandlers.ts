@@ -6,17 +6,22 @@ export function handleNextQuestion(
   inactiveCards: JSONWithCardStyle,
   currentCardIndex: number,
   setCurrentCardIndex: (index: number) => void,
-  setIsAnswerCorrect: (isCorrect: boolean) => void,
   setHasUserAnswered: (answered: boolean) => void,
   setActiveCards: (cards: JSONWithCardStyle) => void,
   setInactiveCards: (cards: JSONWithCardStyle) => void,
+  setIsFinished: (finished: boolean) => void,
+  questionCount: number,
+  setQuestionCount: (count: number) => void,
 ) {
   setHasUserAnswered(false)
 
   if (Object.keys(activeCards).length === 0) {
-    console.log("No more cards to practice!")
+    console.error("There are 0 cards to practice")
     return
   }
+  const newQuestionCount = questionCount + 1
+  setQuestionCount(newQuestionCount)
+  console.log("Question count: ", newQuestionCount)
 
   const currentCardStyle = activeCards[Object.keys(activeCards)[currentCardIndex]].cardStyle
 
@@ -35,7 +40,7 @@ export function handleNextQuestion(
   if (isAnswerCorrect) {
     if (currentCardStyle === "write") {
       if (Object.keys(inactiveCards).length === 0) {
-        cycleCards("done", activeCards, currentCardIndex, setActiveCards)
+        cycleCards("done", activeCards, currentCardIndex, setActiveCards, setIsFinished)
         return
       }
       removeAndAddNewCard(
@@ -54,8 +59,6 @@ export function handleNextQuestion(
   } else {
     cycleCards("multiple-choice", activeCards, currentCardIndex, setActiveCards)
   }
-  console.log("Next question!")
-  setIsAnswerCorrect(false)
 }
 
 function cycleCards(
@@ -63,6 +66,7 @@ function cycleCards(
   activeCards: JSONWithCardStyle,
   currentCardIndex: number,
   setActiveCards: (cards: JSONWithCardStyle) => void,
+  setIsFinished?: (finished: boolean) => void,
 ) {
   updateCardType(activeCards, currentCardIndex, cardType)
 
@@ -85,12 +89,13 @@ function cycleCards(
     updatedActiveCards = updateCards(remainingKeys, updatedActiveCards)
     updatedActiveCards[firstKey] = firstCard
     loopIterations++
-    console.log("currentCard: " + updatedActiveCards[Object.keys(activeCards)[currentCardIndex]])
-    console.log("Loop iteration: ", loopIterations)
+    // console.log("currentCard: " + updatedActiveCards[Object.keys(activeCards)[currentCardIndex]])
+    // console.log("Loop iteration: ", loopIterations)
   }
 
   if (loopIterations === Object.keys(activeCards).length) {
     console.log("No more cards to practice!")
+    setIsFinished?.(true)
     return
   }
   setActiveCards(updatedActiveCards)

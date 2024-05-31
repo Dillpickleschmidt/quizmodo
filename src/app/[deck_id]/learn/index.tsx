@@ -2,10 +2,10 @@ import { useEffect, useMemo, useState } from "react"
 import { View } from "react-native"
 import { Text } from "@/components/ui/text"
 import { Button } from "@/components/ui/button"
-import { useLocalSearchParams } from "expo-router"
+import { router, useLocalSearchParams } from "expo-router"
 import { useLearningModeContext } from "@/context/LearningModeContext"
 import data from "@/test-data/test-data-2.json"
-import CardHandler from "@/components/learning-mode/CardHandler"
+import CardTypeSwitch from "@/components/learning-mode/CardTypeSwitch"
 import useDeckSplit from "@/components/learning-mode/useDeckSplit"
 import CategoryDropdown from "@/components/learning-mode/CategoryDropdown"
 import { handleNextQuestion } from "@/components/learning-mode/cardHandlers"
@@ -33,9 +33,7 @@ function extractUniqueCategories(data: any): string[] {
 export default function LearningPage() {
   const { deck_id } = useLocalSearchParams<{ deck_id: string }>()
   const {
-    correctEntry,
     isAnswerCorrect,
-    setIsAnswerCorrect,
     hasUserAnswered,
     setHasUserAnswered,
     setEnabledAnswerCategories,
@@ -47,6 +45,8 @@ export default function LearningPage() {
 
   const [activeCards, setActiveCards] = useState(slicedData)
   const [inactiveCards, setInactiveCards] = useState(remainingData)
+  const [isFinished, setIsFinished] = useState(false)
+  const [questionCount, setQuestionCount] = useState(0)
 
   useEffect(() => {
     console.log("Now practicing deck " + deck_id)
@@ -63,6 +63,33 @@ export default function LearningPage() {
     console.log("Current card index: ", currentCardIndex)
   }, [activeCards, inactiveCards, currentCardIndex])
 
+  if (isFinished) {
+    return (
+      <View className="w-full h-full justify-center items-center">
+        <Text className="font-interbolditalic text-3xl text-center mx-6">
+          You've finished this deck!
+        </Text>
+        <Text className="text-4xl mt-2">🎉</Text>
+        <Button size="lg" onPress={router.back} className="mt-6">
+          <Text>Continue</Text>
+        </Button>
+      </View>
+    )
+  }
+
+  if (questionCount === 7) {
+    return (
+      <View className="w-full h-full justify-center items-center">
+        <Text className="font-intersemibold text-2xl text-center">
+          See the terms you practiced!
+        </Text>
+        <Button size="lg" onPress={() => setQuestionCount(0)} className="mt-6">
+          <Text>Continue</Text>
+        </Button>
+      </View>
+    )
+  }
+
   return (
     <View
       className={`${setBackgroundColor(isAnswerCorrect, hasUserAnswered)} items-center justify-center w-full h-full`}
@@ -73,8 +100,7 @@ export default function LearningPage() {
         <View className="w-56 mt-4">
           <CategoryDropdown uniqueCategories={uniqueCategories} />
         </View>
-        <Text className="mt-12 text-2xl font-intersemibold">{correctEntry?.key}</Text>
-        <CardHandler data={activeCards} />
+        <CardTypeSwitch data={activeCards} />
       </View>
       {hasUserAnswered && (
         <Button
@@ -86,10 +112,12 @@ export default function LearningPage() {
               inactiveCards,
               currentCardIndex,
               setCurrentCardIndex,
-              setIsAnswerCorrect,
               setHasUserAnswered,
               setActiveCards,
               setInactiveCards,
+              setIsFinished,
+              questionCount,
+              setQuestionCount,
             )
           }
           className="absolute bottom-12"
