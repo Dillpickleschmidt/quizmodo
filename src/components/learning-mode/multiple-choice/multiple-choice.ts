@@ -2,7 +2,7 @@
 This file contains the logic for generating multiple choice options and handling the user's selection.
 */
 
-import { JSONWithAnswerCategories, Entry } from "@/types"
+import { CardObject, Entry } from "@/types"
 
 /*
 This function takes in a raw vocab data object and returns an object with multiple choice options.
@@ -17,7 +17,7 @@ first entry will be the correct key and the remaining entries will be shuffled t
 This is useful for cycling through the data in order.
 */
 export function presentMultipleChoiceOptions(
-  data: JSONWithAnswerCategories,
+  data: CardObject,
   shuffleInput = true,
   currentCardIndex: number,
 ) {

@@ -1,17 +1,17 @@
-import { JSONWithCardStyle } from "@/types"
+import { CardObject } from "@/types"
 
 export function handleNextQuestion(
   isAnswerCorrect: boolean,
-  activeCards: JSONWithCardStyle,
-  inactiveCards: JSONWithCardStyle,
+  activeCards: CardObject,
+  inactiveCards: CardObject,
   currentCardIndex: number,
   setCurrentCardIndex: (index: number) => void,
   setHasUserAnswered: (answered: boolean) => void,
-  setActiveCards: (cards: JSONWithCardStyle) => void,
-  setInactiveCards: (cards: JSONWithCardStyle) => void,
+  setActiveCards: (cards: CardObject) => void,
+  setInactiveCards: (cards: CardObject) => void,
   setIsFinished: (finished: boolean) => void,
-  recentlySeenCards: JSONWithCardStyle | null,
-  setRecentlySeenCards: (cards: JSONWithCardStyle | null) => void,
+  recentlySeenCards: CardObject | null,
+  setRecentlySeenCards: (cards: CardObject | null) => void,
 ) {
   setHasUserAnswered(false)
 
@@ -66,9 +66,9 @@ export function handleNextQuestion(
 
 function cycleCards(
   cardType: "write" | "multiple-choice" | "done",
-  activeCards: JSONWithCardStyle,
+  activeCards: CardObject,
   currentCardIndex: number,
-  setActiveCards: (cards: JSONWithCardStyle) => void,
+  setActiveCards: (cards: CardObject) => void,
   setIsFinished?: (finished: boolean) => void,
 ) {
   updateCardType(activeCards, currentCardIndex, cardType)
@@ -105,7 +105,7 @@ function cycleCards(
 }
 
 function updateCardType(
-  activeCards: JSONWithCardStyle,
+  activeCards: CardObject,
   currentCardIndex: number,
   cardType: "write" | "multiple-choice" | "done",
 ) {
@@ -119,16 +119,16 @@ function incrementIndex(currentCardIndex: number, setCurrentCardIndex: (index: n
 }
 
 function removeAndAddNewCard(
-  activeCards: JSONWithCardStyle,
-  inactiveCards: JSONWithCardStyle,
+  activeCards: CardObject,
+  inactiveCards: CardObject,
   currentCardIndex: number,
-  setActiveCards: (cards: JSONWithCardStyle) => void,
-  setInactiveCards: (cards: JSONWithCardStyle) => void,
+  setActiveCards: (cards: CardObject) => void,
+  setInactiveCards: (cards: CardObject) => void,
 ) {
   const [firstInactiveKey, ...remainingInactiveKeys] = Object.keys(inactiveCards)
-  const updatedActiveCards: JSONWithCardStyle = { ...activeCards }
+  const updatedActiveCards: CardObject = { ...activeCards }
 
-  const newActiveCards: JSONWithCardStyle = {}
+  const newActiveCards: CardObject = {}
   let index = 0
 
   for (const key in updatedActiveCards) {
@@ -146,9 +146,9 @@ function removeAndAddNewCard(
   cycleCards("multiple-choice", newActiveCards, currentCardIndex, setActiveCards)
 }
 
-function updateCards(keys: string[], source: JSONWithCardStyle): JSONWithCardStyle {
+function updateCards(keys: string[], source: CardObject): CardObject {
   return keys.reduce((acc, key) => {
     acc[key] = source[key]
     return acc
-  }, {} as JSONWithCardStyle)
+  }, {} as CardObject)
 }

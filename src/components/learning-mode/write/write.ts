@@ -2,10 +2,10 @@
 This file contains the logic for handling the user's input for the write mode.
 */
 
-import { Entry, JSONWithAnswerCategories } from "@/types"
+import { Entry, CardObject } from "@/types"
 
 export function presentWriteOptions(
-  data: JSONWithAnswerCategories,
+  data: CardObject,
   shuffleInput = true,
   currentCardIndex: number,
 ) {

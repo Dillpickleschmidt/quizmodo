@@ -4,10 +4,10 @@ import { handleMultipleChoiceSelection, presentMultipleChoiceOptions } from "./m
 import { Button } from "@/components/ui/button"
 import { Text } from "@/components/ui/text"
 import { useLearningModeContext } from "@/context/LearningModeContext"
-import { JSONWithAnswerCategories } from "@/types"
+import { CardObject } from "@/types"
 
 type MultipleChoiceProps = {
-  data: JSONWithAnswerCategories
+  data: CardObject
   shuffleInput?: boolean
 }
 

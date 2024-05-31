@@ -10,7 +10,7 @@ import {
 } from "~/components/ui/dropdown-menu"
 import { useMemo, useState } from "react"
 import { Button } from "~/components/ui/button"
-import { JSONWithCardStyle } from "@/types"
+import { CardObject } from "@/types"
 import { useLearningModeContext } from "@/context/LearningModeContext"
 import { Checkbox } from "../ui/checkbox"
 import { Label } from "../ui/label"

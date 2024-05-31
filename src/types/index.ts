@@ -22,5 +22,6 @@ export type JSONWithAnswerCategories = Record<string, Entry>
 
 type EntryWithCardStyle = Entry & {
   cardStyle: string
+  wrongAnswerCount: number
 }
-export type JSONWithCardStyle = Record<string, EntryWithCardStyle>
+export type CardObject = Record<string, EntryWithCardStyle>

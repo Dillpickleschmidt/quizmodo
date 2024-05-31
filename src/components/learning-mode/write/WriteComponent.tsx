@@ -5,10 +5,10 @@ import { useLearningModeContext } from "@/context/LearningModeContext"
 import { handleWrittenAnswer, presentWriteOptions } from "./write"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { JSONWithAnswerCategories } from "@/types"
+import { CardObject } from "@/types"
 
 type WriteComponentProps = {
-  data: JSONWithAnswerCategories
+  data: CardObject
   shuffleInput?: boolean
 }
 

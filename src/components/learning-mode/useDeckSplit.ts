@@ -1,4 +1,4 @@
-import { JSONWithCardStyle, JSONWithAnswerCategories } from "@/types"
+import { CardObject, JSONWithAnswerCategories } from "@/types"
 
 export default function useDeckSplit(data: JSONWithAnswerCategories) {
   // Convert the data object into an array of key-value pairs
@@ -10,6 +10,7 @@ export default function useDeckSplit(data: JSONWithAnswerCategories) {
     {
       ...value,
       cardStyle: "multiple-choice",
+      wrongAnswerCount: 0,
     },
   ])
 
@@ -19,8 +20,8 @@ export default function useDeckSplit(data: JSONWithAnswerCategories) {
   const remainingEntries = updatedEntries.slice(10)
 
   // Convert the updated entries back to an object
-  const slicedData: JSONWithCardStyle = Object.fromEntries(slicedEntries)
-  const remainingData: JSONWithCardStyle = Object.fromEntries(remainingEntries)
+  const slicedData: CardObject = Object.fromEntries(slicedEntries)
+  const remainingData: CardObject = Object.fromEntries(remainingEntries)
 
   return { slicedData, remainingData }
 }

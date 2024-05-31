@@ -9,10 +9,10 @@ import CardTypeSwitch from "@/components/learning-mode/CardTypeSwitch"
 import useDeckSplit from "@/components/learning-mode/useDeckSplit"
 import CategoryDropdown from "@/components/learning-mode/CategoryDropdown"
 import { handleNextQuestion } from "@/components/learning-mode/cardHandlers"
-import { JSONWithCardStyle } from "@/types"
+import { CardObject } from "@/types"
 import ReviewPage from "@/components/learning-mode/ReviewPage"
 
-function logCardCounts(activeCards: JSONWithCardStyle, inactiveCards: JSONWithCardStyle) {
+function logCardCounts(activeCards: CardObject, inactiveCards: CardObject) {
   console.log("Active cards count: ", Object.keys(activeCards).length)
   console.log("Inactive cards count: ", Object.keys(inactiveCards).length)
 }
@@ -47,7 +47,7 @@ export default function LearningPage() {
   const [activeCards, setActiveCards] = useState(slicedData)
   const [inactiveCards, setInactiveCards] = useState(remainingData)
   const [isFinished, setIsFinished] = useState(false)
-  const [recentlySeenCards, setRecentlySeenCards] = useState<JSONWithCardStyle | null>(null)
+  const [recentlySeenCards, setRecentlySeenCards] = useState<CardObject | null>(null)
 
   useEffect(() => {
     console.log("Now practicing deck " + deck_id)

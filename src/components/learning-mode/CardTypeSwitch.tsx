@@ -1,13 +1,13 @@
 import { View } from "react-native"
 import { Text } from "@/components/ui/text"
-import { JSONWithCardStyle } from "@/types"
+import { CardObject } from "@/types"
 import MultipleChoice from "./multiple-choice/MultipleChoice"
 import WriteComponent from "./write/WriteComponent"
 import { useMemo } from "react"
 import { useLearningModeContext } from "@/context/LearningModeContext"
 
 type CardTypeSwitchProps = {
-  data: JSONWithCardStyle
+  data: CardObject
 }
 
 export default function CardTypeSwitch({ data }: CardTypeSwitchProps) {

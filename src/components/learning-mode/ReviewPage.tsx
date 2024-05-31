@@ -1,11 +1,11 @@
 import { View, ScrollView } from "react-native"
 import { Text } from "@/components/ui/text"
 import { Button } from "@/components/ui/button"
-import { AnswerCategory, JSONWithCardStyle } from "@/types"
+import { AnswerCategory, CardObject } from "@/types"
 
 type RecentlySeenCardsProps = {
-  recentlySeenCards: JSONWithCardStyle | null
-  setRecentlySeenCards: (cards: JSONWithCardStyle | null) => void
+  recentlySeenCards: CardObject | null
+  setRecentlySeenCards: (cards: CardObject | null) => void
 }
 
 export default function RecentlySeenCards({
