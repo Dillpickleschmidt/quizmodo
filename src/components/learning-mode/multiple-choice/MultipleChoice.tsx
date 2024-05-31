@@ -18,7 +18,6 @@ export default function MultipleChoice({ data, shuffleInput = true }: MultipleCh
     setHasUserAnswered,
     enabledAnswerCategories,
     currentCardIndex,
-    correctEntry,
   } = useLearningModeContext()
 
   const choices = useMemo(
