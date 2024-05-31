@@ -22,19 +22,19 @@ export function handleNextQuestion(
   }
 
   const currentKey = Object.keys(activeCards)[currentCardIndex]
-  const currentCard = activeCards[currentKey]
+  const currentCard = { ...activeCards[currentKey] } // Deep copy of the current card
   const currentCardStyle = currentCard.cardStyle
 
   if (!isAnswerCorrect) {
-    // Update the wrong answer count for the unsliced data and recently seen cards
-    updateWrongAnswerCount(recentlySeenCards, unslicedData, currentKey)
+    // Update the wrong answer count for the unsliced data and the current card
+    updateWrongAnswerCount(unslicedData, currentKey)
+    currentCard.wrongAnswerCount++
+  } else {
+    currentCard.wrongAnswerCount = 0
   }
 
   // Add the current card to the recently seen cards
   addToRecentlySeenCards(recentlySeenCards, setRecentlySeenCards, currentCard, currentKey)
-
-  // Immediately clear the wrong answer count for the current card
-  currentCard.wrongAnswerCount = 0
 
   if (currentCardIndex <= 3) {
     handleInitialPhase(
@@ -58,21 +58,15 @@ export function handleNextQuestion(
   }
 }
 
-function updateWrongAnswerCount(
-  recentlySeenCards: CardObject | null,
-  unslicedData: CardObject,
-  currentKey: string,
-) {
+function updateWrongAnswerCount(unslicedData: CardObject, currentKey: string) {
   // Ensure wrongAnswerCount is initialized as a number in unslicedData
-  unslicedData[currentKey].wrongAnswerCount = unslicedData[currentKey].wrongAnswerCount || 0
-  unslicedData[currentKey].wrongAnswerCount++
-
-  // Ensure wrongAnswerCount is initialized as a number in recentlySeenCards
-  if (recentlySeenCards && recentlySeenCards[currentKey]) {
-    recentlySeenCards[currentKey].wrongAnswerCount =
-      recentlySeenCards[currentKey].wrongAnswerCount || 0
-    recentlySeenCards[currentKey].wrongAnswerCount++
+  if (unslicedData[currentKey].wrongAnswerCount === undefined) {
+    unslicedData[currentKey].wrongAnswerCount = 0
   }
+  unslicedData[currentKey].wrongAnswerCount++
+  console.log(
+    "Wrong answer count for " + currentKey + ": " + unslicedData[currentKey].wrongAnswerCount,
+  )
 }
 
 function addToRecentlySeenCards(
@@ -81,14 +75,15 @@ function addToRecentlySeenCards(
   currentCard: EntryWithCardProperties,
   currentKey: string,
 ) {
-  // Create a new card object to avoid direct mutation
-  const newCard = { ...currentCard }
+  // Create a deep copy of the current card
+  const currentCardCopy = JSON.parse(JSON.stringify(currentCard))
 
   // Create a new recently seen cards object with the updated card
   const newRecentlySeenCards: CardObject = {
     ...recentlySeenCards,
-    [currentKey]: newCard,
-  } as CardObject
+    [currentKey]: currentCardCopy,
+  }
+  console.log("recentlySeenCards: ", newRecentlySeenCards)
 
   setRecentlySeenCards(newRecentlySeenCards)
 }

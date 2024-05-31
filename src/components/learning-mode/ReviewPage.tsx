@@ -50,7 +50,10 @@ export default function ReviewPage({
         <View className="w-full px-3">
           <Button
             size="lg"
-            onPress={() => setRecentlySeenCards(null)}
+            onPress={() => {
+              console.log("Clearing recently seen cards")
+              setRecentlySeenCards(null)
+            }}
             className="w-full mt-2 mb-4 bg-orange-500"
           >
             <Text>Continue</Text>
