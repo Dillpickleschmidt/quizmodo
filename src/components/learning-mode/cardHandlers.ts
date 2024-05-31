@@ -10,8 +10,8 @@ export function handleNextQuestion(
   setActiveCards: (cards: JSONWithCardStyle) => void,
   setInactiveCards: (cards: JSONWithCardStyle) => void,
   setIsFinished: (finished: boolean) => void,
-  questionCount: number,
-  setQuestionCount: (count: number) => void,
+  recentlySeenCards: JSONWithCardStyle | null,
+  setRecentlySeenCards: (cards: JSONWithCardStyle | null) => void,
 ) {
   setHasUserAnswered(false)
 
@@ -19,11 +19,14 @@ export function handleNextQuestion(
     console.error("There are 0 cards to practice")
     return
   }
-  const newQuestionCount = questionCount + 1
-  setQuestionCount(newQuestionCount)
-  console.log("Question count: ", newQuestionCount)
 
-  const currentCardStyle = activeCards[Object.keys(activeCards)[currentCardIndex]].cardStyle
+  const currentCard = activeCards[Object.keys(activeCards)[currentCardIndex]]
+  const currentCardStyle = currentCard.cardStyle
+
+  // Add the current card to the recently seen cards
+  const currentKey = Object.keys(activeCards)[currentCardIndex]
+  const newRecentlySeenCards = { ...recentlySeenCards, [currentKey]: currentCard }
+  setRecentlySeenCards(newRecentlySeenCards)
 
   if (currentCardIndex <= 3) {
     if (isAnswerCorrect) {

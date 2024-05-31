@@ -10,6 +10,7 @@ import useDeckSplit from "@/components/learning-mode/useDeckSplit"
 import CategoryDropdown from "@/components/learning-mode/CategoryDropdown"
 import { handleNextQuestion } from "@/components/learning-mode/cardHandlers"
 import { JSONWithCardStyle } from "@/types"
+import ReviewPage from "@/components/learning-mode/ReviewPage"
 
 function logCardCounts(activeCards: JSONWithCardStyle, inactiveCards: JSONWithCardStyle) {
   console.log("Active cards count: ", Object.keys(activeCards).length)
@@ -46,7 +47,7 @@ export default function LearningPage() {
   const [activeCards, setActiveCards] = useState(slicedData)
   const [inactiveCards, setInactiveCards] = useState(remainingData)
   const [isFinished, setIsFinished] = useState(false)
-  const [questionCount, setQuestionCount] = useState(0)
+  const [recentlySeenCards, setRecentlySeenCards] = useState<JSONWithCardStyle | null>(null)
 
   useEffect(() => {
     console.log("Now practicing deck " + deck_id)
@@ -77,16 +78,12 @@ export default function LearningPage() {
     )
   }
 
-  if (questionCount === 7) {
+  if (recentlySeenCards && Object.keys(recentlySeenCards).length === 7) {
     return (
-      <View className="w-full h-full justify-center items-center">
-        <Text className="font-intersemibold text-2xl text-center">
-          See the terms you practiced!
-        </Text>
-        <Button size="lg" onPress={() => setQuestionCount(0)} className="mt-6">
-          <Text>Continue</Text>
-        </Button>
-      </View>
+      <ReviewPage
+        recentlySeenCards={recentlySeenCards}
+        setRecentlySeenCards={setRecentlySeenCards}
+      />
     )
   }
 
@@ -116,8 +113,8 @@ export default function LearningPage() {
               setActiveCards,
               setInactiveCards,
               setIsFinished,
-              questionCount,
-              setQuestionCount,
+              recentlySeenCards,
+              setRecentlySeenCards,
             )
           }
           className="absolute bottom-12"
