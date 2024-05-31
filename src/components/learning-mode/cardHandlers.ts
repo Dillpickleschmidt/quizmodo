@@ -1,4 +1,4 @@
-import { CardObject } from "@/types"
+import { CardObject, EntryWithCardProperties } from "@/types"
 
 export function handleNextQuestion(
   isAnswerCorrect: boolean,
@@ -12,6 +12,7 @@ export function handleNextQuestion(
   setIsFinished: (finished: boolean) => void,
   recentlySeenCards: CardObject | null,
   setRecentlySeenCards: (cards: CardObject | null) => void,
+  unslicedData: CardObject,
 ) {
   setHasUserAnswered(false)
 
@@ -20,26 +21,105 @@ export function handleNextQuestion(
     return
   }
 
-  const currentCard = activeCards[Object.keys(activeCards)[currentCardIndex]]
+  const currentKey = Object.keys(activeCards)[currentCardIndex]
+  const currentCard = activeCards[currentKey]
   const currentCardStyle = currentCard.cardStyle
 
-  // Add the current card to the recently seen cards
-  const currentKey = Object.keys(activeCards)[currentCardIndex]
-  const newRecentlySeenCards = { ...recentlySeenCards, [currentKey]: currentCard }
-  setRecentlySeenCards(newRecentlySeenCards)
-
-  if (currentCardIndex <= 3) {
-    if (isAnswerCorrect) {
-      if (currentCardStyle === "multiple-choice") {
-        updateCardType(activeCards, currentCardIndex, "write")
-      }
-    } else {
-      updateCardType(activeCards, currentCardIndex, "multiple-choice")
-    }
-    incrementIndex(currentCardIndex, setCurrentCardIndex)
-    return
+  if (!isAnswerCorrect) {
+    // Update the wrong answer count for the unsliced data and recently seen cards
+    updateWrongAnswerCount(recentlySeenCards, unslicedData, currentKey)
   }
 
+  // Add the current card to the recently seen cards
+  addToRecentlySeenCards(recentlySeenCards, setRecentlySeenCards, currentCard, currentKey)
+
+  // Immediately clear the wrong answer count for the current card
+  currentCard.wrongAnswerCount = 0
+
+  if (currentCardIndex <= 3) {
+    handleInitialPhase(
+      isAnswerCorrect,
+      currentCardStyle,
+      activeCards,
+      currentCardIndex,
+      setCurrentCardIndex,
+    )
+  } else {
+    handleMainPhase(
+      isAnswerCorrect,
+      currentCardStyle,
+      activeCards,
+      inactiveCards,
+      currentCardIndex,
+      setActiveCards,
+      setInactiveCards,
+      setIsFinished,
+    )
+  }
+}
+
+function updateWrongAnswerCount(
+  recentlySeenCards: CardObject | null,
+  unslicedData: CardObject,
+  currentKey: string,
+) {
+  // Ensure wrongAnswerCount is initialized as a number in unslicedData
+  unslicedData[currentKey].wrongAnswerCount = unslicedData[currentKey].wrongAnswerCount || 0
+  unslicedData[currentKey].wrongAnswerCount++
+
+  // Ensure wrongAnswerCount is initialized as a number in recentlySeenCards
+  if (recentlySeenCards && recentlySeenCards[currentKey]) {
+    recentlySeenCards[currentKey].wrongAnswerCount =
+      recentlySeenCards[currentKey].wrongAnswerCount || 0
+    recentlySeenCards[currentKey].wrongAnswerCount++
+  }
+}
+
+function addToRecentlySeenCards(
+  recentlySeenCards: CardObject | null,
+  setRecentlySeenCards: (cards: CardObject | null) => void,
+  currentCard: EntryWithCardProperties,
+  currentKey: string,
+) {
+  // Create a new card object to avoid direct mutation
+  const newCard = { ...currentCard }
+
+  // Create a new recently seen cards object with the updated card
+  const newRecentlySeenCards: CardObject = {
+    ...recentlySeenCards,
+    [currentKey]: newCard,
+  } as CardObject
+
+  setRecentlySeenCards(newRecentlySeenCards)
+}
+
+function handleInitialPhase(
+  isAnswerCorrect: boolean,
+  currentCardStyle: string,
+  activeCards: CardObject,
+  currentCardIndex: number,
+  setCurrentCardIndex: (index: number) => void,
+) {
+  if (isAnswerCorrect) {
+    if (currentCardStyle === "multiple-choice") {
+      updateCardType(activeCards, currentCardIndex, "write")
+    }
+  } else {
+    updateCardType(activeCards, currentCardIndex, "multiple-choice")
+  }
+  incrementIndex(currentCardIndex, setCurrentCardIndex)
+}
+
+function handleMainPhase(
+  isAnswerCorrect: boolean,
+  currentCardStyle: string,
+  activeCards: CardObject,
+  inactiveCards: CardObject,
+  currentCardIndex: number,
+  setActiveCards: (cards: CardObject) => void,
+  setInactiveCards: (cards: CardObject) => void,
+  setIsFinished: (finished: boolean) => void,
+) {
   if (isAnswerCorrect) {
     if (currentCardStyle === "write") {
       if (Object.keys(inactiveCards).length === 0) {
@@ -53,11 +133,8 @@ export function handleNextQuestion(
         setActiveCards,
         setInactiveCards,
       )
-    } else if (currentCardStyle === "multiple-choice") {
-      cycleCards("write", activeCards, currentCardIndex, setActiveCards)
     } else {
-      // Shouldn't need to handle this here, but just in case...
-      cycleCards("done", activeCards, currentCardIndex, setActiveCards)
+      cycleCards("write", activeCards, currentCardIndex, setActiveCards)
     }
   } else {
     cycleCards("multiple-choice", activeCards, currentCardIndex, setActiveCards)

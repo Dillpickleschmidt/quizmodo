@@ -11,6 +11,7 @@ import CategoryDropdown from "@/components/learning-mode/CategoryDropdown"
 import { handleNextQuestion } from "@/components/learning-mode/cardHandlers"
 import { CardObject } from "@/types"
 import ReviewPage from "@/components/learning-mode/ReviewPage"
+import FinishPage from "@/components/learning-mode/FinishPage"
 
 function logCardCounts(activeCards: CardObject, inactiveCards: CardObject) {
   console.log("Active cards count: ", Object.keys(activeCards).length)
@@ -42,7 +43,7 @@ export default function LearningPage() {
     setCurrentCardIndex,
   } = useLearningModeContext()
 
-  const { slicedData, remainingData } = useMemo(() => useDeckSplit(data), [data])
+  const { slicedData, remainingData, unslicedData } = useMemo(() => useDeckSplit(data), [data])
 
   const [activeCards, setActiveCards] = useState(slicedData)
   const [inactiveCards, setInactiveCards] = useState(remainingData)
@@ -65,17 +66,7 @@ export default function LearningPage() {
   }, [activeCards, inactiveCards, currentCardIndex])
 
   if (isFinished) {
-    return (
-      <View className="w-full h-full justify-center items-center">
-        <Text className="font-interbolditalic text-3xl text-center mx-6">
-          You've finished this deck!
-        </Text>
-        <Text className="text-4xl mt-2">🎉</Text>
-        <Button size="lg" onPress={router.back} className="mt-6">
-          <Text>Continue</Text>
-        </Button>
-      </View>
-    )
+    return <FinishPage data={unslicedData} />
   }
 
   if (recentlySeenCards && Object.keys(recentlySeenCards).length === 7) {
@@ -115,6 +106,7 @@ export default function LearningPage() {
               setIsFinished,
               recentlySeenCards,
               setRecentlySeenCards,
+              unslicedData,
             )
           }
           className="absolute bottom-12"

@@ -23,5 +23,7 @@ export default function useDeckSplit(data: JSONWithAnswerCategories) {
   const slicedData: CardObject = Object.fromEntries(slicedEntries)
   const remainingData: CardObject = Object.fromEntries(remainingEntries)
 
-  return { slicedData, remainingData }
+  const unslicedData: CardObject = Object.fromEntries(updatedEntries)
+
+  return { slicedData, remainingData, unslicedData }
 }

@@ -20,8 +20,8 @@ export type Entry = {
 }
 export type JSONWithAnswerCategories = Record<string, Entry>
 
-type EntryWithCardStyle = Entry & {
+export type EntryWithCardProperties = Entry & {
   cardStyle: string
   wrongAnswerCount: number
 }
-export type CardObject = Record<string, EntryWithCardStyle>
+export type CardObject = Record<string, EntryWithCardProperties>
