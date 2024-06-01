@@ -19,6 +19,8 @@ export default function WriteComponent({ data, shuffleInput = true }: WriteCompo
     setHasUserAnswered,
     enabledAnswerCategories,
     currentCardIndex,
+    hasUserAnswered,
+    isAnswerCorrect,
   } = useLearningModeContext()
 
   const correctEntry = useMemo(
@@ -47,14 +49,20 @@ export default function WriteComponent({ data, shuffleInput = true }: WriteCompo
 
   return (
     <View className="mt-4">
-      <Text>Type your answer</Text>
+      <Text>{!hasUserAnswered && "Type your answer"}</Text>
       <Input
         value={userAnswer}
         onChangeText={(e) => setUserAnswer(e)}
         aria-labelledbyledBy="userAnswerInput"
         aria-errormessage="userAnswerInputError"
+        editable={!hasUserAnswered}
+        className={`${hasUserAnswered && (isAnswerCorrect ? "text-green-500" : "text-red-500")} font-interbold opacity-100`}
       />
-      <Button onPress={() => handleInput(userAnswer)} className="my-2">
+      <Button
+        onPress={() => handleInput(userAnswer)}
+        disabled={hasUserAnswered}
+        className="my-2 disabled:opacity-90"
+      >
         <Text>Submit</Text>
       </Button>
     </View>

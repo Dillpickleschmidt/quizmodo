@@ -11,7 +11,7 @@ type FinishPageProps = {
 export default function FinishPage({ data }: FinishPageProps) {
   return (
     <View className="w-full h-full justify-center items-center">
-      <Text className="font-interbolditalic text-3xl text-center mt-12 mx-6">
+      <Text className="font-interbolditalic text-3xl text-center mt-16 mx-6">
         You've finished this deck!
       </Text>
       <Text className="text-4xl mt-2">🎉</Text>
@@ -21,7 +21,7 @@ export default function FinishPage({ data }: FinishPageProps) {
             key={key}
             className="relative mb-4 mx-2 bg-card rounded-lg shadow-md flex flex-row overflow-hidden"
           >
-            <Text className="font-bold text-xl">Term: {key}</Text>
+            <Text className="font-bold text-xl">{key}</Text>
             {card.answerCategories.map((categoryObj: AnswerCategory, index: number) => (
               <View key={index} className="mt-2">
                 <Text className="font-bold">{categoryObj.category}:</Text>

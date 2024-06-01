@@ -60,10 +60,10 @@ export default function LearningPage() {
     setEnabledAnswerCategories(uniqueCategories)
   }, [uniqueCategories])
 
-  // useEffect(() => {
-  //   logCardCounts(activeCards, inactiveCards)
-  //   console.log("Current card index: ", currentCardIndex)
-  // }, [activeCards, inactiveCards, currentCardIndex])
+  useEffect(() => {
+    // logCardCounts(activeCards, inactiveCards)
+    // console.log("Current card index: ", currentCardIndex)
+  }, [activeCards, inactiveCards, currentCardIndex])
 
   if (isFinished) {
     return <FinishPage data={unslicedData} />
@@ -82,10 +82,12 @@ export default function LearningPage() {
     <View
       className={`${setBackgroundColor(isAnswerCorrect, hasUserAnswered)} items-center justify-center w-full h-full`}
     >
-      <View className="w-full px-6 translate-y-12">
-        <Text className="text-3xl font-interblack">Deck {deck_id} Learning Page</Text>
-        <Text className="text-xl">This is where you'll practice</Text>
-        <View className="w-56 mt-4">
+      <View className="w-full px-6 translate-y-6">
+        <Text className={`text-3xl font-interblack ${hasUserAnswered && "text-white"}`}>
+          Deck {deck_id} Learning Page
+        </Text>
+        {/* <Text className="text-xl">This is where you'll practice</Text> */}
+        <View>
           <CategoryDropdown uniqueCategories={uniqueCategories} />
         </View>
         <CardTypeSwitch data={activeCards} />
@@ -109,9 +111,9 @@ export default function LearningPage() {
               unslicedData,
             )
           }
-          className="absolute bottom-12"
+          className={`absolute bottom-12 ${hasUserAnswered && "bg-white"}`}
         >
-          <Text>Next Question {"->"}</Text>
+          <Text className={`${hasUserAnswered && "text-black"}`}>Next Question {"->"}</Text>
         </Button>
       )}
     </View>

@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { View } from "react-native"
 import { handleMultipleChoiceSelection, presentMultipleChoiceOptions } from "./multiple-choice"
 import { Button } from "@/components/ui/button"
@@ -15,10 +15,14 @@ export default function MultipleChoice({ data, shuffleInput = true }: MultipleCh
   const {
     setCorrectEntry,
     setIsAnswerCorrect,
+    hasUserAnswered,
     setHasUserAnswered,
     enabledAnswerCategories,
     currentCardIndex,
+    isAnswerCorrect,
   } = useLearningModeContext()
+
+  const [selectedButtonIndex, setSelectedButtonIndex] = useState<number | null>(null)
 
   const choices = useMemo(
     () => presentMultipleChoiceOptions(data, shuffleInput, currentCardIndex),
@@ -29,14 +33,20 @@ export default function MultipleChoice({ data, shuffleInput = true }: MultipleCh
     setCorrectEntry(choices.correctOption)
   }, [choices, setCorrectEntry])
 
-  const handleSelection = (selection: string) => {
-    setIsAnswerCorrect(handleMultipleChoiceSelection(choices, selection))
+  const handleSelection = (selection: string, index: number) => {
+    const isCorrect = handleMultipleChoiceSelection(choices, selection)
+    setIsAnswerCorrect(isCorrect)
     setHasUserAnswered(true)
+    setSelectedButtonIndex(index)
   }
+
+  const correctAnswer = choices.correctOption.answerCategories
+    .filter((category) => enabledAnswerCategories.includes(category.category))
+    .flatMap((category) => category.answers)
 
   return (
     <View className="mt-4">
-      <Text>Multiple Choice</Text>
+      <Text className={`${hasUserAnswered && "text-white"}`}>Multiple Choice</Text>
       {choices.options.map((option, index) => {
         // Flatten the enabled answers from all categories
         const enabledAnswers = option.answerCategories
@@ -44,11 +54,39 @@ export default function MultipleChoice({ data, shuffleInput = true }: MultipleCh
           .flatMap((category) => category.answers)
 
         // Pick the first answer from the enabled answers array (each answer in the array is equally valid)
-        const firstAnswer = enabledAnswers[0]
+        const firstAnswerIndex = enabledAnswers[0]
+
+        const isCorrect = correctAnswer.includes(firstAnswerIndex)
+        const isSelected = selectedButtonIndex === index
 
         return (
-          <Button key={index} onPress={() => handleSelection(firstAnswer)} className="my-2">
-            <Text>{enabledAnswers.join(", ")}</Text>
+          <Button
+            key={index}
+            onPress={() => handleSelection(firstAnswerIndex, index)}
+            disabled={hasUserAnswered}
+            className={`${
+              hasUserAnswered
+                ? isCorrect
+                  ? "border-r-8 justify-center disabled:opacity-100 bg-white border-green-400"
+                  : isSelected
+                    ? "border-r-8 justify-center disabled:opacity-100 bg-white border-red-400"
+                    : "disabled:opacity-60 bg-white"
+                : "disabled:opacity-60"
+            } my-2`}
+          >
+            <Text
+              className={`${
+                hasUserAnswered
+                  ? isCorrect
+                    ? "text-[#46d246] font-interblack !text-xl"
+                    : isSelected
+                      ? "text-red-500 font-interblack"
+                      : ""
+                  : ""
+              }`}
+            >
+              {enabledAnswers.join(", ")}
+            </Text>
           </Button>
         )
       })}

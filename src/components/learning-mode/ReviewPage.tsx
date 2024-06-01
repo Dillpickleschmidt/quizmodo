@@ -15,7 +15,7 @@ export default function ReviewPage({
   if (recentlySeenCards && Object.keys(recentlySeenCards).length === 7) {
     return (
       <View className="w-full h-full justify-center items-center">
-        <Text className="font-intersemibolditalic text-3xl text-center text-orange-500 mt-12 mx-6">
+        <Text className="font-intersemibolditalic text-3xl text-center text-orange-500 mt-16 mx-6">
           See the terms you practiced!
         </Text>
         <ScrollView className="w-full mt-6">
@@ -28,7 +28,7 @@ export default function ReviewPage({
                 <Text
                   className={`${card.wrongAnswerCount > 0 ? "text-[#ff5757]" : ""} font-interbold text-xl`}
                 >
-                  Term: {key}
+                  {key}
                 </Text>
                 {card.answerCategories.map((categoryObj: AnswerCategory, index: number) => (
                   <View key={index} className="mt-2">

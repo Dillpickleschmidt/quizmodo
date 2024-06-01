@@ -7,9 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 export default function layout() {
   return (
     <LearningModeContextProvider>
-      <SafeAreaView>
-        <Slot />
-      </SafeAreaView>
+      <Slot />
     </LearningModeContextProvider>
   )
 }

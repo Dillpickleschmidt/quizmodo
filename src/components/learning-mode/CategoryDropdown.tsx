@@ -20,7 +20,8 @@ type CategoryDropdownProps = {
 }
 
 export default function CategoryDropdown({ uniqueCategories }: CategoryDropdownProps) {
-  const { enabledAnswerCategories, setEnabledAnswerCategories } = useLearningModeContext()
+  const { enabledAnswerCategories, setEnabledAnswerCategories, hasUserAnswered } =
+    useLearningModeContext()
 
   const [open, setOpen] = useState(false)
 
@@ -46,8 +47,10 @@ export default function CategoryDropdown({ uniqueCategories }: CategoryDropdownP
       }}
     >
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">
-          <Text>Categories</Text>
+        <Button variant="ghost" className="w-24 !px-0">
+          <Text className={`!text-sm ${!hasUserAnswered ? "text-orange-500" : "text-white"}`}>
+            Categories
+          </Text>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent

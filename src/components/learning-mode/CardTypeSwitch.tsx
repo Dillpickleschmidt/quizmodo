@@ -11,7 +11,7 @@ type CardTypeSwitchProps = {
 }
 
 export default function CardTypeSwitch({ data }: CardTypeSwitchProps) {
-  const { currentCardIndex, correctEntry } = useLearningModeContext()
+  const { currentCardIndex, correctEntry, hasUserAnswered } = useLearningModeContext()
 
   const currentKey = useMemo(() => Object.keys(data)[currentCardIndex], [data, currentCardIndex])
 
@@ -34,7 +34,9 @@ export default function CardTypeSwitch({ data }: CardTypeSwitchProps) {
 
   return (
     <>
-      <Text className="mt-12 text-2xl font-intersemibold">{correctEntry?.key}</Text>
+      <Text className={`mt-12 text-3xl font-interblack ${hasUserAnswered && "text-white"}`}>
+        {correctEntry?.key}
+      </Text>
       {renderComponent()}
     </>
   )

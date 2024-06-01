@@ -39,7 +39,7 @@ export default function App() {
                 gradientUnits="userSpaceOnUse"
               >
                 <Stop stopColor="#34D399" offset="25%" />
-                <Stop stopColor="#0ea06f" offset="45%" />
+                <Stop stopColor="#0fa976" offset="45%" />
               </LinearGradient>
               <LinearGradient
                 id="orangeGradient"

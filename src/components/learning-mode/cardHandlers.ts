@@ -83,7 +83,7 @@ function addToRecentlySeenCards(
     ...recentlySeenCards,
     [currentKey]: currentCardCopy,
   }
-  console.log("recentlySeenCards: ", newRecentlySeenCards)
+  // console.log("recentlySeenCards: ", newRecentlySeenCards)
 
   setRecentlySeenCards(newRecentlySeenCards)
 }
