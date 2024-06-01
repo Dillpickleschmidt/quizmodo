@@ -38,7 +38,7 @@ export default function SignIn() {
       <ScrollView>
         <View className="justify-center w-full min-h-[95vh] px-4 my-6">
           <View className="items-center w-full my-20">
-            <Text className="text-2xl font-intersemibold">Log in to Learn Stack</Text>
+            <Text className="text-2xl font-intersemibold">Log in to Quizmodo</Text>
           </View>
           <View className="px-4 gap-y-2">
             {/* <Label nativeID="email" className="!text-sm">

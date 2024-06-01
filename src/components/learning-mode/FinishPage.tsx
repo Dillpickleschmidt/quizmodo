@@ -17,7 +17,10 @@ export default function FinishPage({ data }: FinishPageProps) {
       <Text className="text-4xl mt-2">🎉</Text>
       <ScrollView className="w-full mt-6">
         {Object.entries(data).map(([key, card]) => (
-          <View key={key} className="mb-4 p-4 bg-card mx-2 rounded-lg">
+          <View
+            key={key}
+            className="relative mb-4 mx-2 bg-card rounded-lg shadow-md flex flex-row overflow-hidden"
+          >
             <Text className="font-bold text-xl">Term: {key}</Text>
             {card.answerCategories.map((categoryObj: AnswerCategory, index: number) => (
               <View key={index} className="mt-2">
@@ -38,7 +41,11 @@ export default function FinishPage({ data }: FinishPageProps) {
         ))}
       </ScrollView>
       <View className="w-full px-3">
-        <Button size="lg" onPress={() => router.navigate("/library")} className="mt-6">
+        <Button
+          size="lg"
+          onPress={() => router.navigate("/library")}
+          className="w-full mt-2 mb-4 bg-orange-500"
+        >
           <Text>Return</Text>
         </Button>
       </View>
