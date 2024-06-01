@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react"
-import { View } from "react-native"
+import { ScrollView, View } from "react-native"
 import { Text } from "@/components/ui/text"
 import { Button } from "@/components/ui/button"
 import { router, useLocalSearchParams } from "expo-router"
@@ -55,46 +55,49 @@ export default function LearningPage() {
   }
 
   return (
-    <View
-      className={`${setBackgroundColor(isAnswerCorrect, hasUserAnswered)} items-center justify-center w-full h-full xl:px-72`}
+    <ScrollView
+      automaticallyAdjustKeyboardInsets={true}
+      className={`${setBackgroundColor(isAnswerCorrect, hasUserAnswered)}`}
     >
-      <View className="w-full px-6 translate-y-6">
-        <Text className={`text-3xl font-interblack ${hasUserAnswered && "text-white"}`}>
-          Deck {deck_id} Learning Page
-        </Text>
-        {/* <Text className="text-xl">This is where you'll practice</Text> */}
-        <View>
-          <CategoryDropdown uniqueCategories={uniqueCategories} />
+      <View className={` items-center justify-center w-full h-screen xl:px-72`}>
+        <View className="w-full px-6 translate-y-6">
+          <Text className={`text-3xl font-interblack ${hasUserAnswered && "text-white"}`}>
+            Deck {deck_id} Learning Page
+          </Text>
+          {/* <Text className="text-xl">This is where you'll practice</Text> */}
+          <View>
+            <CategoryDropdown uniqueCategories={uniqueCategories} />
+          </View>
+          <View className="w-full items-center">
+            <CardTypeSwitch data={activeCards} />
+          </View>
         </View>
-        <View className="w-full items-center">
-          <CardTypeSwitch data={activeCards} />
-        </View>
+        {hasUserAnswered && (
+          <Button
+            size="lg"
+            onPress={() =>
+              handleNextQuestion(
+                isAnswerCorrect,
+                activeCards,
+                inactiveCards,
+                currentCardIndex,
+                setCurrentCardIndex,
+                setHasUserAnswered,
+                setActiveCards,
+                setInactiveCards,
+                setIsFinished,
+                recentlySeenCards,
+                setRecentlySeenCards,
+                unslicedData,
+              )
+            }
+            className={`absolute bottom-12 ${hasUserAnswered && "bg-white"}`}
+          >
+            <Text className={`${hasUserAnswered && "text-black"}`}>Next Question {"->"}</Text>
+          </Button>
+        )}
       </View>
-      {hasUserAnswered && (
-        <Button
-          size="lg"
-          onPress={() =>
-            handleNextQuestion(
-              isAnswerCorrect,
-              activeCards,
-              inactiveCards,
-              currentCardIndex,
-              setCurrentCardIndex,
-              setHasUserAnswered,
-              setActiveCards,
-              setInactiveCards,
-              setIsFinished,
-              recentlySeenCards,
-              setRecentlySeenCards,
-              unslicedData,
-            )
-          }
-          className={`absolute bottom-12 ${hasUserAnswered && "bg-white"}`}
-        >
-          <Text className={`${hasUserAnswered && "text-black"}`}>Next Question {"->"}</Text>
-        </Button>
-      )}
-    </View>
+    </ScrollView>
   )
 }
 

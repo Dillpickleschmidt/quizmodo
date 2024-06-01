@@ -56,7 +56,7 @@ export default function WriteComponent({ data, shuffleInput = true }: WriteCompo
         aria-labelledbyledBy="userAnswerInput"
         aria-errormessage="userAnswerInputError"
         editable={!hasUserAnswered}
-        className={`${hasUserAnswered && (isAnswerCorrect ? "text-green-500" : "text-red-500")} font-interbold opacity-100`}
+        className={`${hasUserAnswered && (isAnswerCorrect ? "text-green-500" : "text-red-500")} font-interbold opacity-100 xl:!text-lg`}
       />
       <Button
         onPress={() => handleInput(userAnswer)}
