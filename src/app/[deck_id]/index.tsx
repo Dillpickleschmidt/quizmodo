@@ -15,8 +15,8 @@ export default function DeckPage() {
         {/* Use ! for overriding "undefined type" warning */}
         <StudyList deck_id={deck_id!} />
       </ScrollView>
-      <View className="fixed bottom-0 px-4 py-4">
-        <Button onPress={() => router.navigate("./learn")} className="min-w-full">
+      <View className="fixed bottom-0 max-w-[600px] px-4 py-4">
+        <Button onPress={() => router.navigate("./learn")} className="min-w-full bg-orange-500">
           <Text>Start Learning!</Text>
         </Button>
       </View>

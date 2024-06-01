@@ -72,7 +72,7 @@ export default function App() {
             onPress={() => {
               router.navigate("/auth/sign-up")
             }}
-            className="w-full my-3 rounded-xl"
+            className="w-full max-w-[600px] my-3 rounded-xl"
           >
             <Text className="!text-lg font-interblack text-emerald-600">Sign up</Text>
           </Button>

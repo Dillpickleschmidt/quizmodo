@@ -15,14 +15,14 @@ export default function ReviewPage({
   if (recentlySeenCards && Object.keys(recentlySeenCards).length === 7) {
     return (
       <View className="w-full h-full justify-center items-center">
-        <Text className="font-intersemibolditalic text-3xl text-center text-orange-500 mt-16 mx-6">
+        <Text className="font-intersemibolditalic xl:text-5xl text-3xl text-center text-orange-500 mt-16 mx-6">
           See the terms you practiced!
         </Text>
         <ScrollView className="w-full mt-6">
           {Object.entries(recentlySeenCards).map(([key, card]) => (
             <View
               key={key}
-              className="relative mb-4 mx-2 bg-card rounded-lg shadow-md flex flex-row overflow-hidden"
+              className="relative mb-4 xl:mx-8 mx-2 bg-card rounded-lg shadow-md flex flex-row overflow-hidden"
             >
               <View className="flex-1 py-4 pl-4 pr-6">
                 <Text
@@ -47,7 +47,7 @@ export default function ReviewPage({
             </View>
           ))}
         </ScrollView>
-        <View className="w-full px-3">
+        <View className="xl:max-w-[50vw] w-full px-3">
           <Button
             size="lg"
             onPress={() => {

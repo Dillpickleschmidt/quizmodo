@@ -33,9 +33,9 @@ export default function SignUp() {
   }
 
   return (
-    <SafeAreaView className="h-full bg-background">
-      <ScrollView>
-        <View className="justify-center w-full min-h-[95vh] px-4 my-6">
+    <ScrollView automaticallyAdjustKeyboardInsets={true}>
+      <View className="h-full w-full justify-center items-center">
+        <View className="justify-center w-full max-w-[600px] min-h-[95vh] px-4 my-6">
           <View className="items-center w-full my-20">
             <Text className="text-2xl font-intersemibold">Sign up for Quizmodo!</Text>
           </View>
@@ -53,7 +53,7 @@ export default function SignUp() {
               autoCapitalize="none"
               aria-labelledbyledBy="email"
               aria-errormessage="emailError"
-              className="px-4 min-h-16 rounded-xl focus:border-emerald-500"
+              className="px-4 min-h-16 rounded-xl focus:border-emerald-500 xl:!text-lg"
             />
           </View>
           <View className="px-4 mt-10 gap-y-2">
@@ -70,7 +70,7 @@ export default function SignUp() {
               autoCapitalize="none"
               aria-labelledbyledBy="password"
               aria-errormessage="passwordError"
-              className="px-4 min-h-16 rounded-xl focus:border-orange-500"
+              className="px-4 min-h-16 rounded-xl focus:border-orange-500 xl:!text-lg"
             />
             <View className="items-end w-full px-4 opacity-50">
               <TouchableOpacity
@@ -99,7 +99,7 @@ export default function SignUp() {
             </View>
           </View>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+      </View>
+    </ScrollView>
   )
 }

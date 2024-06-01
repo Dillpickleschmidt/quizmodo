@@ -13,25 +13,6 @@ import { CardObject } from "@/types"
 import ReviewPage from "@/components/learning-mode/ReviewPage"
 import FinishPage from "@/components/learning-mode/FinishPage"
 
-// function logCardCounts(activeCards: CardObject, inactiveCards: CardObject) {
-//   console.log("Active cards count: ", Object.keys(activeCards).length)
-//   console.log("Inactive cards count: ", Object.keys(inactiveCards).length)
-// }
-
-function setBackgroundColor(isCorrect: boolean, hasUserAnswered: boolean) {
-  return hasUserAnswered ? (isCorrect ? "bg-green-500" : "bg-red-500") : ""
-}
-
-function extractUniqueCategories(data: any): string[] {
-  const categories = new Set<string>()
-  Object.values(data).forEach((value: any) => {
-    value.answerCategories.forEach((category: { category: string }) => {
-      categories.add(category.category)
-    })
-  })
-  return Array.from(categories)
-}
-
 export default function LearningPage() {
   const { deck_id } = useLocalSearchParams<{ deck_id: string }>()
   const {
@@ -60,11 +41,6 @@ export default function LearningPage() {
     setEnabledAnswerCategories(uniqueCategories)
   }, [uniqueCategories])
 
-  useEffect(() => {
-    // logCardCounts(activeCards, inactiveCards)
-    // console.log("Current card index: ", currentCardIndex)
-  }, [activeCards, inactiveCards, currentCardIndex])
-
   if (isFinished) {
     return <FinishPage data={unslicedData} />
   }
@@ -80,7 +56,7 @@ export default function LearningPage() {
 
   return (
     <View
-      className={`${setBackgroundColor(isAnswerCorrect, hasUserAnswered)} items-center justify-center w-full h-full`}
+      className={`${setBackgroundColor(isAnswerCorrect, hasUserAnswered)} items-center justify-center w-full h-full xl:px-72`}
     >
       <View className="w-full px-6 translate-y-6">
         <Text className={`text-3xl font-interblack ${hasUserAnswered && "text-white"}`}>
@@ -90,7 +66,9 @@ export default function LearningPage() {
         <View>
           <CategoryDropdown uniqueCategories={uniqueCategories} />
         </View>
-        <CardTypeSwitch data={activeCards} />
+        <View className="w-full items-center">
+          <CardTypeSwitch data={activeCards} />
+        </View>
       </View>
       {hasUserAnswered && (
         <Button
@@ -118,4 +96,18 @@ export default function LearningPage() {
       )}
     </View>
   )
+}
+
+function setBackgroundColor(isCorrect: boolean, hasUserAnswered: boolean) {
+  return hasUserAnswered ? (isCorrect ? "bg-green-500" : "bg-red-500") : ""
+}
+
+function extractUniqueCategories(data: any): string[] {
+  const categories = new Set<string>()
+  Object.values(data).forEach((value: any) => {
+    value.answerCategories.forEach((category: { category: string }) => {
+      categories.add(category.category)
+    })
+  })
+  return Array.from(categories)
 }

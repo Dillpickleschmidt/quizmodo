@@ -33,11 +33,11 @@ export default function CardTypeSwitch({ data }: CardTypeSwitchProps) {
   }
 
   return (
-    <>
+    <View className="xl:max-w-[50vw] w-full">
       <Text className={`mt-12 text-3xl font-interblack ${hasUserAnswered && "text-white"}`}>
         {correctEntry?.key}
       </Text>
       {renderComponent()}
-    </>
+    </View>
   )
 }

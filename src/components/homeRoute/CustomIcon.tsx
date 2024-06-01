@@ -56,7 +56,7 @@ export function TabIcon(title: string, iconComponent: React.ReactNode) {
         tabIcon
         text={title}
         focused={focused}
-        className="text-xs"
+        className="text-xs w-24 text-center"
       />
     ),
   }

@@ -72,7 +72,7 @@ export default function MultipleChoice({ data, shuffleInput = true }: MultipleCh
                     ? "border-r-8 justify-center disabled:opacity-100 bg-white border-red-400"
                     : "disabled:opacity-60 bg-white"
                 : "disabled:opacity-60"
-            } my-2`}
+            } my-2 xl:h-16`}
           >
             <Text
               className={`${
