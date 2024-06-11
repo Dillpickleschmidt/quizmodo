@@ -1,5 +1,6 @@
-{
-  "ぜろ": {
+[
+  {
+    "key": "ぜろ",
     "answerCategories": [
       {
         "category": "Kana",
@@ -11,9 +12,12 @@
       }
     ],
     "notes": [],
-    "videos": []
+    "videos": [],
+    "cardStyle": "multiple-choice",
+    "wrongAnswerCount": 0
   },
-  "れい": {
+  {
+    "key": "れい",
     "answerCategories": [
       {
         "category": "Kana",
@@ -25,9 +29,12 @@
       }
     ],
     "notes": [],
-    "videos": []
+    "videos": [],
+    "cardStyle": "multiple-choice",
+    "wrongAnswerCount": 0
   },
-  "いち": {
+  {
+    "key": "いち",
     "answerCategories": [
       {
         "category": "Kana",
@@ -39,9 +46,12 @@
       }
     ],
     "notes": [],
-    "videos": []
+    "videos": [],
+    "cardStyle": "multiple-choice",
+    "wrongAnswerCount": 0
   },
-  "に": {
+  {
+    "key": "に",
     "answerCategories": [
       {
         "category": "Kana",
@@ -53,9 +63,12 @@
       }
     ],
     "notes": [],
-    "videos": []
+    "videos": [],
+    "cardStyle": "multiple-choice",
+    "wrongAnswerCount": 0
   },
-  "さん": {
+  {
+    "key": "さん",
     "answerCategories": [
       {
         "category": "Kana",
@@ -67,9 +80,12 @@
       }
     ],
     "notes": [],
-    "videos": []
+    "videos": [],
+    "cardStyle": "multiple-choice",
+    "wrongAnswerCount": 0
   },
-  "よん/し": {
+  {
+    "key": "よん/し",
     "answerCategories": [
       {
         "category": "Kana",
@@ -81,9 +97,12 @@
       }
     ],
     "notes": [],
-    "videos": []
+    "videos": [],
+    "cardStyle": "multiple-choice",
+    "wrongAnswerCount": 0
   },
-  "ご": {
+  {
+    "key": "ご",
     "answerCategories": [
       {
         "category": "Kana",
@@ -95,9 +114,12 @@
       }
     ],
     "notes": [],
-    "videos": []
+    "videos": [],
+    "cardStyle": "multiple-choice",
+    "wrongAnswerCount": 0
   },
-  "ろく": {
+  {
+    "key": "ろく",
     "answerCategories": [
       {
         "category": "Kana",
@@ -109,9 +131,12 @@
       }
     ],
     "notes": [],
-    "videos": []
+    "videos": [],
+    "cardStyle": "multiple-choice",
+    "wrongAnswerCount": 0
   },
-  "なな/しち": {
+  {
+    "key": "なな/しち",
     "answerCategories": [
       {
         "category": "Kana",
@@ -123,9 +148,12 @@
       }
     ],
     "notes": [],
-    "videos": []
+    "videos": [],
+    "cardStyle": "multiple-choice",
+    "wrongAnswerCount": 0
   },
-  "はち": {
+  {
+    "key": "はち",
     "answerCategories": [
       {
         "category": "Kana",
@@ -137,9 +165,12 @@
       }
     ],
     "notes": [],
-    "videos": []
+    "videos": [],
+    "cardStyle": "multiple-choice",
+    "wrongAnswerCount": 0
   },
-  "きゅう/く": {
+  {
+    "key": "きゅう/く",
     "answerCategories": [
       {
         "category": "Kana",
@@ -151,9 +182,12 @@
       }
     ],
     "notes": [],
-    "videos": []
+    "videos": [],
+    "cardStyle": "multiple-choice",
+    "wrongAnswerCount": 0
   },
-  "じゅう": {
+  {
+    "key": "じゅう",
     "answerCategories": [
       {
         "category": "Kana",
@@ -165,6 +199,8 @@
       }
     ],
     "notes": [],
-    "videos": []
+    "videos": [],
+    "cardStyle": "multiple-choice",
+    "wrongAnswerCount": 0
   }
-}
+]

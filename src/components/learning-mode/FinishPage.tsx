@@ -1,11 +1,11 @@
 import { View, ScrollView } from "react-native"
 import { Text } from "@/components/ui/text"
 import { Button } from "@/components/ui/button"
-import { CardObject, AnswerCategory } from "@/types"
+import { AnswerCategory, EntryWithCardProperties } from "@/types"
 import { router } from "expo-router"
 
 type FinishPageProps = {
-  data: CardObject
+  data: EntryWithCardProperties[]
 }
 
 export default function FinishPage({ data }: FinishPageProps) {
@@ -16,12 +16,12 @@ export default function FinishPage({ data }: FinishPageProps) {
       </Text>
       <Text className="text-4xl mt-2">🎉</Text>
       <ScrollView className="w-full mt-6">
-        {Object.entries(data).map(([key, card]) => (
+        {data.map((card) => (
           <View
-            key={key}
+            key={card.key}
             className="relative mb-4 xl:mx-8 mx-2 bg-card rounded-lg shadow-md flex flex-row overflow-hidden"
           >
-            <Text className="font-bold text-xl">{key}</Text>
+            <Text className="font-bold text-xl">{card.key}</Text>
             {card.answerCategories.map((categoryObj: AnswerCategory, index: number) => (
               <View key={index} className="mt-2">
                 <Text className="font-bold">{categoryObj.category}:</Text>

@@ -1,21 +1,21 @@
 import { View } from "react-native"
 import { Text } from "@/components/ui/text"
-import { CardObject } from "@/types"
+import { EntryWithCardProperties } from "@/types"
 import MultipleChoice from "./multiple-choice/MultipleChoice"
 import WriteComponent from "./write/WriteComponent"
 import { useMemo } from "react"
 import { useLearningModeContext } from "@/context/LearningModeContext"
 
 type CardTypeSwitchProps = {
-  data: CardObject
+  data: EntryWithCardProperties[]
 }
 
 export default function CardTypeSwitch({ data }: CardTypeSwitchProps) {
   const { currentCardIndex, correctEntry, hasUserAnswered } = useLearningModeContext()
 
-  const currentKey = useMemo(() => Object.keys(data)[currentCardIndex], [data, currentCardIndex])
+  const currentCard = useMemo(() => data[currentCardIndex], [data, currentCardIndex])
 
-  const currentCardStyle = data[currentKey]?.cardStyle
+  const currentCardStyle = currentCard?.cardStyle
 
   function renderComponent() {
     switch (currentCardStyle) {

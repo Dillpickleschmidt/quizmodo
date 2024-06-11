@@ -5,10 +5,10 @@ import { useLearningModeContext } from "@/context/LearningModeContext"
 import { handleWrittenAnswer, presentWriteOptions } from "./write"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { CardObject } from "@/types"
+import { EntryWithCardProperties } from "@/types"
 
 type WriteComponentProps = {
-  data: CardObject
+  data: EntryWithCardProperties[]
   shuffleInput?: boolean
 }
 
@@ -32,9 +32,9 @@ export default function WriteComponent({ data, shuffleInput = true }: WriteCompo
   useEffect(() => {
     setCorrectEntry(correctEntry)
     setUserAnswer("")
-  }, [correctEntry])
+  }, [correctEntry, setCorrectEntry])
 
-  const handleInput = (userAnswer: string) => {
+  const handleInput = () => {
     setIsAnswerCorrect(handleWrittenAnswer(userAnswer, correctEntry, enabledAnswerCategories))
     setHasUserAnswered(true)
 
@@ -53,16 +53,12 @@ export default function WriteComponent({ data, shuffleInput = true }: WriteCompo
       <Input
         value={userAnswer}
         onChangeText={(e) => setUserAnswer(e)}
-        aria-labelledbyledBy="userAnswerInput"
+        aria-labelledby="userAnswerInput"
         aria-errormessage="userAnswerInputError"
         editable={!hasUserAnswered}
         className={`${hasUserAnswered && (isAnswerCorrect ? "text-green-500" : "text-red-500")} font-interbold opacity-100 xl:!text-lg`}
       />
-      <Button
-        onPress={() => handleInput(userAnswer)}
-        disabled={hasUserAnswered}
-        className="my-2 disabled:opacity-90"
-      >
+      <Button onPress={handleInput} disabled={hasUserAnswered} className="my-2 disabled:opacity-90">
         <Text>Submit</Text>
       </Button>
     </View>

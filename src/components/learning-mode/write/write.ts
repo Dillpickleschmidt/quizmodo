@@ -2,17 +2,17 @@
 This file contains the logic for handling the user's input for the write mode.
 */
 
-import { Entry, CardObject } from "@/types"
+import { EntryWithCardProperties } from "@/types"
 
 export function presentWriteOptions(
-  data: CardObject,
+  data: EntryWithCardProperties[],
   shuffleInput = true,
   currentCardIndex: number,
-) {
-  let entries = Object.entries(data) // [1, 2, 3, 4, 5...]
+): EntryWithCardProperties {
+  let entries = data
 
   if (entries.length < 1) {
-    throw new Error("Entries is empty, cannot pick a correct key.")
+    throw new Error("Entries are empty, cannot pick a correct key.")
   }
 
   if (shuffleInput) {
@@ -20,28 +20,26 @@ export function presentWriteOptions(
   }
 
   // Extract the entry at the specified index
-  const correctKeyArr = entries.splice(currentCardIndex, 1)[0]
+  const correctEntry = entries[currentCardIndex]
 
-  // Get the selected key and entry from the correctKeyArr
-  const selectedEntry = correctKeyArr[1]
-  const correctKey = correctKeyArr[0]
-
-  const correctOption = {
-    key: correctKey,
-    ...selectedEntry,
-  }
-
-  return correctOption
+  return correctEntry
 }
 
+/**
+ * Check if the user's written answer is correct based on enabled categories.
+ * @param userAnswer The user's answer to check.
+ * @param correctOption The correct entry with answers.
+ * @param enabledAnswerCategories The categories to check answers against.
+ * @returns True if the answer is correct, false otherwise.
+ */
 export function handleWrittenAnswer(
   userAnswer: string,
-  correctOption: Entry & { key: string },
-  correctAnswers: string[],
-) {
+  correctOption: EntryWithCardProperties,
+  enabledAnswerCategories: string[],
+): boolean {
   // Flatten the enabled answers from all categories
   const enabledAnswers = correctOption.answerCategories
-    .filter((category) => correctAnswers.includes(category.category))
+    .filter((category) => enabledAnswerCategories.includes(category.category))
     .flatMap((category) => category.answers)
 
   // Check if the user's answer matches any of the enabled answers

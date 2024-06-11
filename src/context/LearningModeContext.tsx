@@ -10,8 +10,8 @@ type LearningModeContext = {
   setIsAnswerCorrect: React.Dispatch<React.SetStateAction<boolean>>
   hasUserAnswered: boolean
   setHasUserAnswered: React.Dispatch<React.SetStateAction<boolean>>
-  correctEntry?: Entry & { key: string }
-  setCorrectEntry: React.Dispatch<React.SetStateAction<(Entry & { key: string }) | undefined>>
+  correctEntry?: Entry
+  setCorrectEntry: React.Dispatch<React.SetStateAction<Entry | undefined>>
   enabledAnswerCategories: string[]
   setEnabledAnswerCategories: React.Dispatch<React.SetStateAction<string[]>>
   currentCardIndex: number
@@ -23,7 +23,7 @@ const LearningModeContext = createContext<LearningModeContext | null>(null)
 export function LearningModeContextProvider({ children }: LearningModeContextProps) {
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false)
   const [hasUserAnswered, setHasUserAnswered] = useState(false)
-  const [correctEntry, setCorrectEntry] = useState<(Entry & { key: string }) | undefined>()
+  const [correctEntry, setCorrectEntry] = useState<Entry | undefined>()
   const [enabledAnswerCategories, setEnabledAnswerCategories] = useState<string[]>([])
   const [currentCardIndex, setCurrentCardIndex] = useState(0)
 

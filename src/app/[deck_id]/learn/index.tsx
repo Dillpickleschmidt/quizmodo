@@ -9,7 +9,7 @@ import CardTypeSwitch from "@/components/learning-mode/CardTypeSwitch"
 import useDeckSplit from "@/components/learning-mode/useDeckSplit"
 import CategoryDropdown from "@/components/learning-mode/CategoryDropdown"
 import { handleNextQuestion } from "@/components/learning-mode/cardHandlers"
-import { CardObject } from "@/types"
+import { EntryWithCardProperties } from "@/types"
 import ReviewPage from "@/components/learning-mode/ReviewPage"
 import FinishPage from "@/components/learning-mode/FinishPage"
 
@@ -26,10 +26,10 @@ export default function LearningPage() {
 
   const { slicedData, remainingData, unslicedData } = useMemo(() => useDeckSplit(data), [data])
 
-  const [activeCards, setActiveCards] = useState(slicedData)
-  const [inactiveCards, setInactiveCards] = useState(remainingData)
+  const [activeCards, setActiveCards] = useState<EntryWithCardProperties[]>(slicedData)
+  const [inactiveCards, setInactiveCards] = useState<EntryWithCardProperties[]>(remainingData)
   const [isFinished, setIsFinished] = useState(false)
-  const [recentlySeenCards, setRecentlySeenCards] = useState<CardObject | null>(null)
+  const [recentlySeenCards, setRecentlySeenCards] = useState<EntryWithCardProperties[] | null>(null)
 
   useEffect(() => {
     console.log("Now practicing deck " + deck_id)
@@ -45,7 +45,7 @@ export default function LearningPage() {
     return <FinishPage data={unslicedData} />
   }
 
-  if (recentlySeenCards && Object.keys(recentlySeenCards).length === 7) {
+  if (recentlySeenCards && recentlySeenCards.length === 7) {
     return (
       <ReviewPage
         recentlySeenCards={recentlySeenCards}
@@ -59,12 +59,11 @@ export default function LearningPage() {
       automaticallyAdjustKeyboardInsets={true}
       className={`${setBackgroundColor(isAnswerCorrect, hasUserAnswered)}`}
     >
-      <View className={` items-center justify-center w-full h-screen xl:px-72`}>
+      <View className={`items-center justify-center w-full h-screen xl:px-72`}>
         <View className="w-full px-6 translate-y-6">
           <Text className={`text-3xl font-interblack ${hasUserAnswered && "text-white"}`}>
             Deck {deck_id} Learning Page
           </Text>
-          {/* <Text className="text-xl">This is where you'll practice</Text> */}
           <View>
             <CategoryDropdown uniqueCategories={uniqueCategories} />
           </View>
@@ -105,10 +104,10 @@ function setBackgroundColor(isCorrect: boolean, hasUserAnswered: boolean) {
   return hasUserAnswered ? (isCorrect ? "bg-green-500" : "bg-red-500") : ""
 }
 
-function extractUniqueCategories(data: any): string[] {
+function extractUniqueCategories(data: EntryWithCardProperties[]): string[] {
   const categories = new Set<string>()
-  Object.values(data).forEach((value: any) => {
-    value.answerCategories.forEach((category: { category: string }) => {
+  data.forEach((entry) => {
+    entry.answerCategories.forEach((category) => {
       categories.add(category.category)
     })
   })

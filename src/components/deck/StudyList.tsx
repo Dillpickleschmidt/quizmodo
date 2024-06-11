@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react"
 import { View, Text, StyleSheet } from "react-native"
 import data from "@/test-data/test-data-2.json"
-import { JSONWithAnswerCategories } from "@/types"
+import { EntryWithCardProperties } from "@/types"
 
 type QuizListProps = {
   deck_id: string
 }
 
 const StudyList = ({ deck_id }: QuizListProps) => {
-  const [quizData, setQuizData] = useState<JSONWithAnswerCategories>({})
+  const [quizData, setQuizData] = useState<EntryWithCardProperties[]>([])
 
   useEffect(() => {
     setQuizData(data) // Directly set the data from JSON
@@ -17,10 +17,10 @@ const StudyList = ({ deck_id }: QuizListProps) => {
   return (
     <>
       <Text style={styles.title}>{`Deck ${deck_id} Questions`}</Text>
-      {Object.entries(quizData).map(([question, details], index) => (
+      {quizData.map((entry, index) => (
         <View key={index} style={styles.entryContainer}>
-          <Text style={styles.question}>{question}</Text>
-          {details.answerCategories.map((category, i) => (
+          <Text style={styles.question}>{entry.key}</Text>
+          {entry.answerCategories.map((category, i) => (
             <View key={i} style={styles.detailSection}>
               <Text style={styles.detailTitle}>{category.category}:</Text>
               {category.answers.map((answer, j) => (
@@ -30,10 +30,10 @@ const StudyList = ({ deck_id }: QuizListProps) => {
               ))}
             </View>
           ))}
-          {details.notes && (
+          {entry.notes && (
             <View style={styles.detailSection}>
               <Text style={styles.detailTitle}>Notes:</Text>
-              {details.notes.map((note, i) => (
+              {entry.notes.map((note, i) => (
                 <Text key={i} style={styles.detailText}>
                   {note}
                 </Text>

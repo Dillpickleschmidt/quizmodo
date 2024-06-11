@@ -4,10 +4,10 @@ import { handleMultipleChoiceSelection, presentMultipleChoiceOptions } from "./m
 import { Button } from "@/components/ui/button"
 import { Text } from "@/components/ui/text"
 import { useLearningModeContext } from "@/context/LearningModeContext"
-import { CardObject } from "@/types"
+import { EntryWithCardProperties } from "@/types"
 
 type MultipleChoiceProps = {
-  data: CardObject
+  data: EntryWithCardProperties[]
   shuffleInput?: boolean
 }
 
@@ -19,7 +19,6 @@ export default function MultipleChoice({ data, shuffleInput = true }: MultipleCh
     setHasUserAnswered,
     enabledAnswerCategories,
     currentCardIndex,
-    isAnswerCorrect,
   } = useLearningModeContext()
 
   const [selectedButtonIndex, setSelectedButtonIndex] = useState<number | null>(null)
@@ -30,6 +29,7 @@ export default function MultipleChoice({ data, shuffleInput = true }: MultipleCh
   )
 
   useEffect(() => {
+    console.log(choices.correctOption.key)
     setCorrectEntry(choices.correctOption)
   }, [choices, setCorrectEntry])
 
@@ -54,15 +54,15 @@ export default function MultipleChoice({ data, shuffleInput = true }: MultipleCh
           .flatMap((category) => category.answers)
 
         // Pick the first answer from the enabled answers array (each answer in the array is equally valid)
-        const firstAnswerIndex = enabledAnswers[0]
+        const firstAnswer = enabledAnswers[0]
 
-        const isCorrect = correctAnswer.includes(firstAnswerIndex)
+        const isCorrect = correctAnswer.includes(firstAnswer)
         const isSelected = selectedButtonIndex === index
 
         return (
           <Button
             key={index}
-            onPress={() => handleSelection(firstAnswerIndex, index)}
+            onPress={() => handleSelection(firstAnswer, index)}
             disabled={hasUserAnswered}
             className={`${
               hasUserAnswered
