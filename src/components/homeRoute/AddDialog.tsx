@@ -29,9 +29,11 @@ export default function AddDialog({ children }: AddDialogProps) {
         <Button className="shadow-md bg-card min-h-32" onPress={() => router.push("")}>
           <Text className="text-primary">Create Folder</Text>
         </Button>
-        <Button className="shadow-md bg-card min-h-32" onPress={() => router.push("")}>
-          <Text className="text-primary">Create New Set</Text>
-        </Button>
+        <DialogClose asChild>
+          <Button className="shadow-md bg-card min-h-32" onPress={() => router.push("/new/create")}>
+            <Text className="text-primary">Create New Set</Text>
+          </Button>
+        </DialogClose>
         <DialogFooter>
           <DialogClose asChild>
             <Button>
