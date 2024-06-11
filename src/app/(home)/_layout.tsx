@@ -29,7 +29,23 @@ export default function TabsLayout() {
           },
         }}
       >
-        <Tabs.Screen name="library" options={TabIcon("Library", <FolderOpen />)} />
+        <Tabs.Screen
+          name="library"
+          options={{
+            tabBarIcon: ({ focused }: { focused: boolean }) => (
+              <CustomIcon
+                color="text-emerald-500"
+                icon={<FolderOpen />}
+                size={26}
+                tabIcon
+                text={"Library"}
+                focused={focused}
+                className="text-xs w-24 text-center"
+              />
+            ),
+            headerShown: false,
+          }}
+        />
         {/* Unique screen that actually loads a dialog instead */}
         <Tabs.Screen
           name="create"
