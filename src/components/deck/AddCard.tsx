@@ -5,16 +5,16 @@ import { Input } from "../ui/input"
 
 type AddCardProps = {
   term: string
-  definition: string
+  categories: { [key: string]: string }
   onTermChange: (text: string) => void
-  onDefinitionChange: (text: string) => void
+  onCategoryChange: (category: string, text: string) => void
 }
 
 export default function AddCard({
   term,
-  definition,
+  categories,
   onTermChange,
-  onDefinitionChange,
+  onCategoryChange,
 }: AddCardProps) {
   return (
     <View className="w-full rounded-xl bg-card border border-dashed border-card-foreground my-2 shadow-lg">
@@ -25,12 +25,16 @@ export default function AddCard({
           onChangeText={onTermChange}
         />
         <Text className="ml-6 py-4 font-interblack text-sm">Term</Text>
-        <Input
-          className="bg-transparent border-x-0 border-t-0 border-b border-primary py-2 mx-6 px-2 !text-xl font-intermedium"
-          value={definition}
-          onChangeText={onDefinitionChange}
-        />
-        <Text className="ml-6 py-4 font-interblack text-sm">Definition</Text>
+        {Object.keys(categories).map((category) => (
+          <View key={category}>
+            <Input
+              className="bg-transparent border-x-0 border-t-0 border-b border-primary py-2 mx-6 px-2 !text-xl font-intermedium"
+              value={categories[category]}
+              onChangeText={(text) => onCategoryChange(category, text)}
+            />
+            <Text className="ml-6 py-4 font-interblack text-sm">{category}</Text>
+          </View>
+        ))}
       </View>
     </View>
   )
