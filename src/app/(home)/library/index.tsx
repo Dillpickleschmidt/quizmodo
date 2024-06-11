@@ -5,6 +5,34 @@ import { Button } from "@/components/ui/button"
 import { router } from "expo-router"
 
 export default function index() {
+  const decks = [
+    {
+      id: 1,
+      name: "Deck 1",
+      description: "This is a deck of cards",
+    },
+    {
+      id: 2,
+      name: "Deck 2",
+      description: "This is another deck of cards",
+    },
+    {
+      id: 3,
+      name: "Deck 3",
+      description: "This is another deck of cards",
+    },
+    {
+      id: 4,
+      name: "Deck 4",
+      description: "This is another deck of cards",
+    },
+    {
+      id: 5,
+      name: "Deck 5",
+      description: "This is another deck of cards",
+    },
+  ]
+
   return (
     <View className="justify-center w-full h-full">
       {/* Eventually, fetch the list of decks from the user and use a */}
@@ -14,42 +42,16 @@ export default function index() {
       </View>
       <ScrollView>
         <View className="flex items-center gap-3 mt-6 px-6">
-          <Button
-            onPress={() => router.navigate("/1")}
-            className="xl:w-[50%] w-full !min-h-48 bg-card border-2 border-black shadow-md"
-          >
-            <Text className="text-primary">Go to Deck 1</Text>
-          </Button>
-          <Button
-            onPress={() => router.navigate("/2")}
-            className="xl:w-[50%] w-full !min-h-48 bg-card border-2 border-black shadow-md"
-          >
-            <Text className="text-primary">Go to Deck 2</Text>
-          </Button>
-          <Button
-            onPress={() => router.navigate("/3")}
-            className="xl:w-[50%] w-full !min-h-48 bg-card border-2 border-black shadow-md"
-          >
-            <Text className="text-primary">Go to Deck 3</Text>
-          </Button>
-          <Button
-            onPress={() => router.navigate("/1")}
-            className="xl:w-[50%] w-full !min-h-48 bg-card border-2 border-black shadow-md"
-          >
-            <Text className="text-primary">Go to Deck 4</Text>
-          </Button>
-          <Button
-            onPress={() => router.navigate("/2")}
-            className="xl:w-[50%] w-full !min-h-48 bg-card border-2 border-black shadow-md"
-          >
-            <Text className="text-primary">Go to Deck 5</Text>
-          </Button>
-          <Button
-            onPress={() => router.navigate("/3")}
-            className="xl:w-[50%] w-full !min-h-48 bg-card border-2 border-black shadow-md"
-          >
-            <Text className="text-primary">Go to Deck 6</Text>
-          </Button>
+          {/* Map over all the decks */}
+          {decks.map((deck) => (
+            <Button
+              onPress={() => router.navigate(`/${deck.id}`)}
+              key={deck.id}
+              className="xl:w-[50%] w-full !min-h-48 bg-card border-2 border-black shadow-md"
+            >
+              <Text className="text-primary">{deck.name}</Text>
+            </Button>
+          ))}
         </View>
       </ScrollView>
     </View>
