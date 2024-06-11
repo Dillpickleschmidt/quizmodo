@@ -13,13 +13,18 @@ export default function ReviewPage({
   setRecentlySeenCards,
 }: RecentlySeenCardsProps) {
   if (recentlySeenCards && recentlySeenCards.length === 7) {
+    // Create a Map to filter out duplicate keys and keep only the last occurrence
+    const uniqueCards = Array.from(
+      new Map(recentlySeenCards.map((card) => [card.key, card])).values(),
+    )
+
     return (
       <View className="w-full h-full justify-center items-center">
         <Text className="font-intersemibolditalic xl:text-5xl text-3xl text-center text-orange-500 mt-16 mx-6">
           See the terms you practiced!
         </Text>
         <ScrollView className="w-full mt-6">
-          {recentlySeenCards.map((card) => (
+          {uniqueCards.map((card) => (
             <View
               key={card.key}
               className="relative mb-4 xl:mx-8 mx-2 bg-card rounded-lg shadow-md flex flex-row overflow-hidden"
