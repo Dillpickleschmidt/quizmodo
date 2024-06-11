@@ -1,178 +1,170 @@
 {
-  "What is the largest land animal?": {
+  "ぜろ": {
     "answerCategories": [
       {
-        "category": "Scientific Name",
-        "answers": ["Loxodonta africana"]
+        "category": "Kana",
+        "answers": ["ぜろ"]
       },
       {
-        "category": "Common Name",
-        "answers": ["African Elephant"]
+        "category": "English",
+        "answers": ["Zero", "0"]
       }
     ],
-    "notes": [
-      "African Elephants are the largest land animals on Earth.",
-      "They are known for their large ears, which help to regulate their body temperature."
-    ]
+    "notes": [],
+    "videos": []
   },
-  "What is the fastest land animal?": {
+  "れい": {
     "answerCategories": [
       {
-        "category": "Scientific Name",
-        "answers": ["Acinonyx jubatus"]
+        "category": "Kana",
+        "answers": ["れい"]
       },
       {
-        "category": "Common Name",
-        "answers": ["Cheetah"]
+        "category": "English",
+        "answers": ["Zero", "0"]
       }
     ],
-    "notes": [
-      "Cheetahs are known for their incredible speed, which they use to catch their prey.",
-      "They have a unique black 'tear mark' under their eyes which helps to reflect the sun's glare while hunting."
-    ]
+    "notes": [],
+    "videos": []
   },
-  "What animal is known as the king of the jungle?": {
+  "いち": {
     "answerCategories": [
       {
-        "category": "Scientific Name",
-        "answers": ["Panthera leo"]
+        "category": "Kana",
+        "answers": ["いち"]
       },
       {
-        "category": "Common Name",
-        "answers": ["Lion"]
+        "category": "English",
+        "answers": ["One", "1"]
       }
     ],
-    "notes": [
-      "Lions are known as the king of the jungle, although they primarily live in grasslands and savannas.",
-      "Male lions have a distinctive mane, which is a sign of maturity and health."
-    ]
+    "notes": [],
+    "videos": []
   },
-  "What is the tallest land animal?": {
+  "に": {
     "answerCategories": [
       {
-        "category": "Scientific Name",
-        "answers": ["Giraffa camelopardalis"]
+        "category": "Kana",
+        "answers": ["に"]
       },
       {
-        "category": "Common Name",
-        "answers": ["Giraffe"]
+        "category": "English",
+        "answers": ["Two", "2"]
       }
     ],
-    "notes": [
-      "Giraffes are the tallest land animals, reaching heights of up to 18 feet (5.5 meters).",
-      "Their long necks allow them to browse on leaves and shoots high in the trees."
-    ]
+    "notes": [],
+    "videos": []
   },
-  "What is the largest marine mammal?": {
+  "さん": {
     "answerCategories": [
       {
-        "category": "Scientific Name",
-        "answers": ["Balaenoptera musculus"]
+        "category": "Kana",
+        "answers": ["さん"]
       },
       {
-        "category": "Common Name",
-        "answers": ["Blue Whale"]
+        "category": "English",
+        "answers": ["Three", "3"]
       }
     ],
-    "notes": [
-      "Blue Whales are the largest animals to have ever existed, larger than any dinosaur.",
-      "They can reach lengths of up to 100 feet (30 meters) and weigh as much as 200 tons."
-    ]
+    "notes": [],
+    "videos": []
   },
-  "What bird has the largest wingspan?": {
+  "よん/し": {
     "answerCategories": [
       {
-        "category": "Scientific Name",
-        "answers": ["Diomedea exulans"]
+        "category": "Kana",
+        "answers": ["よん/し"]
       },
       {
-        "category": "Common Name",
-        "answers": ["Wandering Albatross"]
+        "category": "English",
+        "answers": ["Four", "4"]
       }
     ],
-    "notes": [
-      "The Wandering Albatross has the largest wingspan of any living bird, reaching up to 11 feet (3.4 meters).",
-      "They are known for their long-distance flights across the Southern Ocean."
-    ]
+    "notes": [],
+    "videos": []
   },
-  "What is the only mammal capable of true flight?": {
+  "ご": {
     "answerCategories": [
       {
-        "category": "Scientific Name",
-        "answers": ["Chiroptera"]
+        "category": "Kana",
+        "answers": ["ご"]
       },
       {
-        "category": "Common Name",
-        "answers": ["Bat"]
+        "category": "English",
+        "answers": ["Five", "5"]
       }
     ],
-    "notes": [
-      "Bats are the only mammals capable of sustained flight.",
-      "There are over 1,200 species of bats, making up about 20% of all mammal species."
-    ]
+    "notes": [],
+    "videos": []
   },
-  "What is the largest species of shark?": {
+  "ろく": {
     "answerCategories": [
       {
-        "category": "Scientific Name",
-        "answers": ["Rhincodon typus"]
+        "category": "Kana",
+        "answers": ["ろく"]
       },
       {
-        "category": "Common Name",
-        "answers": ["Whale Shark"]
+        "category": "English",
+        "answers": ["Six", "6"]
       }
     ],
-    "notes": [
-      "Whale Sharks are the largest species of shark, growing up to 40 feet (12 meters) in length.",
-      "They are filter feeders and primarily eat plankton."
-    ]
+    "notes": [],
+    "videos": []
   },
-  "What is the smallest bird?": {
+  "なな/しち": {
     "answerCategories": [
       {
-        "category": "Scientific Name",
-        "answers": ["Mellisuga helenae"]
+        "category": "Kana",
+        "answers": ["なな/しち"]
       },
       {
-        "category": "Common Name",
-        "answers": ["Bee Hummingbird"]
+        "category": "English",
+        "answers": ["Seven", "7"]
       }
     ],
-    "notes": [
-      "The Bee Hummingbird is the smallest bird, measuring about 2.4 inches (6.1 cm) in length.",
-      "They are native to Cuba and the Isla de la Juventud."
-    ]
+    "notes": [],
+    "videos": []
   },
-  "What is the largest species of penguin?": {
+  "はち": {
     "answerCategories": [
       {
-        "category": "Scientific Name",
-        "answers": ["Aptenodytes forsteri"]
+        "category": "Kana",
+        "answers": ["はち"]
       },
       {
-        "category": "Common Name",
-        "answers": ["Emperor Penguin"]
+        "category": "English",
+        "answers": ["Eight", "8"]
       }
     ],
-    "notes": [
-      "Emperor Penguins are the largest species of penguin, standing up to 48 inches (122 cm) tall.",
-      "They are known for their long treks across the Antarctic ice to breeding colonies."
-    ]
+    "notes": [],
+    "videos": []
   },
-  "What is the largest reptile?": {
+  "きゅう/く": {
     "answerCategories": [
       {
-        "category": "Scientific Name",
-        "answers": ["Crocodylus porosus"]
+        "category": "Kana",
+        "answers": ["きゅう/く"]
       },
       {
-        "category": "Common Name",
-        "answers": ["Saltwater Crocodile"]
+        "category": "English",
+        "answers": ["Nine", "9"]
       }
     ],
-    "notes": [
-      "Saltwater Crocodiles are the largest reptiles, growing up to 23 feet (7 meters) in length.",
-      "They are found in saltwater habitats and brackish wetlands in Southeast Asia and Australia."
-    ]
+    "notes": [],
+    "videos": []
+  },
+  "じゅう": {
+    "answerCategories": [
+      {
+        "category": "Kana",
+        "answers": ["じゅう"]
+      },
+      {
+        "category": "English",
+        "answers": ["Ten", "10"]
+      }
+    ],
+    "notes": [],
+    "videos": []
   }
 }

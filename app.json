@@ -2,7 +2,10 @@
   "expo": {
     "name": "Learn Stack",
     "slug": "learn-stack",
-    "scheme": ["learn-stack", "com.supabase"],
+    "scheme": [
+      "learn-stack",
+      "com.supabase"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -19,15 +22,27 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#191919"
-      }
+      },
+      "package": "com.dillpickleschmidt.quizmodo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-router", "expo-secure-store"],
+    "plugins": [
+      "expo-router",
+      "expo-secure-store"
+    ],
     "experiments": {
       "typedRoutes": true,
       "tsconfigPaths": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "b01f6459-82f2-44ae-927b-fb6ca9e2d0c4"
+      }
     }
   }
 }
