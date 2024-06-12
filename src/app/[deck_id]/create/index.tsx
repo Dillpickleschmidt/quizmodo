@@ -1,18 +1,23 @@
-import { ScrollView, View } from "react-native"
+import { Pressable, ScrollView, View } from "react-native"
 import React, { useEffect, useState } from "react"
 import { Text } from "@/components/ui/text"
 import AddCard from "@/components/deck/AddCard"
 import { Button } from "@/components/ui/button"
-import CategoryDropdown from "@/components/deck/CategoryDropdown"
+import CategoryDialog from "@/components/deck/CategoryDialog"
+import { CustomIcon } from "@/components/homeRoute/CustomIcon"
+import { Ionicons } from "@expo/vector-icons"
+import { Pickaxe } from "@/lib/icons/Pickaxe"
 
 type CardData = {
   term: string
   categories: { [key: string]: string }
 }
 
-const uniqueCategories = ["category 1", "category 2"] // Define your categories here
+const defaultCategory = "Answer"
 
 export default function CreatePage() {
+  const [uniqueCategories, setUniqueCategories] = useState<string[]>([defaultCategory])
+
   // Initialize the state with two empty card objects
   const [cards, setCards] = useState<CardData[]>([
     {
@@ -50,6 +55,36 @@ export default function CreatePage() {
     setCards(newCards)
   }
 
+  const addCategory = (newCategory: string) => {
+    setUniqueCategories([...uniqueCategories, newCategory])
+    setCards(
+      cards.map((card) => ({
+        ...card,
+        categories: { ...card.categories, [newCategory]: "" },
+      })),
+    )
+  }
+
+  const removeCategory = (category: string) => {
+    setUniqueCategories(uniqueCategories.filter((c) => c !== category))
+    setCards(
+      cards.map((card) => {
+        const { [category]: _, ...newCategories } = card.categories
+        return { ...card, categories: newCategories }
+      }),
+    )
+  }
+
+  const resetCategories = () => {
+    setUniqueCategories([defaultCategory])
+    setCards(
+      cards.map((card) => ({
+        ...card,
+        categories: { [defaultCategory]: "" },
+      })),
+    )
+  }
+
   // Log the state whenever it changes
   useEffect(() => {
     console.log("Cards state changed: ", cards)
@@ -71,18 +106,25 @@ export default function CreatePage() {
         ))}
         <View className="h-20"></View>
       </ScrollView>
-      <View className="absolute z-10 w-full bg-background/95 pt-20 pb-8">
+      <View className="absolute z-10 w-full bg-background/95 pt-20 pb-8 flex justify-between items-center">
         <Text className="text-center font-interbold text-4xl">Create Deck</Text>
+        <View className="absolute right-4 top-[4.5rem]">
+          <CategoryDialog
+            uniqueCategories={uniqueCategories}
+            onAddCategory={addCategory}
+            onRemoveCategory={removeCategory}
+            onResetCategories={resetCategories}
+          >
+            <Pressable className="p-4">
+              <CustomIcon icon={<Pickaxe />} size={28} color="text-primary" />
+            </Pressable>
+          </CategoryDialog>
+        </View>
       </View>
       <View className="absolute z-10 w-full bottom-0 flex items-end">
-        <View className="mb-1 mr-2">
-          <CategoryDropdown uniqueCategories={uniqueCategories} />
-        </View>
-        <View className="w-full bg-background/90">
-          <Button onPress={addNewCard} className="my-3 mx-4">
-            <Text>Add New Card</Text>
-          </Button>
-        </View>
+        <Pressable onPress={addNewCard} className="my-3 mx-4 p-4">
+          <CustomIcon icon={<Ionicons name="add-circle" />} size={56} color="text-primary" />
+        </Pressable>
       </View>
     </>
   )

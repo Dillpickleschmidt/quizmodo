@@ -17,22 +17,22 @@ export default function AddCard({
   onCategoryChange,
 }: AddCardProps) {
   return (
-    <View className="w-full rounded-xl bg-card border border-dashed border-card-foreground my-2 shadow-lg">
-      <View className="pt-7 pb-1">
+    <View className="w-full rounded-xl bg-card border border-card-foreground my-2 shadow-lg">
+      <View className="pt-6 pb-1">
         <Input
-          className="bg-transparent border-x-0 border-t-0 border-b border-primary py-2 mx-6 px-2 !text-xl font-intermedium"
+          className="bg-transparent border-x-0 border-t-0 border-card-foreground py-3 mx-6 px-2 !text-xl font-intermedium"
           value={term}
           onChangeText={onTermChange}
         />
-        <Text className="ml-6 py-4 font-interblack text-sm">Term</Text>
+        <Text className="ml-6 pt-2 pb-3 font-interblack text-sm">Term</Text>
         {Object.keys(categories).map((category) => (
           <View key={category}>
             <Input
-              className="bg-transparent border-x-0 border-t-0 border-b border-primary py-2 mx-6 px-2 !text-xl font-intermedium"
+              className="bg-transparent border-x-0 border-t-0 border-card-foreground py-3 mx-6 px-2 !text-xl font-intermedium"
               value={categories[category]}
               onChangeText={(text) => onCategoryChange(category, text)}
             />
-            <Text className="ml-6 py-4 font-interblack text-sm">{category}</Text>
+            <Text className="ml-6 pt-2 pb-4 font-interblack text-sm">{category}</Text>
           </View>
         ))}
       </View>
