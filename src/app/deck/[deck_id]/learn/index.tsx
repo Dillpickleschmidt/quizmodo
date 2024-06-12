@@ -9,7 +9,7 @@ import CardTypeSwitch from "@/components/learning-mode/CardTypeSwitch"
 import useDeckSplit from "@/components/learning-mode/useDeckSplit"
 import CategoryDropdown from "@/components/learning-mode/CategoryDropdown"
 import { handleNextQuestion } from "@/components/learning-mode/cardHandlers"
-import { EntryWithCardProperties } from "@/types"
+import { Entry, EntryWithCardProperties } from "@/types"
 import ReviewPage from "@/components/learning-mode/ReviewPage"
 import FinishPage from "@/components/learning-mode/FinishPage"
 
@@ -104,7 +104,7 @@ function setBackgroundColor(isCorrect: boolean, hasUserAnswered: boolean) {
   return hasUserAnswered ? (isCorrect ? "bg-green-500" : "bg-red-500") : ""
 }
 
-function extractUniqueCategories(data: EntryWithCardProperties[]): string[] {
+function extractUniqueCategories(data: Entry[]): string[] {
   const categories = new Set<string>()
   data.forEach((entry) => {
     entry.answerCategories.forEach((category) => {

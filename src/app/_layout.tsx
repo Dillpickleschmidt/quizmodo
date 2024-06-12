@@ -11,6 +11,7 @@ import { NAV_THEME } from "~/lib/constants"
 import { useColorScheme } from "~/lib/useColorScheme"
 import { PortalHost } from "~/components/primitives/portal"
 import { GlobalContextProvider } from "@/context/GlobalContext"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 const LIGHT_THEME: Theme = {
   dark: false,
@@ -83,17 +84,22 @@ export default function RootLayout() {
     return null
   }
   const backgroundColor = colorScheme ? NAV_THEME[colorScheme].background : undefined
+
+  const queryClient = new QueryClient()
+
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      <GlobalContextProvider>
-        <View className="w-full h-full" style={{ backgroundColor: backgroundColor }}>
-          <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-          <Stack screenOptions={{ headerShown: false }}>
-            {/* <Stack.Screen name="index" /> */}
-          </Stack>
-          <PortalHost />
-        </View>
-      </GlobalContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <GlobalContextProvider>
+          <View className="w-full h-full" style={{ backgroundColor: backgroundColor }}>
+            <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
+            <Stack screenOptions={{ headerShown: false }}>
+              {/* <Stack.Screen name="index" /> */}
+            </Stack>
+            <PortalHost />
+          </View>
+        </GlobalContextProvider>
+      </QueryClientProvider>
     </ThemeProvider>
   )
 }

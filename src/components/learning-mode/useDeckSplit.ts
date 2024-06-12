@@ -1,6 +1,6 @@
-import { EntryWithCardProperties } from "@/types"
+import { EntryWithCardProperties, Entry } from "@/types"
 
-export default function useDeckSplit(data: EntryWithCardProperties[]) {
+export default function useDeckSplit(data: Entry[]) {
   // Add a new property 'cardStyle' and 'wrongAnswerCount' to each entry
   const updatedEntries = data.map((entry, index) => ({
     ...entry,

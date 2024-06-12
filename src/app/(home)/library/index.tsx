@@ -45,13 +45,13 @@ export default function index() {
 
   return (
     <View className="w-full h-full">
-      <View className="h-24" />
+      <View className="h-28" />
       <ScrollView>
         <View className="flex items-center gap-3 mt-6 px-6">
           {/* Map over all the decks */}
           {decks.map((deck) => (
             <Button
-              onPress={() => router.navigate(`/${deck.id}`)}
+              onPress={() => router.navigate(`/deck/${deck.id}`)}
               key={deck.id}
               className="xl:w-[50%] w-full p-12 bg-card border border-card-foreground border-dashed shadow-md items-start"
             >

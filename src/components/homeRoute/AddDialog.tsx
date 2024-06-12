@@ -33,7 +33,7 @@ export default function AddDialog({ children }: AddDialogProps) {
           <Button
             variant="outline"
             className="shadow-md min-h-32"
-            onPress={() => router.push("/new/create")}
+            onPress={() => router.push("/deck/new/create")}
           >
             <Text className="text-primary">Create New Set</Text>
           </Button>

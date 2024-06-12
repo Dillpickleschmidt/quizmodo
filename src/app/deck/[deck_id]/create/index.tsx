@@ -90,11 +90,6 @@ export default function CreatePage() {
     setCards(updatedCards)
   }
 
-  // Log the state whenever it changes
-  useEffect(() => {
-    console.log("Cards state changed: ", cards)
-  }, [cards])
-
   const handleDeckNameChange = (name: string) => {
     setDeckName(name.trim())
   }
