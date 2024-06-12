@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog"
 import { Text } from "~/components/ui/text"
-import { View, FlatList, Alert } from "react-native"
+import { View, FlatList } from "react-native"
 import { Input } from "../ui/input"
 import {
   AlertDialog,
@@ -40,6 +40,7 @@ export default function CategoryDialog({
   children,
 }: CategoryDialogProps) {
   const [newCategory, setNewCategory] = useState("")
+  const [showWarning, setShowWarning] = useState(false)
 
   const handleAddCategory = () => {
     if (newCategory.trim() !== "") {
@@ -50,10 +51,14 @@ export default function CategoryDialog({
 
   const handleRemoveCategory = (category: string) => {
     if (uniqueCategories.length <= 1) {
-      Alert.alert("Warning", "There must be at least one category.")
+      setShowWarning(true)
     } else {
       onRemoveCategory(category)
     }
+  }
+
+  const closeWarning = () => {
+    setShowWarning(false)
   }
 
   return (
@@ -117,6 +122,26 @@ export default function CategoryDialog({
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      <AlertDialog open={showWarning} onOpenChange={closeWarning}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-center text-red-500">
+              There must be at least one category.
+            </AlertDialogTitle>
+            {/* <AlertDialogDescription className="text-red-500">
+              There must be at least one category.
+            </AlertDialogDescription> */}
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction asChild>
+              <Button onPress={closeWarning}>
+                <Text>OK</Text>
+              </Button>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   )
 }

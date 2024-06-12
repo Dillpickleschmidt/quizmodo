@@ -7,6 +7,7 @@ import CategoryDialog from "@/components/deck/CategoryDialog"
 import { CustomIcon } from "@/components/homeRoute/CustomIcon"
 import { Ionicons } from "@expo/vector-icons"
 import { Pickaxe } from "@/lib/icons/Pickaxe"
+import { Input } from "@/components/ui/input"
 
 type CardData = {
   term: string
@@ -16,6 +17,7 @@ type CardData = {
 const defaultCategory = "Answer"
 
 export default function CreatePage() {
+  const [deckName, setDeckName] = useState<string>("")
   const [uniqueCategories, setUniqueCategories] = useState<string[]>([defaultCategory])
 
   // Initialize the state with two empty card objects
@@ -76,19 +78,26 @@ export default function CreatePage() {
   }
 
   const resetCategories = () => {
+    const answerCategoryExists = uniqueCategories.includes(defaultCategory)
+    // Keep only the default category and remove all others
+    const updatedCards = cards.map((card) => {
+      const newCategories = answerCategoryExists
+        ? { [defaultCategory]: card.categories[defaultCategory] }
+        : { [defaultCategory]: "" }
+      return { ...card, categories: newCategories }
+    })
     setUniqueCategories([defaultCategory])
-    setCards(
-      cards.map((card) => ({
-        ...card,
-        categories: { [defaultCategory]: "" },
-      })),
-    )
+    setCards(updatedCards)
   }
 
   // Log the state whenever it changes
   useEffect(() => {
     console.log("Cards state changed: ", cards)
   }, [cards])
+
+  const handleDeckNameChange = (name: string) => {
+    setDeckName(name.trim())
+  }
 
   return (
     <>
@@ -107,7 +116,12 @@ export default function CreatePage() {
         <View className="h-20"></View>
       </ScrollView>
       <View className="absolute z-10 w-full bg-background/95 pt-20 pb-8 flex justify-between items-center">
-        <Text className="text-center font-interbold text-4xl">Create Deck</Text>
+        <Input
+          value={deckName}
+          onChangeText={handleDeckNameChange}
+          placeholder="[Deck Name]"
+          className="bg-transparent text-center font-interbold !text-4xl w-full border-0"
+        />
         <View className="absolute right-4 top-[4.5rem]">
           <CategoryDialog
             uniqueCategories={uniqueCategories}
@@ -122,9 +136,19 @@ export default function CreatePage() {
         </View>
       </View>
       <View className="absolute z-10 w-full bottom-0 flex items-end">
-        <Pressable onPress={addNewCard} className="my-3 mx-4 p-4">
-          <CustomIcon icon={<Ionicons name="add-circle" />} size={56} color="text-primary" />
-        </Pressable>
+        <View className="mr-6">
+          <Pressable onPress={addNewCard}>
+            <CustomIcon icon={<Ionicons name="add-circle" />} size={56} color="text-primary" />
+          </Pressable>
+        </View>
+        <View className="w-full py-2 px-3 bg-background/70 h-18">
+          <Button
+            className="w-full bg-orange-500"
+            onPress={() => console.log("Save deck", deckName, cards)}
+          >
+            <Text className="text-center">Save Deck</Text>
+          </Button>
+        </View>
       </View>
     </>
   )

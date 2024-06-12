@@ -26,11 +26,15 @@ export default function AddDialog({ children }: AddDialogProps) {
           <DialogTitle>Create</DialogTitle>
           <DialogDescription>This is where you'll add new items to your library.</DialogDescription>
         </DialogHeader>
-        <Button className="shadow-md bg-card min-h-32" onPress={() => router.push("")}>
+        <Button variant="outline" className="shadow-md min-h-32" onPress={() => router.push("")}>
           <Text className="text-primary">Create Folder</Text>
         </Button>
         <DialogClose asChild>
-          <Button className="shadow-md bg-card min-h-32" onPress={() => router.push("/new/create")}>
+          <Button
+            variant="outline"
+            className="shadow-md min-h-32"
+            onPress={() => router.push("/new/create")}
+          >
             <Text className="text-primary">Create New Set</Text>
           </Button>
         </DialogClose>

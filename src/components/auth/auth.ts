@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Alert } from "react-native"
-import { supabase } from "~/lib/supabase/supabase" // Adjust the import path to your supabase client
+import { supabase } from "~/lib/supabase/supabase"
 import { makeRedirectUri } from "expo-auth-session"
 import * as QueryParams from "expo-auth-session/build/QueryParams"
 import * as WebBrowser from "expo-web-browser"
