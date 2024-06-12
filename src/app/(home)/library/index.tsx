@@ -44,8 +44,8 @@ export default function index() {
   ]
 
   return (
-    <View className="justify-center w-full h-full">
-      <View className="h-28" />
+    <View className="w-full h-full">
+      <View className="h-24" />
       <ScrollView>
         <View className="flex items-center gap-3 mt-6 px-6">
           {/* Map over all the decks */}
@@ -61,7 +61,7 @@ export default function index() {
           ))}
         </View>
       </ScrollView>
-      <View className="absolute top-0 w-full z-10 bg-background/95 items-center pt-16 pb-8">
+      <View className="absolute top-0 w-full z-10 bg-background/95 items-center pt-12 pb-6">
         <Text className="xl:text-5xl text-3xl font-interblack">Library</Text>
       </View>
     </View>

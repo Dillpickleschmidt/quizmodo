@@ -11,10 +11,7 @@
         "answers": ["Zero", "0"]
       }
     ],
-    "notes": [],
-    "videos": [],
-    "cardStyle": "multiple-choice",
-    "wrongAnswerCount": 0
+    "mnemonics": ""
   },
   {
     "key": "れい",
@@ -28,10 +25,7 @@
         "answers": ["Zero", "0"]
       }
     ],
-    "notes": [],
-    "videos": [],
-    "cardStyle": "multiple-choice",
-    "wrongAnswerCount": 0
+    "mnemonics": ""
   },
   {
     "key": "いち",
@@ -45,10 +39,7 @@
         "answers": ["One", "1"]
       }
     ],
-    "notes": [],
-    "videos": [],
-    "cardStyle": "multiple-choice",
-    "wrongAnswerCount": 0
+    "mnemonics": ""
   },
   {
     "key": "に",
@@ -62,10 +53,7 @@
         "answers": ["Two", "2"]
       }
     ],
-    "notes": [],
-    "videos": [],
-    "cardStyle": "multiple-choice",
-    "wrongAnswerCount": 0
+    "mnemonics": ""
   },
   {
     "key": "さん",
@@ -79,10 +67,7 @@
         "answers": ["Three", "3"]
       }
     ],
-    "notes": [],
-    "videos": [],
-    "cardStyle": "multiple-choice",
-    "wrongAnswerCount": 0
+    "mnemonics": ""
   },
   {
     "key": "よん/し",
@@ -96,10 +81,7 @@
         "answers": ["Four", "4"]
       }
     ],
-    "notes": [],
-    "videos": [],
-    "cardStyle": "multiple-choice",
-    "wrongAnswerCount": 0
+    "mnemonics": ""
   },
   {
     "key": "ご",
@@ -113,10 +95,7 @@
         "answers": ["Five", "5"]
       }
     ],
-    "notes": [],
-    "videos": [],
-    "cardStyle": "multiple-choice",
-    "wrongAnswerCount": 0
+    "mnemonics": ""
   },
   {
     "key": "ろく",
@@ -130,10 +109,7 @@
         "answers": ["Six", "6"]
       }
     ],
-    "notes": [],
-    "videos": [],
-    "cardStyle": "multiple-choice",
-    "wrongAnswerCount": 0
+    "mnemonics": ""
   },
   {
     "key": "なな/しち",
@@ -147,10 +123,7 @@
         "answers": ["Seven", "7"]
       }
     ],
-    "notes": [],
-    "videos": [],
-    "cardStyle": "multiple-choice",
-    "wrongAnswerCount": 0
+    "mnemonics": ""
   },
   {
     "key": "はち",
@@ -164,10 +137,7 @@
         "answers": ["Eight", "8"]
       }
     ],
-    "notes": [],
-    "videos": [],
-    "cardStyle": "multiple-choice",
-    "wrongAnswerCount": 0
+    "mnemonics": ""
   },
   {
     "key": "きゅう/く",
@@ -181,10 +151,7 @@
         "answers": ["Nine", "9"]
       }
     ],
-    "notes": [],
-    "videos": [],
-    "cardStyle": "multiple-choice",
-    "wrongAnswerCount": 0
+    "mnemonics": ""
   },
   {
     "key": "じゅう",
@@ -198,9 +165,6 @@
         "answers": ["Ten", "10"]
       }
     ],
-    "notes": [],
-    "videos": [],
-    "cardStyle": "multiple-choice",
-    "wrongAnswerCount": 0
+    "mnemonics": ""
   }
 ]
