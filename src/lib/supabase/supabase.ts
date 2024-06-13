@@ -63,7 +63,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error("Supabase URL or Supabase Anon Key is missing.")
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
   auth: {
     storage: new LargeSecureStore(),
     autoRefreshToken: true,

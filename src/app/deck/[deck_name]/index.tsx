@@ -28,6 +28,7 @@ export default function DeckPage() {
   if (deckQuery.isSuccess) {
     console.log(deckQuery.data.deck_name)
   }
+  const deckId = deckQuery.data?.deck_id
 
   return (
     <SafeAreaView>

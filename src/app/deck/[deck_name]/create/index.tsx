@@ -136,7 +136,7 @@ export default function CreatePage() {
       return
     }
     if (userId) {
-      createDeckMutation.mutate({ deckName, userId })
+      createDeckMutation.mutate({ deck_name: deckName, user_id: userId })
     } else {
       console.log("User not found")
     }
