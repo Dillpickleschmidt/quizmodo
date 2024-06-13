@@ -21,7 +21,7 @@ export default function index() {
     enabled: !!userId,
   })
   const decks = decksQuery.data
-  console.log(decks)
+  // console.log(decks)
 
   return (
     <View className="w-full h-full">

@@ -6,6 +6,7 @@ import { Input } from "../ui/input"
 type AddCardProps = {
   term: string
   categories: { [key: string]: string }
+  mnemonic: string
   onTermChange: (text: string) => void
   onCategoryChange: (category: string, text: string) => void
 }
@@ -13,6 +14,7 @@ type AddCardProps = {
 export default function AddCard({
   term,
   categories,
+  mnemonic,
   onTermChange,
   onCategoryChange,
 }: AddCardProps) {

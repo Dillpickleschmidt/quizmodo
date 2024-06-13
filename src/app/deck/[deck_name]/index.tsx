@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button"
 import StudyList from "@/components/deck/StudyList"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { useQuery } from "@tanstack/react-query"
-import { getDeck, getUser } from "@/lib/supabase/supabaseHooks"
+import { fetchDeckEntriesWithCategories, getUser } from "@/lib/supabase/supabaseHooks"
+// import data from "@/test-data/test-data-2.json"
 
 export default function DeckPage() {
   const { deck_name: deckName } = useLocalSearchParams<{ deck_name: string }>()
@@ -19,16 +20,13 @@ export default function DeckPage() {
   // if (userQuery.isSuccess) console.log(userQuery.data?.id)
   const userId = userQuery.data?.id
 
-  // Get the deck
+  // Get all entries + answer categories matching the deck id
   const deckQuery = useQuery({
-    queryKey: [deckName],
-    queryFn: () => getDeck(deckName!, userId!),
+    queryKey: [deckName, userId],
+    queryFn: () => fetchDeckEntriesWithCategories(deckName!, userId!),
     enabled: !!userId,
   })
-  if (deckQuery.isSuccess) {
-    console.log(deckQuery.data.deck_name)
-  }
-  const deckId = deckQuery.data?.deck_id
+  const data = deckQuery.data?.entries
 
   return (
     <SafeAreaView>
@@ -45,7 +43,7 @@ export default function DeckPage() {
         ) : (
           <ScrollView className="px-6">
             <View className="h-28" />
-            <StudyList />
+            {data && <StudyList data={data} />}
             <View className="h-14" />
           </ScrollView>
         )}

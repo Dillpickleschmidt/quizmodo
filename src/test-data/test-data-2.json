@@ -11,7 +11,7 @@
         "answers": ["Zero", "0"]
       }
     ],
-    "mnemonics": ""
+    "mnemonic": ""
   },
   {
     "key": "れい",
@@ -25,7 +25,7 @@
         "answers": ["Zero", "0"]
       }
     ],
-    "mnemonics": ""
+    "mnemonic": ""
   },
   {
     "key": "いち",
@@ -39,7 +39,7 @@
         "answers": ["One", "1"]
       }
     ],
-    "mnemonics": ""
+    "mnemonic": ""
   },
   {
     "key": "に",
@@ -53,7 +53,7 @@
         "answers": ["Two", "2"]
       }
     ],
-    "mnemonics": ""
+    "mnemonic": ""
   },
   {
     "key": "さん",
@@ -67,7 +67,7 @@
         "answers": ["Three", "3"]
       }
     ],
-    "mnemonics": ""
+    "mnemonic": ""
   },
   {
     "key": "よん/し",
@@ -81,7 +81,7 @@
         "answers": ["Four", "4"]
       }
     ],
-    "mnemonics": ""
+    "mnemonic": ""
   },
   {
     "key": "ご",
@@ -95,7 +95,7 @@
         "answers": ["Five", "5"]
       }
     ],
-    "mnemonics": ""
+    "mnemonic": ""
   },
   {
     "key": "ろく",
@@ -109,7 +109,7 @@
         "answers": ["Six", "6"]
       }
     ],
-    "mnemonics": ""
+    "mnemonic": ""
   },
   {
     "key": "なな/しち",
@@ -123,7 +123,7 @@
         "answers": ["Seven", "7"]
       }
     ],
-    "mnemonics": ""
+    "mnemonic": ""
   },
   {
     "key": "はち",
@@ -137,7 +137,7 @@
         "answers": ["Eight", "8"]
       }
     ],
-    "mnemonics": ""
+    "mnemonic": ""
   },
   {
     "key": "きゅう/く",
@@ -151,7 +151,7 @@
         "answers": ["Nine", "9"]
       }
     ],
-    "mnemonics": ""
+    "mnemonic": ""
   },
   {
     "key": "じゅう",
@@ -165,6 +165,6 @@
         "answers": ["Ten", "10"]
       }
     ],
-    "mnemonics": ""
+    "mnemonic": ""
   }
 ]

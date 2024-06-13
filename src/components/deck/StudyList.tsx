@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { View, Text, StyleSheet } from "react-native"
-import data from "@/test-data/test-data-2.json"
 import { Entry } from "@/types"
 
-const StudyList = () => {
+type StudyListProps = {
+  data: Entry[]
+}
+
+const StudyList = ({ data }: StudyListProps) => {
   const [quizData, setQuizData] = useState<Entry[]>([])
 
   useEffect(() => {
@@ -25,12 +28,10 @@ const StudyList = () => {
               ))}
             </View>
           ))}
-          {entry.notes && (
-            <View style={styles.detailSection}>
-              <Text style={styles.detailTitle}>Notes:</Text>
-              {entry.mnemonic && <Text style={styles.detailText}>Mnemonic: {entry.mnemonic}</Text>}
-            </View>
-          )}
+          <View style={styles.detailSection}>
+            <Text style={styles.detailTitle}>Mnemonic:</Text>
+            {entry.mnemonic && <Text style={styles.detailText}>{entry.mnemonic}</Text>}
+          </View>
         </View>
       ))}
     </>

@@ -7,9 +7,7 @@
         "answers": ["Paris"]
       }
     ],
-    "mnemonics": [
-      "Paris rhymes with 'pair of keys', which can unlock the gates to the city of lights."
-    ]
+    "mnemonic": ""
   },
   {
     "key": "What is the boiling point of water?",
@@ -19,9 +17,7 @@
         "answers": ["100 degrees Celsius"]
       }
     ],
-    "mnemonics": [
-      "'Boiling point' sounds like 'boiling joint', imagine water boiling at a joint family dinner at 100 degrees."
-    ]
+    "mnemonic": ""
   },
   {
     "key": "What is the chemical symbol for gold?",
@@ -31,9 +27,7 @@
         "answers": ["Au"]
       }
     ],
-    "mnemonics": [
-      "'Au' sounds like 'ow', something you might exclaim when finding gold because it's so valuable."
-    ]
+    "mnemonic": ""
   },
   {
     "key": "Who wrote 'To Kill a Mockingbird'?",
@@ -43,7 +37,7 @@
         "answers": ["Harper Lee"]
       }
     ],
-    "mnemonics": ["'Harper' sounds like 'harp', and a musician could sing about the mockingbird."]
+    "mnemonic": ""
   },
   {
     "key": "What is the capital of Spain?",
@@ -53,9 +47,7 @@
         "answers": ["Madrid"]
       }
     ],
-    "mnemonics": [
-      "'Madrid' sounds similar to 'mad ride', which could remind you of the bustling streets of Spain's capital."
-    ]
+    "mnemonic": ""
   },
   {
     "key": "What is the formula for the area of a circle?",
@@ -65,7 +57,7 @@
         "answers": ["πr²"]
       }
     ],
-    "mnemonics": ["'Pie Are Squared' sounds like a math themed bakery treat."]
+    "mnemonic": ""
   },
   {
     "key": "Who discovered penicillin?",
@@ -75,9 +67,7 @@
         "answers": ["Alexander Fleming"]
       }
     ],
-    "mnemonics": [
-      "Fleming sounds like 'flaming', linking to the idea of something revolutionary or 'catching fire'."
-    ]
+    "mnemonic": ""
   },
   {
     "key": "What year did the Titanic sink?",
@@ -87,7 +77,7 @@
         "answers": ["1912"]
       }
     ],
-    "mnemonics": ["Remember '1912' by associating it with '1 night, 9, 1 too many icebergs'."]
+    "mnemonic": ""
   },
   {
     "key": "What is the hardest natural substance on Earth?",
@@ -97,7 +87,7 @@
         "answers": ["Diamond"]
       }
     ],
-    "mnemonics": ["'Diamond' sounds like 'die hard', representing its unmatched hardness."]
+    "mnemonic": ""
   },
   {
     "key": "What is the speed of light?",
@@ -107,7 +97,7 @@
         "answers": ["299,792,458 meters per second"]
       }
     ],
-    "mnemonics": ["Think '299,792,458', as '2 shy of 300 million meters', rushing per second."]
+    "mnemonic": ""
   },
   {
     "key": "What is the powerhouse of the cell?",
@@ -117,7 +107,7 @@
         "answers": ["Mitochondria"]
       }
     ],
-    "mnemonics": ["'Mighty chondria' powers the cell."]
+    "mnemonic": ""
   },
   {
     "key": "Who painted the Mona Lisa?",
@@ -127,9 +117,7 @@
         "answers": ["Leonardo da Vinci"]
       }
     ],
-    "mnemonics": [
-      "'Leo's nardo' sounds like 'lizard', a creature known for its keen observational gaze, much like Leonardo's while painting."
-    ]
+    "mnemonic": ""
   },
   {
     "key": "What element has the atomic number 1?",
@@ -139,7 +127,7 @@
         "answers": ["Hydrogen"]
       }
     ],
-    "mnemonics": ["'Hydro-gen', like 'high drone', flying number one in the periodic table."]
+    "mnemonic": ""
   },
   {
     "key": "What was the main cause of World War I?",
@@ -149,9 +137,7 @@
         "answers": ["Assassination of Archduke Franz Ferdinand"]
       }
     ],
-    "mnemonics": [
-      "'Franz' sounds like 'frantic', leading to a frantic series of events sparking the war."
-    ]
+    "mnemonic": ""
   },
   {
     "key": "Who is the author of 'Pride and Prejudice'?",
@@ -161,7 +147,7 @@
         "answers": ["Jane Austen"]
       }
     ],
-    "mnemonics": ["'Jane' sounds like 'plain', but her intricate plots are anything but."]
+    "mnemonic": ""
   },
   {
     "key": "What is the largest planet in our solar system?",
@@ -171,7 +157,7 @@
         "answers": ["Jupiter"]
       }
     ],
-    "mnemonics": ["'Jupiter', like 'Jumbo Peter', dominates with its massive size."]
+    "mnemonic": ""
   },
   {
     "key": "Who discovered America?",
@@ -181,7 +167,7 @@
         "answers": ["Christopher Columbus"]
       }
     ],
-    "mnemonics": ["'Columbus' sounds like 'column bus', transporting the old world to the new."]
+    "mnemonic": ""
   },
   {
     "key": "What causes seasons on Earth?",
@@ -191,7 +177,7 @@
         "answers": ["The tilt of the Earth's axis"]
       }
     ],
-    "mnemonics": ["'Tilt' as in the Earth slants its 'hat' at the sun, changing the seasons."]
+    "mnemonic": ""
   },
   {
     "key": "What is the smallest bone in the human body?",
@@ -201,7 +187,7 @@
         "answers": ["Stapes"]
       }
     ],
-    "mnemonics": ["'Stapes' sounds like 'staples', tiny yet essential in the structure of the ear."]
+    "mnemonic": ""
   },
   {
     "key": "What language has the most native speakers worldwide?",
@@ -211,9 +197,7 @@
         "answers": ["Mandarin Chinese"]
       }
     ],
-    "mnemonics": [
-      "'Mandarin' sounds like 'man drain', as if drawing in the most people with its linguistic flow."
-    ]
+    "mnemonic": ""
   },
   {
     "key": "What is the symbol for silver on the periodic table?",
@@ -223,7 +207,7 @@
         "answers": ["Ag"]
       }
     ],
-    "mnemonics": ["'Ag' for 'Aged goods', fitting for a precious metal."]
+    "mnemonic": ""
   },
   {
     "key": "Who wrote '1984'?",
@@ -233,6 +217,6 @@
         "answers": ["George Orwell"]
       }
     ],
-    "mnemonics": ["'Orwell' sounds like 'or well', pondering the deep well of dystopian ideas."]
+    "mnemonic": ""
   }
 ]
