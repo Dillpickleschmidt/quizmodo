@@ -36,3 +36,10 @@ export async function createDeck({ deckName, userId }: CreateDeckProps) {
   //   }, 1000)
   // })
 }
+
+// Get all decks matching the user id
+export async function getDecks(userId: string) {
+  const { data, error } = await supabase.from("decks").select().eq("user_id", userId)
+  if (error) throw new Error(error.message)
+  return data
+}

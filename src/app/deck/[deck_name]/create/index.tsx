@@ -5,11 +5,12 @@ import AddCard from "@/components/deck/AddCard"
 import { Button } from "@/components/ui/button"
 import { CustomIcon } from "@/components/homeRoute/CustomIcon"
 import { Ionicons } from "@expo/vector-icons"
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { createDeck, getUser } from "@/lib/supabase/supabaseHooks"
 import CreateDeckErrorAlert from "./components/CreateDeckErrorAlert"
 import { DeckHeader } from "./components/DeckHeader"
 import MissingDeckNameAlert from "./components/MissingDeckNameAlert"
+import { router } from "expo-router"
 
 type CardData = {
   term: string
@@ -103,6 +104,8 @@ export default function CreatePage() {
     setDeckName(name.trim())
   }
 
+  const queryClient = useQueryClient()
+
   // Get the user
   const userQuery = useQuery({
     queryKey: ["user"],
@@ -113,8 +116,13 @@ export default function CreatePage() {
   // Function to create a new deck
   const createDeckMutation = useMutation({
     mutationFn: createDeck,
-    onSuccess: () => {
+    onSuccess: (data) => {
       console.log(`Deck ${deckName} created successfully`)
+      // Manually update the query cache with the new deck data (so you don't have to refetch it from the server)
+      queryClient.setQueryData([deckName], data)
+      // Invalidate the decks list query so it will refetch the updated list
+      queryClient.invalidateQueries({ queryKey: ["decks"] })
+      router.push(`/deck/${deckName}`)
     },
     onError: () => {
       setShowCreateDeckError(true)

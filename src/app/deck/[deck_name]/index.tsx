@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView } from "react-native"
+import { View, ScrollView } from "react-native"
 import React from "react"
 import { Text } from "@/components/ui/text"
 import { router, useLocalSearchParams } from "expo-router"
@@ -9,7 +9,7 @@ import { useQuery } from "@tanstack/react-query"
 import { getDeck, getUser } from "@/lib/supabase/supabaseHooks"
 
 export default function DeckPage() {
-  const { deck_id } = useLocalSearchParams<{ deck_id: string }>()
+  const { deck_name: deckName } = useLocalSearchParams<{ deck_name: string }>()
 
   // Get the user
   const userQuery = useQuery({
@@ -17,12 +17,13 @@ export default function DeckPage() {
     queryFn: () => getUser(),
   })
   // if (userQuery.isSuccess) console.log(userQuery.data?.id)
+  const userId = userQuery.data?.id
 
   // Get the deck
   const deckQuery = useQuery({
-    queryKey: ["decks", deck_id],
-    queryFn: () => getDeck(deck_id!, userQuery.data?.id!),
-    enabled: !!userQuery.data?.id,
+    queryKey: [deckName],
+    queryFn: () => getDeck(deckName!, userId!),
+    enabled: !!userId,
   })
   if (deckQuery.isSuccess) {
     console.log(deckQuery.data.deck_name)
@@ -44,11 +45,12 @@ export default function DeckPage() {
           <ScrollView className="px-6">
             <View className="h-28" />
             <StudyList />
+            <View className="h-14" />
           </ScrollView>
         )}
       </View>
       <View className="absolute top-0 z-10 w-full bg-background/95 items-center pt-16 pb-8">
-        <Text className="xl:text-5xl text-3xl font-interblack">{`${deck_id} Cards`}</Text>
+        <Text className="xl:text-5xl text-3xl font-interblack">{`${deckName} Cards`}</Text>
       </View>
       <View className="absolute bottom-0 z-10 w-full">
         <View className="w-full py-2 px-3 bg-background/70 h-18">
