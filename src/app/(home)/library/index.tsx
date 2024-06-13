@@ -45,8 +45,8 @@ export default function index() {
 
   return (
     <View className="w-full h-full">
-      <View className="h-28" />
       <ScrollView>
+        <View className="h-28" />
         <View className="flex items-center gap-3 mt-6 px-6">
           {/* Map over all the decks */}
           {decks.map((deck) => (

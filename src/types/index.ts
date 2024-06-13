@@ -7,7 +7,7 @@ export type AnswerCategory = {
 export type Entry = {
   key: string
   answerCategories: AnswerCategory[]
-  mnemonics?: string
+  mnemonic?: string
   [key: string]: any // Allow for additional properties
 }
 

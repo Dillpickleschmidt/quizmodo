@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { View, Text, StyleSheet } from "react-native"
 import data from "@/test-data/test-data-2.json"
-import { EntryWithCardProperties } from "@/types"
+import { Entry } from "@/types"
 
-type QuizListProps = {
-  deck_id: string
-}
-
-const StudyList = ({ deck_id }: QuizListProps) => {
-  const [quizData, setQuizData] = useState<EntryWithCardProperties[]>([])
+const StudyList = () => {
+  const [quizData, setQuizData] = useState<Entry[]>([])
 
   useEffect(() => {
     setQuizData(data) // Directly set the data from JSON
@@ -16,7 +12,6 @@ const StudyList = ({ deck_id }: QuizListProps) => {
 
   return (
     <>
-      <Text style={styles.title}>{`Deck ${deck_id} Questions`}</Text>
       {quizData.map((entry, index) => (
         <View key={index} style={styles.entryContainer}>
           <Text style={styles.question}>{entry.key}</Text>
@@ -33,11 +28,7 @@ const StudyList = ({ deck_id }: QuizListProps) => {
           {entry.notes && (
             <View style={styles.detailSection}>
               <Text style={styles.detailTitle}>Notes:</Text>
-              {entry.notes.map((note, i) => (
-                <Text key={i} style={styles.detailText}>
-                  {note}
-                </Text>
-              ))}
+              {entry.mnemonic && <Text style={styles.detailText}>Mnemonic: {entry.mnemonic}</Text>}
             </View>
           )}
         </View>

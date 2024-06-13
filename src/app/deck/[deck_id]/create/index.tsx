@@ -1,13 +1,15 @@
 import { Pressable, ScrollView, View } from "react-native"
-import React, { useEffect, useState } from "react"
+import { useState } from "react"
 import { Text } from "@/components/ui/text"
 import AddCard from "@/components/deck/AddCard"
 import { Button } from "@/components/ui/button"
-import CategoryDialog from "@/components/deck/CategoryDialog"
 import { CustomIcon } from "@/components/homeRoute/CustomIcon"
 import { Ionicons } from "@expo/vector-icons"
-import { Pickaxe } from "@/lib/icons/Pickaxe"
-import { Input } from "@/components/ui/input"
+import { useMutation, useQuery } from "@tanstack/react-query"
+import { createDeck, getUser } from "@/lib/supabase/supabaseHooks"
+import CreateDeckErrorAlert from "./components/CreateDeckErrorAlert"
+import { DeckHeader } from "./components/DeckHeader"
+import MissingDeckNameAlert from "./components/MissingDeckNameAlert"
 
 type CardData = {
   term: string
@@ -19,8 +21,10 @@ const defaultCategory = "Answer"
 export default function CreatePage() {
   const [deckName, setDeckName] = useState<string>("")
   const [uniqueCategories, setUniqueCategories] = useState<string[]>([defaultCategory])
+  const [showCreateDeckError, setShowCreateDeckError] = useState(false)
+  const [showMissingDeckNameError, setShowMissingDeckNameError] = useState(false)
 
-  // Initialize the state with two empty card objects
+  // Initialize the cards state with two empty card objects
   const [cards, setCards] = useState<CardData[]>([
     {
       term: "",
@@ -50,13 +54,7 @@ export default function CreatePage() {
     setCards(newCards)
   }
 
-  const updateCardCategory = (index: number, category: string, value: string) => {
-    const newCards = cards.map((card, i) =>
-      i === index ? { ...card, categories: { ...card.categories, [category]: value } } : card,
-    )
-    setCards(newCards)
-  }
-
+  // Function to add a new category
   const addCategory = (newCategory: string) => {
     setUniqueCategories([...uniqueCategories, newCategory])
     setCards(
@@ -67,6 +65,15 @@ export default function CreatePage() {
     )
   }
 
+  // Function to update card category data
+  const updateCardCategory = (index: number, category: string, value: string) => {
+    const newCards = cards.map((card, i) =>
+      i === index ? { ...card, categories: { ...card.categories, [category]: value } } : card,
+    )
+    setCards(newCards)
+  }
+
+  // Function to remove a category
   const removeCategory = (category: string) => {
     setUniqueCategories(uniqueCategories.filter((c) => c !== category))
     setCards(
@@ -77,6 +84,7 @@ export default function CreatePage() {
     )
   }
 
+  // Function to reset categories to default
   const resetCategories = () => {
     const answerCategoryExists = uniqueCategories.includes(defaultCategory)
     // Keep only the default category and remove all others
@@ -90,12 +98,55 @@ export default function CreatePage() {
     setCards(updatedCards)
   }
 
+  // Function to handle deck name change
   const handleDeckNameChange = (name: string) => {
     setDeckName(name.trim())
   }
 
+  // Get the user
+  const userQuery = useQuery({
+    queryKey: ["user"],
+    queryFn: () => getUser(),
+  })
+  const userId = userQuery.data?.id
+
+  // Function to create a new deck
+  const createDeckMutation = useMutation({
+    mutationFn: createDeck,
+    onSuccess: () => {
+      console.log(`Deck ${deckName} created successfully`)
+    },
+    onError: () => {
+      setShowCreateDeckError(true)
+    },
+  })
+
+  // Handle save deck button press
+  function handleSaveDeck() {
+    if (!deckName.trim()) {
+      setShowMissingDeckNameError(true)
+      return
+    }
+    if (userId) {
+      createDeckMutation.mutate({ deckName, userId })
+    } else {
+      console.log("User not found")
+    }
+  }
+
   return (
     <>
+      {createDeckMutation.isError && (
+        <CreateDeckErrorAlert
+          createDeckMutationErrorMessage={createDeckMutation.error.message}
+          showError={showCreateDeckError}
+          setShowError={setShowCreateDeckError}
+        />
+      )}
+      <MissingDeckNameAlert
+        showMissingDeckNameError={showMissingDeckNameError}
+        setShowMissingDeckNameError={setShowMissingDeckNameError}
+      />
       <ScrollView>
         <View className="h-40"></View>
         {cards.map((card, index) => (
@@ -110,26 +161,14 @@ export default function CreatePage() {
         ))}
         <View className="h-20"></View>
       </ScrollView>
-      <View className="absolute z-10 w-full bg-background/95 pt-20 pb-8 flex justify-between items-center">
-        <Input
-          value={deckName}
-          onChangeText={handleDeckNameChange}
-          placeholder="[Deck Name]"
-          className="bg-transparent text-center font-interbold !text-4xl w-full border-0"
-        />
-        <View className="absolute right-4 top-[4.5rem]">
-          <CategoryDialog
-            uniqueCategories={uniqueCategories}
-            onAddCategory={addCategory}
-            onRemoveCategory={removeCategory}
-            onResetCategories={resetCategories}
-          >
-            <Pressable className="p-4">
-              <CustomIcon icon={<Pickaxe />} size={28} color="text-primary" />
-            </Pressable>
-          </CategoryDialog>
-        </View>
-      </View>
+      <DeckHeader
+        deckName={deckName}
+        handleDeckNameChange={handleDeckNameChange}
+        uniqueCategories={uniqueCategories}
+        addCategory={addCategory}
+        removeCategory={removeCategory}
+        resetCategories={resetCategories}
+      />
       <View className="absolute z-10 w-full bottom-0 flex items-end">
         <View className="mr-6">
           <Pressable onPress={addNewCard}>
@@ -139,7 +178,8 @@ export default function CreatePage() {
         <View className="w-full py-2 px-3 bg-background/70 h-18">
           <Button
             className="w-full bg-orange-500"
-            onPress={() => console.log("Save deck", deckName, cards)}
+            onPress={() => handleSaveDeck()}
+            // disabled={createDeckMutation.isPending}
           >
             <Text className="text-center">Save Deck</Text>
           </Button>
