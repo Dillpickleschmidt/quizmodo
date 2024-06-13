@@ -11,7 +11,7 @@ import CreateDeckErrorAlert from "./components/CreateDeckErrorAlert"
 import { DeckHeader } from "./components/DeckHeader"
 import MissingDeckNameAlert from "./components/MissingDeckNameAlert"
 import { router } from "expo-router"
-import { addNewCard, updateCardTerm, updateCardCategory } from "./components/cardHelpers"
+import { updateCardTerm, updateCardCategory } from "./components/cardHelpers"
 import { CardData } from "./components/cardData"
 import DraggableFlatList, { RenderItemParams } from "react-native-draggable-flatlist"
 
@@ -209,13 +209,13 @@ export default function CreatePage() {
         cards={cards}
         setCards={setCards}
       />
-      <View className="absolute z-10 w-full bottom-0 flex items-end">
+      <View className="absolute bottom-0 z-10 flex w-full items-end">
         <View className="mr-6">
           <Pressable onPress={handleAddNewCard}>
             <CustomIcon icon={<Ionicons name="add-circle" />} size={56} color="text-primary" />
           </Pressable>
         </View>
-        <View className="w-full py-2 px-3 bg-background/70 h-18">
+        <View className="h-18 w-full bg-background/70 px-3 py-2">
           <Button className="w-full bg-orange-500" onPress={handleSaveDeck}>
             <Text className="text-center">Save Deck</Text>
           </Button>

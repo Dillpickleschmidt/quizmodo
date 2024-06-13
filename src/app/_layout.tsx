@@ -94,7 +94,7 @@ export default function RootLayout() {
       <GestureHandlerRootView>
         <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
           <GlobalContextProvider>
-            <View className="w-full h-full" style={{ backgroundColor: backgroundColor }}>
+            <View className="h-full w-full" style={{ backgroundColor: backgroundColor }}>
               <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
               <Stack screenOptions={{ headerShown: false }}>
                 {/* <Stack.Screen name="index" /> */}

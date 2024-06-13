@@ -65,7 +65,7 @@ export default function CategoryDialog({
     <>
       <Dialog>
         <DialogTrigger asChild>{children}</DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] h-[400px]">
+        <DialogContent className="h-[400px] sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Manage Categories</DialogTitle>
             <DialogDescription>Add or remove answer categories for your cards.</DialogDescription>
@@ -77,7 +77,7 @@ export default function CategoryDialog({
             data={uniqueCategories}
             keyExtractor={(item) => item}
             renderItem={({ item }) => (
-              <View className="flex flex-row justify-between items-center p-2">
+              <View className="flex flex-row items-center justify-between p-2">
                 <Text>{item}</Text>
                 <Button variant="outline" onPress={() => handleRemoveCategory(item)}>
                   <Text>Remove</Text>
@@ -86,7 +86,7 @@ export default function CategoryDialog({
             )}
           />
           <DialogFooter>
-            <View className="relative w-full flex flex-row justify-between mb-2">
+            <View className="relative mb-2 flex w-full flex-row justify-between">
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <Button variant="outline">

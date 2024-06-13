@@ -67,10 +67,10 @@ export default function MultipleChoice({ data, shuffleInput = true }: MultipleCh
             className={`${
               hasUserAnswered
                 ? isCorrect
-                  ? "border-r-8 justify-center disabled:opacity-100 bg-white border-green-400"
+                  ? "justify-center border-r-8 border-green-400 bg-white disabled:opacity-100"
                   : isSelected
-                    ? "border-r-8 justify-center disabled:opacity-100 bg-white border-red-400"
-                    : "disabled:opacity-60 bg-white"
+                    ? "justify-center border-r-8 border-red-400 bg-white disabled:opacity-100"
+                    : "bg-white disabled:opacity-60"
                 : "disabled:opacity-60"
             } my-2 xl:h-16`}
           >
@@ -78,9 +78,9 @@ export default function MultipleChoice({ data, shuffleInput = true }: MultipleCh
               className={`${
                 hasUserAnswered
                   ? isCorrect
-                    ? "text-[#46d246] font-interblack !text-xl"
+                    ? "font-interblack !text-xl text-[#46d246]"
                     : isSelected
-                      ? "text-red-500 font-interblack"
+                      ? "font-interblack text-red-500"
                       : ""
                   : ""
               }`}

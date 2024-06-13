@@ -58,12 +58,12 @@ export function DeckHeader({
   }
 
   return (
-    <View className="absolute top-0 z-10 w-full bg-background/95 pt-20 pb-8 flex justify-between items-center">
+    <View className="absolute top-0 z-10 flex w-full items-center justify-between bg-background/95 pb-8 pt-20">
       <Input
         value={deckName}
         onChangeText={handleDeckNameChange}
         placeholder="[Deck Name]"
-        className="bg-transparent text-center font-interbold !text-4xl w-full border-0"
+        className="w-full border-0 bg-transparent text-center font-interbold !text-4xl"
       />
       <View className="absolute right-4 top-[4.5rem]">
         <CategoryDialog

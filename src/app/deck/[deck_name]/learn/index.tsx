@@ -59,9 +59,9 @@ export default function LearningPage() {
       automaticallyAdjustKeyboardInsets={true}
       className={`${setBackgroundColor(isAnswerCorrect, hasUserAnswered)}`}
     >
-      <View className={`items-center justify-center w-full h-screen xl:px-72`}>
-        <View className="w-full px-6 translate-y-6">
-          <Text className={`text-3xl font-interblack ${hasUserAnswered && "text-white"}`}>
+      <View className={`h-screen w-full items-center justify-center xl:px-72`}>
+        <View className="w-full translate-y-6 px-6">
+          <Text className={`font-interblack text-3xl ${hasUserAnswered && "text-white"}`}>
             Deck {deck_id} Learning Page
           </Text>
           <View>

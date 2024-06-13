@@ -24,25 +24,25 @@ export default function index() {
   // console.log(decks)
 
   return (
-    <View className="w-full h-full">
+    <View className="h-full w-full">
       <ScrollView>
         <View className="h-32" />
-        <View className="flex items-center gap-3 mt-6 px-6">
+        <View className="mt-6 flex items-center gap-3 px-6">
           {/* Map over all the decks */}
           {decks?.map((deck) => (
             <Button
               onPress={() => router.navigate(`/deck/${deck.deck_name}`)}
               key={deck.deck_name}
-              className="xl:w-[50%] w-full p-12 bg-card border border-card-foreground border-dashed shadow-md items-start"
+              className="w-full items-start border border-dashed border-card-foreground bg-card p-12 shadow-md xl:w-[50%]"
             >
-              <Text className="text-primary mt-5 !text-xl font-interblack">{deck.deck_name}</Text>
-              <Text className="text-muted-foreground mb-5 !text-sm">{deck.description}</Text>
+              <Text className="mt-5 font-interblack !text-xl text-primary">{deck.deck_name}</Text>
+              <Text className="mb-5 !text-sm text-muted-foreground">{deck.description}</Text>
             </Button>
           ))}
         </View>
       </ScrollView>
-      <View className="absolute top-0 w-full z-10 bg-background/95 items-center pt-12 pb-6">
-        <Text className="xl:text-5xl text-3xl font-interblack">Library</Text>
+      <View className="absolute top-0 z-10 w-full items-center bg-background/95 pb-6 pt-12">
+        <Text className="font-interblack text-3xl xl:text-5xl">Library</Text>
       </View>
     </View>
   )

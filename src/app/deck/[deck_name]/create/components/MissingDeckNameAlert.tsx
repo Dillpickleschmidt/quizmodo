@@ -26,7 +26,7 @@ export default function MissingDeckNameAlert({
     <AlertDialog open={showMissingDeckNameError} onOpenChange={closeMissingDeckNameError}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-center text-red-500 !text-3xl">
+          <AlertDialogTitle className="text-center !text-3xl text-red-500">
             Deck name is required!
           </AlertDialogTitle>
         </AlertDialogHeader>

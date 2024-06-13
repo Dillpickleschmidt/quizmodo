@@ -1,18 +1,5 @@
 import { CardData } from "./cardData"
 
-export function addNewCard(cards: CardData[], uniqueCategories: string[]): CardData[] {
-  const newOrder = cards.length
-  return [
-    ...cards,
-    {
-      term: "",
-      mnemonic: "",
-      categories: Object.fromEntries(uniqueCategories.map((category) => [category, ""])),
-      order: newOrder,
-    },
-  ]
-}
-
 export function updateCardTerm(cards: CardData[], index: number, value: string): CardData[] {
   return cards.map((card, i) => (i === index ? { ...card, term: value } : card))
 }
@@ -67,12 +54,4 @@ export function resetCategories(
     return { ...card, categories: newCategories }
   })
   return { cards: updatedCards, uniqueCategories: [defaultCategory] }
-}
-
-export function reorderCards(cards: CardData[], startIndex: number, endIndex: number): CardData[] {
-  const result = Array.from(cards)
-  const [removed] = result.splice(startIndex, 1)
-  result.splice(endIndex, 0, removed)
-
-  return result.map((card, index) => ({ ...card, order: index }))
 }

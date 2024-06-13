@@ -19,15 +19,15 @@ export default function ReviewPage({
     )
 
     return (
-      <View className="w-full h-full justify-center items-center">
-        <Text className="font-intersemibolditalic xl:text-5xl text-3xl text-center text-orange-500 mt-16 mx-6">
+      <View className="h-full w-full items-center justify-center">
+        <Text className="mx-6 mt-16 text-center font-intersemibolditalic text-3xl text-orange-500 xl:text-5xl">
           See the terms you practiced!
         </Text>
-        <ScrollView className="w-full mt-6">
+        <ScrollView className="mt-6 w-full">
           {uniqueCards.map((card) => (
             <View
               key={card.key}
-              className="relative mb-4 xl:mx-8 mx-2 bg-card rounded-lg shadow-md flex flex-row overflow-hidden"
+              className="relative mx-2 mb-4 flex flex-row overflow-hidden rounded-lg bg-card shadow-md xl:mx-8"
             >
               <View className="flex-1 py-4 pl-4 pr-6">
                 <Text
@@ -47,19 +47,19 @@ export default function ReviewPage({
                 ))}
               </View>
               <View
-                className={`absolute right-0 h-full ${card.wrongAnswerCount > 0 ? "bg-red-500 w-4" : "bg-emerald-500/50 w-2"}`}
+                className={`absolute right-0 h-full ${card.wrongAnswerCount > 0 ? "w-4 bg-red-500" : "w-2 bg-emerald-500/50"}`}
               ></View>
             </View>
           ))}
         </ScrollView>
-        <View className="xl:max-w-[50vw] w-full px-3">
+        <View className="w-full px-3 xl:max-w-[50vw]">
           <Button
             size="lg"
             onPress={() => {
               console.log("Clearing recently seen cards")
               setRecentlySeenCards(null)
             }}
-            className="w-full mt-2 mb-4 bg-orange-500"
+            className="mb-4 mt-2 w-full bg-orange-500"
           >
             <Text>Continue</Text>
           </Button>

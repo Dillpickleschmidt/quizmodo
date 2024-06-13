@@ -34,12 +34,12 @@ export default function Settings() {
 
   return (
     <SafeAreaView className="h-full bg-background">
-      <View className="items-center justify-center w-full px-4 mt-6">
-        <TouchableOpacity className="items-end w-full mb-10" onPress={logout}>
+      <View className="mt-6 w-full items-center justify-center px-4">
+        <TouchableOpacity className="mb-10 w-full items-end" onPress={logout}>
           <CustomIcon icon={<LogOut />} color="text-red-500" size={24} />
         </TouchableOpacity>
       </View>
-      <View className="items-center justify-center w-full h-[80vh]">
+      <View className="h-[80vh] w-full items-center justify-center">
         {colorScheme === "dark" ? (
           <MoonStar color={primaryColor} size={36} />
         ) : (

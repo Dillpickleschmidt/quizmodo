@@ -39,11 +39,11 @@ export default function DeckPage() {
       {/* Use ! for overriding "undefined type" warning */}
       <View className="h-full">
         {deckQuery.isLoading ? (
-          <View className="h-full justify-center items-center">
+          <View className="h-full items-center justify-center">
             <Text>Loading...</Text>
           </View>
         ) : deckQuery.isError ? (
-          <View className="h-full justify-center items-center">
+          <View className="h-full items-center justify-center">
             <Text>Error: {deckQuery.error.message}</Text>
           </View>
         ) : (
@@ -54,11 +54,11 @@ export default function DeckPage() {
           </ScrollView>
         )}
       </View>
-      <View className="absolute top-0 z-10 w-full bg-background/95 items-center pt-16 pb-8">
-        <Text className="xl:text-5xl text-3xl font-interblack">{`${deckName} Cards`}</Text>
+      <View className="absolute top-0 z-10 w-full items-center bg-background/95 pb-8 pt-16">
+        <Text className="font-interblack text-3xl xl:text-5xl">{`${deckName} Cards`}</Text>
       </View>
       <View className="absolute bottom-0 z-10 w-full">
-        <View className="w-full py-2 px-3 bg-background/70 h-18">
+        <View className="h-18 w-full bg-background/70 px-3 py-2">
           <Button
             onPress={() => router.navigate(`/deck/${deckName}/learn`)}
             className="min-w-full bg-orange-500"

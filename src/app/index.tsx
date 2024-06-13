@@ -19,9 +19,9 @@ export default function App() {
         contentContainerStyle={{ height: "100%" }}
         overScrollMode={Platform.OS === "android" ? "always" : "auto"}
       >
-        <View className="items-center justify-center w-full h-full px-4 -mt-24">
+        <View className="-mt-24 h-full w-full items-center justify-center px-4">
           <View className="flex-row flex-wrap justify-center">
-            <Text className="text-4xl text-center font-intermedium mt-12">Welcome to</Text>
+            <Text className="mt-12 text-center font-intermedium text-4xl">Welcome to</Text>
           </View>
           <Svg
             height="80"
@@ -61,20 +61,20 @@ export default function App() {
             </SVGText>
           </Svg>
           <View className="relative mt-2">
-            <Text className="text-xl text-center">
-              Memorize <Text className="text-xl font-interbolditalic">any</Text> subject!
+            <Text className="text-center text-xl">
+              Memorize <Text className="font-interbolditalic text-xl">any</Text> subject!
             </Text>
           </View>
         </View>
-        <View className="absolute items-center w-full px-8 bottom-44">
+        <View className="absolute bottom-44 w-full items-center px-8">
           <Button
             size="lg"
             onPress={() => {
               router.navigate("/auth/sign-up")
             }}
-            className="w-full max-w-[600px] my-3 rounded-xl"
+            className="my-3 w-full max-w-[600px] rounded-xl"
           >
-            <Text className="!text-lg font-interblack text-emerald-600">Sign up</Text>
+            <Text className="font-interblack !text-lg text-emerald-600">Sign up</Text>
           </Button>
           <Button
             size="lg"
@@ -83,7 +83,7 @@ export default function App() {
             }}
             className="w-full max-w-[600px] rounded-xl"
           >
-            <Text className="!text-base font-interblack flex-row">Log in</Text>
+            <Text className="flex-row font-interblack !text-base">Log in</Text>
           </Button>
         </View>
       </ScrollView>

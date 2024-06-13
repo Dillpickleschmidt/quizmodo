@@ -38,7 +38,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
       <DropdownMenuPrimitive.SubTrigger
         ref={ref}
         className={cn(
-          "flex flex-row web:cursor-default web:select-none gap-2 items-center web:focus:bg-accent web:hover:bg-accent active:bg-accent rounded-sm px-2 py-1.5 native:py-2 web:outline-none",
+          "native:py-2 flex flex-row items-center gap-2 rounded-sm px-2 py-1.5 active:bg-accent web:cursor-default web:select-none web:outline-none web:hover:bg-accent web:focus:bg-accent",
           open && "bg-accent",
           inset && "pl-8",
           className,
@@ -62,10 +62,10 @@ const DropdownMenuSubContent = React.forwardRef<
     <DropdownMenuPrimitive.SubContent
       ref={ref}
       className={cn(
-        "z-50 min-w-[8rem] overflow-hidden rounded-md border border-border mt-1 bg-popover p-1 shadow-md shadow-foreground/5 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+        "z-50 mt-1 min-w-[8rem] overflow-hidden rounded-md border border-border bg-popover p-1 shadow-md shadow-foreground/5 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
         open
           ? "web:animate-in web:fade-in-0 web:zoom-in-95"
-          : "web:animate-out web:fade-out-0 web:zoom-out ",
+          : "web:animate-out web:fade-out-0 web:zoom-out",
         className,
       )}
       {...props}
@@ -125,7 +125,7 @@ const DropdownMenuItem = React.forwardRef<
     <DropdownMenuPrimitive.Item
       ref={ref}
       className={cn(
-        "relative flex flex-row web:cursor-default gap-2 items-center rounded-sm px-2 py-1.5 native:py-2 web:outline-none web:focus:bg-accent active:bg-accent web:hover:bg-accent group",
+        "native:py-2 group relative flex flex-row items-center gap-2 rounded-sm px-2 py-1.5 active:bg-accent web:cursor-default web:outline-none web:hover:bg-accent web:focus:bg-accent",
         inset && "pl-8",
         props.disabled && "opacity-50 web:pointer-events-none",
         className,
@@ -143,8 +143,8 @@ const DropdownMenuCheckboxItem = React.forwardRef<
   <DropdownMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
-      "relative flex flex-row web:cursor-default items-center web:group rounded-sm py-1.5 native:py-2 pl-8 pr-2 web:outline-none web:focus:bg-accent active:bg-accent",
-      props.disabled && "web:pointer-events-none opacity-50",
+      "web:group native:py-2 relative flex flex-row items-center rounded-sm py-1.5 pl-8 pr-2 active:bg-accent web:cursor-default web:outline-none web:focus:bg-accent",
+      props.disabled && "opacity-50 web:pointer-events-none",
       className,
     )}
     checked={checked}
@@ -167,15 +167,15 @@ const DropdownMenuRadioItem = React.forwardRef<
   <DropdownMenuPrimitive.RadioItem
     ref={ref}
     className={cn(
-      "relative flex flex-row web:cursor-default web:group items-center rounded-sm py-1.5 native:py-2 pl-8 pr-2 web:outline-none web:focus:bg-accent active:bg-accent",
-      props.disabled && "web:pointer-events-none opacity-50",
+      "web:group native:py-2 relative flex flex-row items-center rounded-sm py-1.5 pl-8 pr-2 active:bg-accent web:cursor-default web:outline-none web:focus:bg-accent",
+      props.disabled && "opacity-50 web:pointer-events-none",
       className,
     )}
     {...props}
   >
     <View className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
-        <View className="w-2 h-2 rounded-full bg-foreground" />
+        <View className="h-2 w-2 rounded-full bg-foreground" />
       </DropdownMenuPrimitive.ItemIndicator>
     </View>
     <>{children}</>
@@ -192,7 +192,7 @@ const DropdownMenuLabel = React.forwardRef<
   <DropdownMenuPrimitive.Label
     ref={ref}
     className={cn(
-      "px-2 py-1.5 text-sm native:text-base font-intersemibold text-foreground web:cursor-default",
+      "native:text-base px-2 py-1.5 font-intersemibold text-sm text-foreground web:cursor-default",
       inset && "pl-8",
       className,
     )}
@@ -220,7 +220,7 @@ const DropdownMenuShortcut = ({
   return (
     <Text
       className={cn(
-        "ml-auto text-xs native:text-sm tracking-widest text-muted-foreground",
+        "native:text-sm ml-auto text-xs tracking-widest text-muted-foreground",
         className,
       )}
       {...props}

@@ -24,18 +24,18 @@ export default function AddCard({
 }: AddCardProps) {
   return (
     <View
-      className={`w-full rounded-xl bg-card border border-card-foreground my-2 shadow-lg ${isActive ? "scale-[1.02]" : ""}`}
+      className={`my-2 w-full rounded-xl border border-card-foreground bg-card shadow-lg ${isActive ? "scale-[1.02]" : ""}`}
     >
-      <View className="pt-6 pb-1">
-        <View className=" flex flex-row">
+      <View className="pb-1 pt-6">
+        <View className="flex flex-row">
           {/* Term */}
           <View className="flex-grow">
             <Input
-              className="bg-transparent border-x-0 border-t-0 border-card-foreground py-3 mx-6 px-2 !text-xl font-intermedium"
+              className="mx-6 border-x-0 border-t-0 border-card-foreground bg-transparent px-2 py-3 font-intermedium !text-xl"
               value={term}
               onChangeText={onTermChange}
             />
-            <Text className="ml-6 pt-2 pb-3 font-interblack text-sm">Term</Text>
+            <Text className="ml-6 pb-3 pt-2 font-interblack text-sm">Term</Text>
           </View>
           <View className="mr-6 mt-8">
             <CustomIcon icon={<GripVertical />} size={28} color="text-card-foreground" />
@@ -52,11 +52,11 @@ export default function AddCard({
           <View key={category}>
             {/* Answers */}
             <Input
-              className="bg-transparent border-x-0 border-t-0 border-card-foreground py-3 mx-6 px-2 !text-xl font-intermedium"
+              className="mx-6 border-x-0 border-t-0 border-card-foreground bg-transparent px-2 py-3 font-intermedium !text-xl"
               value={categories[category]}
               onChangeText={(text) => onCategoryChange(category, text)}
             />
-            <Text className="ml-6 pt-2 pb-4 font-interblack text-sm">{category}</Text>
+            <Text className="ml-6 pb-4 pt-2 font-interblack text-sm">{category}</Text>
           </View>
         ))}
       </View>

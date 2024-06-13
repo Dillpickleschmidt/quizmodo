@@ -32,7 +32,7 @@ const CardTitle = React.forwardRef<TextRef, React.ComponentPropsWithoutRef<typeo
       aria-level={3}
       ref={ref}
       className={cn(
-        "text-2xl text-card-foreground font-intersemibold leading-none tracking-tight",
+        "font-intersemibold text-2xl leading-none tracking-tight text-card-foreground",
         className,
       )}
       {...props}

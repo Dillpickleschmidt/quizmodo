@@ -40,7 +40,7 @@ export default function TabsLayout() {
                 tabIcon
                 text={"Library"}
                 focused={focused}
-                className="text-xs w-24 text-center"
+                className="w-24 text-center text-xs"
               />
             ),
             headerShown: false,
@@ -51,7 +51,7 @@ export default function TabsLayout() {
           name="create"
           options={{
             tabBarButton: () => (
-              <View className="items-center justify-center h-[5.5rem] min-w-[30%]">
+              <View className="h-[5.5rem] min-w-[30%] items-center justify-center">
                 <AddDialog>
                   {/* padding to expand touchable area */}
                   <Pressable className="p-4">
