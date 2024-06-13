@@ -10,8 +10,10 @@ const StudyList = ({ data }: StudyListProps) => {
   const [quizData, setQuizData] = useState<Entry[]>([])
 
   useEffect(() => {
-    setQuizData(data) // Directly set the data from JSON
-  }, [])
+    // Sort data based on the order property before setting it
+    const sortedData = data.sort((a, b) => a.order - b.order)
+    setQuizData(sortedData) // Directly set the sorted data from JSON
+  }, [data])
 
   return (
     <>
@@ -21,7 +23,7 @@ const StudyList = ({ data }: StudyListProps) => {
           {entry.answerCategories.map((category, i) => (
             <View key={i} style={styles.detailSection}>
               <Text style={styles.detailTitle}>{category.category}:</Text>
-              {category.answers.map((answer, j) => (
+              {category.answers.map((answer: string, j: number) => (
                 <Text key={j} style={styles.detailText}>
                   {answer}
                 </Text>

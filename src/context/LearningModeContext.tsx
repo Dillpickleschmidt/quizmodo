@@ -16,6 +16,8 @@ type LearningModeContext = {
   setEnabledAnswerCategories: React.Dispatch<React.SetStateAction<string[]>>
   currentCardIndex: number
   setCurrentCardIndex: React.Dispatch<React.SetStateAction<number>>
+  data: Entry[]
+  setData: React.Dispatch<React.SetStateAction<Entry[]>>
 }
 
 const LearningModeContext = createContext<LearningModeContext | null>(null)
@@ -26,6 +28,7 @@ export function LearningModeContextProvider({ children }: LearningModeContextPro
   const [correctEntry, setCorrectEntry] = useState<Entry | undefined>()
   const [enabledAnswerCategories, setEnabledAnswerCategories] = useState<string[]>([])
   const [currentCardIndex, setCurrentCardIndex] = useState(0)
+  const [data, setData] = useState<Entry[]>([])
 
   return (
     <LearningModeContext.Provider
@@ -40,6 +43,8 @@ export function LearningModeContextProvider({ children }: LearningModeContextPro
         setEnabledAnswerCategories,
         currentCardIndex,
         setCurrentCardIndex,
+        data,
+        setData,
       }}
     >
       {children}

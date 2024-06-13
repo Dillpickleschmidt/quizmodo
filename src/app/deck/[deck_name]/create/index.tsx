@@ -1,5 +1,5 @@
-import { Pressable, ScrollView, View } from "react-native"
-import { useState } from "react"
+import { Pressable, View, TouchableOpacity } from "react-native"
+import { useEffect, useState } from "react"
 import { Text } from "@/components/ui/text"
 import AddCard from "@/components/deck/AddCard"
 import { Button } from "@/components/ui/button"
@@ -13,6 +13,7 @@ import MissingDeckNameAlert from "./components/MissingDeckNameAlert"
 import { router } from "expo-router"
 import { addNewCard, updateCardTerm, updateCardCategory } from "./components/cardHelpers"
 import { CardData } from "./components/cardData"
+import DraggableFlatList, { RenderItemParams } from "react-native-draggable-flatlist"
 
 const defaultCategory = "Answer"
 
@@ -22,14 +23,18 @@ export default function CreatePage() {
   const [uniqueCategories, setUniqueCategories] = useState<string[]>([defaultCategory])
   const [showCreateDeckError, setShowCreateDeckError] = useState(false)
   const [showMissingDeckNameError, setShowMissingDeckNameError] = useState(false)
+  const [nextId, setNextId] = useState<number>(2) // Initial ID set to 2 since we start with two cards
+  const [activeItem, setActiveItem] = useState<number | null>(null)
   const [cards, setCards] = useState<CardData[]>([
     {
+      id: 0,
       term: "",
       mnemonic: "",
       categories: Object.fromEntries(uniqueCategories.map((category) => [category, ""])),
       order: 0,
     },
     {
+      id: 1,
       term: "",
       mnemonic: "",
       categories: Object.fromEntries(uniqueCategories.map((category) => [category, ""])),
@@ -41,7 +46,17 @@ export default function CreatePage() {
 
   // Event Handlers
   const handleAddNewCard = () => {
-    setCards(addNewCard(cards, uniqueCategories))
+    setCards([
+      ...cards,
+      {
+        id: nextId,
+        term: "",
+        mnemonic: "",
+        categories: Object.fromEntries(uniqueCategories.map((category) => [category, ""])),
+        order: cards.length,
+      },
+    ])
+    setNextId(nextId + 1) // Increment the ID for the next card
   }
 
   const handleUpdateCardTerm = (index: number, value: string) => {
@@ -62,6 +77,16 @@ export default function CreatePage() {
     } else {
       console.log("User not found")
     }
+  }
+
+  const handleDragEnd = ({ data }: { data: CardData[] }) => {
+    // Update the order property based on the new position
+    const updatedCards = data.map((card, index) => ({
+      ...card,
+      order: index,
+    }))
+    setCards(updatedCards)
+    setActiveItem(null) // Reset active item when drag ends
   }
 
   // Query to get the user
@@ -95,7 +120,9 @@ export default function CreatePage() {
         deck_id: deckId,
         key: card.term,
         mnemonic: card.mnemonic,
+        order: card.order,
       }))
+      console.log("Entries to create:", entries)
 
       const entriesData = await createEntries(entries)
 
@@ -119,6 +146,36 @@ export default function CreatePage() {
     }
   }
 
+  // Log every time a card input changes
+  useEffect(() => {
+    console.log(cards)
+  }, [cards])
+
+  const renderItem = ({ item, drag, isActive }: RenderItemParams<CardData>) => {
+    const index = cards.findIndex((card) => card.id === item.id)
+    // if (isActive) console.log("Active")
+    return (
+      <Pressable
+        onLongPress={() => {
+          setActiveItem(item.id)
+          drag()
+        }}
+        delayLongPress={200}
+        className={`w-full items-center px-4 ${activeItem === item.id ? "bg-opacity-75" : ""}`}
+      >
+        <AddCard
+          key={item.id}
+          term={item.term}
+          mnemonic={item.mnemonic}
+          categories={item.categories}
+          onTermChange={(text) => handleUpdateCardTerm(index, text)}
+          onCategoryChange={(category, text) => handleUpdateCardCategory(index, category, text)}
+          isActive={isActive}
+        />
+      </Pressable>
+    )
+  }
+
   // Render Component
   return (
     <>
@@ -133,21 +190,17 @@ export default function CreatePage() {
         showMissingDeckNameError={showMissingDeckNameError}
         setShowMissingDeckNameError={setShowMissingDeckNameError}
       />
-      <ScrollView>
-        <View className="h-40"></View>
-        {cards.map((card, index) => (
-          <View key={index} className="w-full items-center px-4">
-            <AddCard
-              term={card.term}
-              mnemonic={card.mnemonic}
-              categories={card.categories}
-              onTermChange={(text) => handleUpdateCardTerm(index, text)}
-              onCategoryChange={(category, text) => handleUpdateCardCategory(index, category, text)}
-            />
-          </View>
-        ))}
-        <View className="h-20"></View>
-      </ScrollView>
+      <View className="flex-1">
+        <DraggableFlatList
+          data={cards}
+          onDragEnd={handleDragEnd}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderItem}
+          autoscrollThreshold={150} // Adjust this value as needed
+          autoscrollSpeed={300} // Adjust this value as needed
+          contentContainerStyle={{ paddingBottom: 80, paddingTop: 160 }} // Adjust this value as needed
+        />
+      </View>
       <DeckHeader
         deckName={deckName}
         setDeckName={setDeckName}

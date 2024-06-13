@@ -12,6 +12,8 @@ import { useColorScheme } from "~/lib/useColorScheme"
 import { PortalHost } from "~/components/primitives/portal"
 import { GlobalContextProvider } from "@/context/GlobalContext"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import "react-native-gesture-handler"
+import { GestureHandlerRootView } from "react-native-gesture-handler"
 
 const LIGHT_THEME: Theme = {
   dark: false,
@@ -88,18 +90,20 @@ export default function RootLayout() {
   const queryClient = new QueryClient()
 
   return (
-    <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
-      <QueryClientProvider client={queryClient}>
-        <GlobalContextProvider>
-          <View className="w-full h-full" style={{ backgroundColor: backgroundColor }}>
-            <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-            <Stack screenOptions={{ headerShown: false }}>
-              {/* <Stack.Screen name="index" /> */}
-            </Stack>
-            <PortalHost />
-          </View>
-        </GlobalContextProvider>
-      </QueryClientProvider>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <GestureHandlerRootView>
+        <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
+          <GlobalContextProvider>
+            <View className="w-full h-full" style={{ backgroundColor: backgroundColor }}>
+              <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
+              <Stack screenOptions={{ headerShown: false }}>
+                {/* <Stack.Screen name="index" /> */}
+              </Stack>
+              <PortalHost />
+            </View>
+          </GlobalContextProvider>
+        </ThemeProvider>
+      </GestureHandlerRootView>
+    </QueryClientProvider>
   )
 }

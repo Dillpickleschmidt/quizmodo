@@ -1,5 +1,5 @@
 import { View, ScrollView } from "react-native"
-import React from "react"
+import React, { useEffect } from "react"
 import { Text } from "@/components/ui/text"
 import { router, useLocalSearchParams } from "expo-router"
 import { Button } from "@/components/ui/button"
@@ -7,17 +7,18 @@ import StudyList from "@/components/deck/StudyList"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { useQuery } from "@tanstack/react-query"
 import { fetchDeckEntriesWithCategories, getUser } from "@/lib/supabase/supabaseHooks"
+import { useLearningModeContext } from "@/context/LearningModeContext"
 // import data from "@/test-data/test-data-2.json"
 
 export default function DeckPage() {
   const { deck_name: deckName } = useLocalSearchParams<{ deck_name: string }>()
+  const { setData } = useLearningModeContext()
 
   // Get the user
   const userQuery = useQuery({
     queryKey: ["user"],
     queryFn: () => getUser(),
   })
-  // if (userQuery.isSuccess) console.log(userQuery.data?.id)
   const userId = userQuery.data?.id
 
   // Get all entries + answer categories matching the deck id
@@ -27,6 +28,11 @@ export default function DeckPage() {
     enabled: !!userId,
   })
   const data = deckQuery.data?.entries
+  useEffect(() => {
+    if (data) {
+      setData(data)
+    }
+  }, [data, setData])
 
   return (
     <SafeAreaView>
@@ -53,7 +59,10 @@ export default function DeckPage() {
       </View>
       <View className="absolute bottom-0 z-10 w-full">
         <View className="w-full py-2 px-3 bg-background/70 h-18">
-          <Button onPress={() => router.navigate("./learn")} className="min-w-full bg-orange-500">
+          <Button
+            onPress={() => router.navigate(`/deck/${deckName}/learn`)}
+            className="min-w-full bg-orange-500"
+          >
             <Text>Start Learning!</Text>
           </Button>
         </View>

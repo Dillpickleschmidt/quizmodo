@@ -4,7 +4,6 @@ import { Text } from "@/components/ui/text"
 import { Button } from "@/components/ui/button"
 import { router, useLocalSearchParams } from "expo-router"
 import { useLearningModeContext } from "@/context/LearningModeContext"
-import data from "@/test-data/test-data-2.json"
 import CardTypeSwitch from "@/components/learning-mode/CardTypeSwitch"
 import useDeckSplit from "@/components/learning-mode/useDeckSplit"
 import CategoryDropdown from "@/components/learning-mode/CategoryDropdown"
@@ -22,6 +21,7 @@ export default function LearningPage() {
     setEnabledAnswerCategories,
     currentCardIndex,
     setCurrentCardIndex,
+    data,
   } = useLearningModeContext()
 
   const { slicedData, remainingData, unslicedData } = useMemo(() => useDeckSplit(data), [data])
