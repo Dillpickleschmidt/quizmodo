@@ -18,7 +18,7 @@ export default function StudyList({ data }: StudyListProps) {
   return (
     <>
       {quizData.map((entry, index) => (
-        <View key={index} className="my-2 rounded-xl bg-card p-6">
+        <View key={index} className="my-2 rounded-xl bg-card p-6 shadow-md">
           <Text className="font-interbold text-2xl !text-orange-500 text-primary">{entry.key}</Text>
           {entry.answerCategories.map((category, i) => (
             <View key={i}>

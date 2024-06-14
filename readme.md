@@ -20,7 +20,7 @@ A React Native mobile app that improves vocabulary retention through a mix of mu
 - Type the following into your terminal:
 
 ```
-npm install --legacy-peer-deps
+npm install
 ```
 
 Ensure you have the following VSCode extensions:

@@ -15,26 +15,31 @@ export default function FinishPage({ data }: FinishPageProps) {
         You've finished this deck!
       </Text>
       <Text className="mt-2 text-4xl">🎉</Text>
-      <ScrollView className="mt-6 w-full">
-        {data.map((card) => (
-          <View
-            key={card.key}
-            className="relative mx-2 mb-4 flex flex-row overflow-hidden rounded-lg bg-card shadow-md xl:mx-8"
-          >
-            <Text className="text-xl font-bold">{card.key}</Text>
-            {card.answerCategories.map((categoryObj: AnswerCategory, index: number) => (
-              <View key={index} className="mt-2">
-                <Text className="font-bold">{categoryObj.category}:</Text>
-                {categoryObj.answers.map((answer: string, idx: number) => (
-                  <Text key={idx} className="ml-4">
+      <ScrollView className="mt-6 w-full px-4">
+        {data.map((entry, index) => (
+          <View key={index} className="my-2 rounded-xl bg-card p-6 shadow-md">
+            <Text className="font-interbold text-2xl !text-orange-500 text-primary">
+              {entry.key}
+            </Text>
+            {entry.answerCategories.map((category, i) => (
+              <View key={i}>
+                <Text className="my-2 font-interitalic text-muted-foreground">
+                  {category.category}:
+                </Text>
+                {category.answers.map((answer: string, j: number) => (
+                  <Text key={j} className="font-interbold text-xl text-primary">
                     {answer}
                   </Text>
                 ))}
               </View>
             ))}
-            {card.wrongAnswerCount > 0 && (
-              <Text className="mt-2 text-red-500">
-                You missed this question {card.wrongAnswerCount} times
+            <View className="">
+              <Text className="my-2 font-interitalic text-muted-foreground">Mnemonic:</Text>
+              {entry.mnemonic && <Text className="">{entry.mnemonic}</Text>}
+            </View>
+            {entry.wrongAnswerCount > 0 && (
+              <Text className="text-red-500">
+                You missed this question {entry.wrongAnswerCount} times
               </Text>
             )}
           </View>

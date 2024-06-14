@@ -91,7 +91,7 @@ export async function createCategories(categories: CreateCategoryProps[]) {
 // Fetch all entries and answer categories for a deck
 export async function fetchDeckEntriesWithCategories(deckName: string, userId: string) {
   try {
-    console.log("Fetching deck entries and answer categories", deckName, userId)
+    // console.log("Fetching deck entries and answer categories", deckName, userId)
     // Step 1: Get the deck using the existing helper function
     const deckData = await getDeck(deckName, userId)
     const { deck_id, deck_name } = deckData
@@ -117,7 +117,7 @@ export async function fetchDeckEntriesWithCategories(deckName: string, userId: s
     }
 
     // Output the final result
-    console.log("Deck with entries and answer categories:", result)
+    // console.log("Deck with entries and answer categories:", result)
     return result
   } catch (error) {
     console.error("Error fetching deck entries and categories:", error)
