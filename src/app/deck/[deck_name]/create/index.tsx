@@ -1,7 +1,7 @@
-import { Pressable, View } from "react-native"
-import { useEffect, useState } from "react"
+import { View, Pressable } from "react-native"
+import { useEffect, useState, useCallback } from "react"
 import { Text } from "@/components/ui/text"
-import AddCard from "@/components/deck/AddCard"
+import Card from "@/components/deck/Card"
 import { Button } from "@/components/ui/button"
 import { CustomIcon } from "@/components/homeRoute/CustomIcon"
 import { Ionicons } from "@expo/vector-icons"
@@ -10,6 +10,7 @@ import { getUser, createDeck, createEntries, createCategories } from "@/lib/supa
 import CreateDeckErrorAlert from "./components/CreateDeckErrorAlert"
 import { DeckHeader } from "./components/DeckHeader"
 import MissingDeckNameAlert from "./components/MissingDeckNameAlert"
+import MinimumCardsAlert from "./components/MinimumCardsAlert" // Import the new alert component
 import { router } from "expo-router"
 import { updateCardTerm, updateCardCategory } from "./components/cardHelpers"
 import { CardData } from "./components/cardData"
@@ -23,7 +24,7 @@ export default function CreatePage() {
   const [uniqueCategories, setUniqueCategories] = useState<string[]>([defaultCategory])
   const [showCreateDeckError, setShowCreateDeckError] = useState(false)
   const [showMissingDeckNameError, setShowMissingDeckNameError] = useState(false)
-  const [activeItem, setActiveItem] = useState<number | null>(null)
+  const [showMinimumCardsError, setShowMinimumCardsError] = useState(false) // New state for minimum cards alert
   const defaultNumberOfCards = 4
   // Initialize cards with default number of cards
   const [cards, setCards] = useState<CardData[]>(
@@ -58,6 +59,14 @@ export default function CreatePage() {
     setCards(updateCardCategory(cards, index, category, value))
   }
 
+  const handleDeleteCard = (index: number) => {
+    if (cards.length <= 4) {
+      setShowMinimumCardsError(true)
+    } else {
+      setCards(cards.filter((_, i) => i !== index))
+    }
+  }
+
   const handleSaveDeck = () => {
     if (!deckName.trim()) {
       setShowMissingDeckNameError(true)
@@ -77,7 +86,6 @@ export default function CreatePage() {
       order: index,
     }))
     setCards(updatedCards)
-    setActiveItem(null) // Reset active item when drag ends
   }
 
   // Query to get the user
@@ -138,34 +146,29 @@ export default function CreatePage() {
   }
 
   // Log every time a card input changes
-  useEffect(() => {
-    console.log(cards)
-  }, [cards])
+  // useEffect(() => {
+  //   console.log(cards)
+  // }, [cards])
 
-  const renderItem = ({ item, drag, isActive }: RenderItemParams<CardData>) => {
-    const index = cards.indexOf(item)
-    // if (isActive) console.log("Active")
-    return (
-      <Pressable
-        onLongPress={() => {
-          setActiveItem(index)
-          drag()
-        }}
-        delayLongPress={150}
-        className={`w-full items-center px-4 ${activeItem === index ? "bg-opacity-75" : ""}`}
-      >
-        <AddCard
+  const renderItem = useCallback(
+    ({ item, drag, isActive }: RenderItemParams<CardData>) => {
+      const index = cards.indexOf(item)
+      return (
+        <Card
           key={index}
           term={item.term}
           mnemonic={item.mnemonic}
           categories={item.categories}
           onTermChange={(text) => handleUpdateCardTerm(index, text)}
           onCategoryChange={(category, text) => handleUpdateCardCategory(index, category, text)}
+          onDelete={() => handleDeleteCard(index)}
           isActive={isActive}
+          drag={drag}
         />
-      </Pressable>
-    )
-  }
+      )
+    },
+    [cards],
+  )
 
   // Render Component
   return (
@@ -180,6 +183,10 @@ export default function CreatePage() {
       <MissingDeckNameAlert
         showMissingDeckNameError={showMissingDeckNameError}
         setShowMissingDeckNameError={setShowMissingDeckNameError}
+      />
+      <MinimumCardsAlert
+        showMinimumCardsError={showMinimumCardsError}
+        setShowMinimumCardsError={setShowMinimumCardsError}
       />
       <View className="flex-1">
         <DraggableFlatList
