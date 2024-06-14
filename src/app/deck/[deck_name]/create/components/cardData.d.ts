@@ -3,5 +3,4 @@ export type CardData = {
   mnemonic: string
   categories: { [key: string]: string }
   order: number
-  id: number
 }

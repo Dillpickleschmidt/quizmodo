@@ -1,4 +1,4 @@
-import { Pressable, View, TouchableOpacity } from "react-native"
+import { Pressable, View } from "react-native"
 import { useEffect, useState } from "react"
 import { Text } from "@/components/ui/text"
 import AddCard from "@/components/deck/AddCard"
@@ -23,24 +23,17 @@ export default function CreatePage() {
   const [uniqueCategories, setUniqueCategories] = useState<string[]>([defaultCategory])
   const [showCreateDeckError, setShowCreateDeckError] = useState(false)
   const [showMissingDeckNameError, setShowMissingDeckNameError] = useState(false)
-  const [nextId, setNextId] = useState<number>(2) // Initial ID set to 2 since we start with two cards
   const [activeItem, setActiveItem] = useState<number | null>(null)
-  const [cards, setCards] = useState<CardData[]>([
-    {
-      id: 0,
+  const defaultNumberOfCards = 4
+  // Initialize cards with default number of cards
+  const [cards, setCards] = useState<CardData[]>(
+    Array.from({ length: defaultNumberOfCards }, (_, i) => ({
       term: "",
       mnemonic: "",
-      categories: Object.fromEntries(uniqueCategories.map((category) => [category, ""])),
-      order: 0,
-    },
-    {
-      id: 1,
-      term: "",
-      mnemonic: "",
-      categories: Object.fromEntries(uniqueCategories.map((category) => [category, ""])),
-      order: 1,
-    },
-  ])
+      categories: { [defaultCategory]: "" },
+      order: i,
+    })),
+  )
 
   const queryClient = useQueryClient()
 
@@ -49,14 +42,12 @@ export default function CreatePage() {
     setCards([
       ...cards,
       {
-        id: nextId,
         term: "",
         mnemonic: "",
         categories: Object.fromEntries(uniqueCategories.map((category) => [category, ""])),
         order: cards.length,
       },
     ])
-    setNextId(nextId + 1) // Increment the ID for the next card
   }
 
   const handleUpdateCardTerm = (index: number, value: string) => {
@@ -152,19 +143,19 @@ export default function CreatePage() {
   }, [cards])
 
   const renderItem = ({ item, drag, isActive }: RenderItemParams<CardData>) => {
-    const index = cards.findIndex((card) => card.id === item.id)
+    const index = cards.indexOf(item)
     // if (isActive) console.log("Active")
     return (
       <Pressable
         onLongPress={() => {
-          setActiveItem(item.id)
+          setActiveItem(index)
           drag()
         }}
         delayLongPress={200}
-        className={`w-full items-center px-4 ${activeItem === item.id ? "bg-opacity-75" : ""}`}
+        className={`w-full items-center px-4 ${activeItem === index ? "bg-opacity-75" : ""}`}
       >
         <AddCard
-          key={item.id}
+          key={index}
           term={item.term}
           mnemonic={item.mnemonic}
           categories={item.categories}
@@ -194,7 +185,7 @@ export default function CreatePage() {
         <DraggableFlatList
           data={cards}
           onDragEnd={handleDragEnd}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={(item) => cards.indexOf(item).toString()}
           renderItem={renderItem}
           autoscrollThreshold={150} // Adjust this value as needed
           autoscrollSpeed={300} // Adjust this value as needed

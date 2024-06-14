@@ -24,7 +24,7 @@ export default function AddCard({
 }: AddCardProps) {
   return (
     <View
-      className={`my-2 w-full rounded-xl border border-card-foreground bg-card shadow-lg ${isActive ? "scale-[1.02]" : ""}`}
+      className={`my-2 w-full rounded-xl border border-card-foreground bg-card shadow-lg ${isActive ? "scale-[.95]" : ""}`}
     >
       <View className="pb-1 pt-6">
         <View className="flex flex-row">
