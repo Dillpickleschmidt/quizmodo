@@ -1,5 +1,5 @@
-import { View } from "react-native"
-import React from "react"
+import { View, Animated } from "react-native"
+import React, { useEffect, useRef } from "react"
 import { Text } from "../ui/text"
 import { Input } from "../ui/input"
 import { GripVertical } from "@/lib/icons/GripVertical"
@@ -22,9 +22,22 @@ export default function AddCard({
   onCategoryChange,
   isActive,
 }: AddCardProps) {
+  const scaleAnim = useRef(new Animated.Value(1)).current
+
+  useEffect(() => {
+    Animated.timing(scaleAnim, {
+      toValue: isActive ? 0.93 : 1,
+      duration: 200,
+      useNativeDriver: true,
+    }).start()
+  }, [isActive])
+
   return (
-    <View
-      className={`my-2 w-full rounded-xl border border-card-foreground bg-card shadow-lg ${isActive ? "scale-[.95]" : ""}`}
+    <Animated.View
+      style={{
+        transform: [{ scale: scaleAnim }],
+      }}
+      className="my-2 w-full rounded-xl border border-card-foreground bg-card shadow-lg"
     >
       <View className="pb-1 pt-6">
         <View className="flex flex-row">
@@ -41,13 +54,6 @@ export default function AddCard({
             <CustomIcon icon={<GripVertical />} size={28} color="text-card-foreground" />
           </View>
         </View>
-        {/* Mnemonic */}
-        {/* <Input
-          className="bg-transparent border-x-0 border-t-0 border-card-foreground py-3 mx-6 px-2 !text-xl font-intermedium"
-          value={mnemonic}
-          onChangeText={(text) => onCategoryChange("mnemonic", text)}
-        />
-        <Text className="ml-6 pt-2 pb-3 font-interblack text-sm">Mnemonic</Text> */}
         {Object.keys(categories).map((category) => (
           <View key={category}>
             {/* Answers */}
@@ -60,6 +66,6 @@ export default function AddCard({
           </View>
         ))}
       </View>
-    </View>
+    </Animated.View>
   )
 }

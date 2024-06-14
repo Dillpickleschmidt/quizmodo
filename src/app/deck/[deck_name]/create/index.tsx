@@ -151,7 +151,7 @@ export default function CreatePage() {
           setActiveItem(index)
           drag()
         }}
-        delayLongPress={200}
+        delayLongPress={150}
         className={`w-full items-center px-4 ${activeItem === index ? "bg-opacity-75" : ""}`}
       >
         <AddCard
