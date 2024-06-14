@@ -214,7 +214,7 @@ export default function CreatePage() {
           </Pressable>
         </View>
         <View className="h-18 w-full bg-background/70 px-3 py-2">
-          <Button className="w-full bg-orange-500" onPress={handleSaveDeck}>
+          <Button className="w-full bg-emerald-500" onPress={handleSaveDeck}>
             <Text className="text-center">Save Deck</Text>
           </Button>
         </View>

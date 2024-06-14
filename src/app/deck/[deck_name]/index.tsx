@@ -47,7 +47,7 @@ export default function DeckPage() {
             <Text>Error: {deckQuery.error.message}</Text>
           </View>
         ) : (
-          <ScrollView className="px-6">
+          <ScrollView className="px-4">
             <View className="h-28" />
             {data && <StudyList data={data} />}
             <View className="h-14" />
@@ -61,7 +61,7 @@ export default function DeckPage() {
         <View className="h-18 w-full bg-background/70 px-3 py-2">
           <Button
             onPress={() => router.navigate(`/deck/${deckName}/learn`)}
-            className="min-w-full bg-orange-500"
+            className="min-w-full bg-emerald-500"
           >
             <Text>Start Learning!</Text>
           </Button>

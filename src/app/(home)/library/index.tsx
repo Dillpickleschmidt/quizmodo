@@ -11,7 +11,7 @@ import { Trash2 } from "@/lib/icons/Trash2"
 const UnderlayLeft = ({ onDelete }: { onDelete: () => void }) => {
   const { close } = useSwipeableItemParams()
   return (
-    <View className="!ml-12 flex-1 items-end justify-center rounded-lg border border-background bg-orange-500 pr-5">
+    <View className="!ml-12 flex-1 items-end justify-center rounded-lg border border-background bg-red-500 pr-[1.31rem]">
       <Pressable
         onPress={() => {
           onDelete()
@@ -19,7 +19,7 @@ const UnderlayLeft = ({ onDelete }: { onDelete: () => void }) => {
         }}
         className="pt-6"
       >
-        <CustomIcon icon={<Trash2 />} size={24} color="text-white" />
+        <CustomIcon icon={<Trash2 />} size={24} color="text-primary-foreground" />
       </Pressable>
     </View>
   )
