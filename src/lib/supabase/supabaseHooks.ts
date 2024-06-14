@@ -37,6 +37,16 @@ export async function createDeck({ deck_name, user_id }: CreateDeckProps) {
   return data
 }
 
+// Delete a deck
+export async function deleteDeck({ deck_name, user_id }: { deck_name: string; user_id: string }) {
+  const { error } = await supabase
+    .from("decks")
+    .delete()
+    .eq("deck_name", deck_name)
+    .eq("user_id", user_id)
+  if (error) throw new Error(error.message)
+}
+
 // Fetch all entries for a deck with associated answer categories
 export async function getEntriesWithCategories(deckId: number) {
   const { data, error } = await supabase

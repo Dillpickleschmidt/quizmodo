@@ -40,7 +40,7 @@ export default function DeckPage() {
       <View className="h-full">
         {deckQuery.isLoading ? (
           <View className="h-full items-center justify-center">
-            <Text>Loading...</Text>
+            <Text className="text-xl">Loading...</Text>
           </View>
         ) : deckQuery.isError ? (
           <View className="h-full items-center justify-center">

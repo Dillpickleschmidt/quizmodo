@@ -188,7 +188,7 @@ export default function CreatePage() {
         showMinimumCardsError={showMinimumCardsError}
         setShowMinimumCardsError={setShowMinimumCardsError}
       />
-      <View className="flex-1">
+      <View>
         <DraggableFlatList
           data={cards}
           onDragEnd={handleDragEnd}
